@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/element.css" />
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.el-header {
+				padding: 0
+			
+			}
+			
+			.el-menu {
+				border: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="index">
+			<el-container style='height:95vh; border: 1px solid #eee'>
+				<el-header style="height: 10%;">
+					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+						<el-menu-item index="1">处理中心</el-menu-item>
+						<el-menu-item index="3" >消息中心</el-menu-item>
+						<el-menu-item index="4" text-rigth>
+							<a href="#">订单管理</a>
+						</el-menu-item>
+					</el-menu>
+				</el-header>
+				<el-container>
+					<el-aside width="200px">
+						<el-menu>
+							<el-submenu index="1">
+								<template slot="title">
+									<i class="el-icon-user"></i>
+									<span>会员管理</span>
+								</template>
+								<el-menu-item-group>
+									<el-menu-item index="1-2" @click="showView('add.html')"><i class="el-icon-message"></i>新增会员</el-menu-item>
+									<el-menu-item index="1-1" @click="showView('person.html')"><i class="el-icon-message"></i>基本信息维护</el-menu-item>
+								</el-menu-item-group>
+							</el-submenu>
+							<el-submenu index="2">
+								<template slot="title">
+									<i class="el-icon-user"></i>
+									<span>会员管理</span>
+								</template>
+								<el-menu-item-group>
+									<el-menu-item index="1-2" @click="showView('add.html')"><i class="el-icon-message"></i>新增会员</el-menu-item>
+									<el-menu-item index="1-1" @click="showView('person.html')"><i class="el-icon-message"></i>基本信息维护</el-menu-item>
+								</el-menu-item-group>
+							</el-submenu>
+						</el-menu>
+					</el-aside>
+					<el-main>
+						<div id="cnt"></div>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/vue.js"></script>
+	<script type="text/javascript" src="../../js/element.js"></script>
+	<script type="text/javascript" src="../../js/axios.min.js"></script>
+	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
+	<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
+	<script>
+		var index = new Vue({
+			el: "#index",
+			data: {
+				activeIndex: '1',
+				activeIndex2: '1'
+			},
+			methods: {
+				handleSelect(key, keyPath) {
+					console.log(key, keyPath);
+				}
+			}
+		})
+	</script>
+
+</html>
