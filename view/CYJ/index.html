@@ -64,8 +64,7 @@
 									<span>{{item.title}}</span>
 								</template>
 								<el-menu-item-group>
-									<el-menu-item v-for="(temp,i) in item.option" :key="i" :index="(index+1)+'-'+(i+1)" 
-										@click="addTab(editableTabsValue,temp.itemTitle)">
+									<el-menu-item v-for="(temp,i) in item.option" :key="i" :index="(index+1)+'-'+(i+1)" @click="addTab(editableTabsValue,temp.itemTitle,temp.url)">
 										<i class="el-icon-message"></i>{{temp.itemTitle}}
 									</el-menu-item>
 								</el-menu-item-group>
@@ -75,7 +74,7 @@
 					<el-main>
 						<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
 							<el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name">
-								{{item.content}}
+								<div :id="item.name"></div>
 							</el-tab-pane>
 						</el-tabs>
 						<div id="cnt">
@@ -96,7 +95,7 @@
 				title: "服务接待",
 				option: [{
 						itemTitle: "维修接车",
-						url: "add.html"
+						url: "aaa.html"
 					},
 					{
 						itemTitle: "竣工检验",
@@ -262,14 +261,13 @@
 				tabIndex: ''
 			},
 			methods: {
-				addTab(targetName,title,url) {
-					for(i=0;i<this.editableTabs.length;i++){
-						if(title==this.editableTabs[i].title){
+				addTab(targetName, title, url) {
+					for(i = 0; i < this.editableTabs.length; i++) {
+						if(title == this.editableTabs[i].title) {
 							this.editableTabsValue = this.editableTabs[i].name;
 							return;
 						}
 					}
-					console.log(targetName)
 					let newTabName = ++this.tabIndex + '';
 					this.editableTabs.push({
 						title: title,
@@ -277,6 +275,9 @@
 						content: ''
 					});
 					this.editableTabsValue = newTabName;
+					this.$nextTick(()=>{
+						$(`#${newTabName}`).load(url);
+					})
 				},
 				removeTab(targetName) {
 					let tabs = this.editableTabs;
