@@ -13,7 +13,11 @@
 			
 			.el-header {
 				padding: 0
+			}
 			
+			.el-aside {
+				height: 89vh;
+				border-right: 1px solid #e6e6e6;
 			}
 			
 			.el-menu {
@@ -24,46 +28,59 @@
 
 	<body>
 		<div id="index">
-			<h1>
-				asdassd
-			</h1>
 			<el-container style='height:95vh; border: 1px solid #eee'>
-				<el-header style="height: 10%;">
+				<el-header>
 					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item index="1">处理中心</el-menu-item>
-						<el-menu-item index="3" >消息中心</el-menu-item>
-						<el-menu-item index="4" text-rigth>
-							<a href="#">订单管理</a>
+						<el-menu-item><img src="../../img/1606181050(1).jpg" alt="" /></el-menu-item>
+						<el-menu-item index="1">服务接待</el-menu-item>
+						<el-menu-item index="2">备品管理</el-menu-item>
+						<el-menu-item index="3">结算中心</el-menu-item>
+						<el-menu-item index="4">客户档案</el-menu-item>
+						<el-menu-item index="5">基础数据</el-menu-item>
+						<el-menu-item index="6">财务管理</el-menu-item>
+						<el-menu-item index="7">行政人事</el-menu-item>
+						<el-menu-item index="8">系统设置</el-menu-item>
+						<el-menu-item index="9" style="float: right;">
+							<el-dropdown>
+								<i class="el-icon-user" style="margin-right: 15px"></i>
+								<el-dropdown-menu slot="dropdown">
+									<el-dropdown-item>用户名：
+										<!--{{username}}-->
+									</el-dropdown-item>
+									<el-dropdown-item>
+										<el-button type="success" size="small">退出登录</el-button>
+									</el-dropdown-item>
+								</el-dropdown-menu>
+							</el-dropdown>
 						</el-menu-item>
 					</el-menu>
 				</el-header>
 				<el-container>
-					<el-aside width="200px">
+					<el-aside id="left" width="200px">
 						<el-menu>
-							<el-submenu index="1">
+							<el-submenu v-for="(item,index) in options" :key="index" :index="(index+1)+''">
 								<template slot="title">
 									<i class="el-icon-user"></i>
-									<span>会员管理</span>
+									<span>{{item.title}}</span>
 								</template>
 								<el-menu-item-group>
-									<el-menu-item index="1-2" @click="showView('add.html')"><i class="el-icon-message"></i>新增会员</el-menu-item>
-									<el-menu-item index="1-1" @click="showView('person.html')"><i class="el-icon-message"></i>基本信息维护</el-menu-item>
-								</el-menu-item-group>
-							</el-submenu>
-							<el-submenu index="2">
-								<template slot="title">
-									<i class="el-icon-user"></i>
-									<span>会员管理</span>
-								</template>
-								<el-menu-item-group>
-									<el-menu-item index="1-2" @click="showView('add.html')"><i class="el-icon-message"></i>新增会员</el-menu-item>
-									<el-menu-item index="1-1" @click="showView('person.html')"><i class="el-icon-message"></i>基本信息维护</el-menu-item>
+									<el-menu-item v-for="(temp,i) in item.option" :key="i" :index="(index+1)+'-'+(i+1)" 
+										@click="addTab(editableTabsValue,temp.itemTitle)">
+										<i class="el-icon-message"></i>{{temp.itemTitle}}
+									</el-menu-item>
 								</el-menu-item-group>
 							</el-submenu>
 						</el-menu>
 					</el-aside>
 					<el-main>
-						<div id="cnt"></div>
+						<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+							<el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name">
+								{{item.content}}
+							</el-tab-pane>
+						</el-tabs>
+						<div id="cnt">
+
+						</div>
 					</el-main>
 				</el-container>
 			</el-container>
@@ -75,16 +92,215 @@
 	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
 	<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
 	<script>
+		var fuwu = [{
+				title: "服务接待",
+				option: [{
+						itemTitle: "维修接车",
+						url: "add.html"
+					},
+					{
+						itemTitle: "竣工检验",
+						url: "add.html"
+					},
+					{
+						itemTitle: "保险对价",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "车间管理",
+				option: [{
+						itemTitle: "调度派工",
+						url: "add.html"
+					},
+					{
+						itemTitle: "班组施工",
+						url: "add.html"
+					},
+					{
+						itemTitle: "施工登记",
+						url: "add.html"
+					},
+					{
+						itemTitle: "客户看板",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "三包索赔",
+				option: [{
+						itemTitle: "索赔申报",
+						url: "add.html"
+					},
+					{
+						itemTitle: "确认索赔",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "业务分析",
+				option: [{
+						itemTitle: "维修监管",
+						url: "add.html"
+					},
+					{
+						itemTitle: "台次日统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "误工率统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "返工率统计",
+						url: "add.html"
+					}
+				]
+			}
+		];
+
+		var jiesuan = [{
+				title: "前台结算",
+				option: [{
+						itemTitle: "结算中心",
+						url: "add.html"
+					},
+					{
+						itemTitle: "快速通道",
+						url: "add.html"
+					},
+					{
+						itemTitle: "出厂放行",
+						url: "add.html"
+					},
+					{
+						itemTitle: "维修退货",
+						url: "add.html"
+					},
+					{
+						itemTitle: "其它收入",
+						url: "add.html"
+					},
+					{
+						itemTitle: "预收定金",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "收益统计",
+				option: [{
+						itemTitle: "结算资金统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "销售收入统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "结算分类统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "其它收入统计",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "业绩考核",
+				option: [{
+						itemTitle: "服务业绩统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "维修班组业绩",
+						url: "add.html"
+					},
+					{
+						itemTitle: "维修技工业绩",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "卡管理",
+				option: [{
+						itemTitle: "储值卡余额表",
+						url: "add.html"
+					},
+					{
+						itemTitle: "卡销售统计表",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "其他统计",
+				option: [{
+						itemTitle: "免单查询",
+						url: "add.html"
+					},
+					{
+						itemTitle: "附单查询",
+						url: "add.html"
+					}
+				]
+			}
+		];
+
 		var index = new Vue({
 			el: "#index",
 			data: {
+				options: [],
 				activeIndex: '1',
-				activeIndex2: '1'
+				editableTabsValue: '',
+				editableTabs: [],
+				tabIndex: ''
 			},
 			methods: {
+				addTab(targetName,title,url) {
+					console.log(targetName)
+					let newTabName = ++this.tabIndex + '';
+					this.editableTabs.push({
+						title: title,
+						name: newTabName,
+						content: $()
+					});
+					this.editableTabsValue = newTabName;
+				},
+				removeTab(targetName) {
+					let tabs = this.editableTabs;
+					let activeName = this.editableTabsValue;
+					if(activeName === targetName) {
+						tabs.forEach((tab, index) => {
+							if(tab.name === targetName) {
+								let nextTab = tabs[index + 1] || tabs[index - 1];
+								if(nextTab) {
+									activeName = nextTab.name;
+								}
+							}
+						});
+					}
+					this.editableTabsValue = activeName;
+					this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+				},
 				handleSelect(key, keyPath) {
 					console.log(key, keyPath);
-				}
+					if(key == 1) {
+						this.options = fuwu;
+					} else if(key == 2) {
+
+					} else if(key == 3) {
+						this.options = jiesuan;
+					}
+				},
+			},
+			mounted() {
+				this.options = fuwu;
 			}
 		})
 	</script>
