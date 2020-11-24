@@ -263,12 +263,18 @@
 			},
 			methods: {
 				addTab(targetName,title,url) {
+					for(i=0;i<this.editableTabs.length;i++){
+						if(title==this.editableTabs[i].title){
+							this.editableTabsValue = this.editableTabs[i].name;
+							return;
+						}
+					}
 					console.log(targetName)
 					let newTabName = ++this.tabIndex + '';
 					this.editableTabs.push({
 						title: title,
 						name: newTabName,
-						content: $()
+						content: ''
 					});
 					this.editableTabsValue = newTabName;
 				},
