@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="../../css/element.css">
 </head>
 <body>
-    <div id="clientApp">
+    <div id="carInfosApp">
         <div>
             <el-row>
                 <br>
                 <el-col :span="4">
                     <div class="grid-content bg-purple-dark">
-                        <span style="font-size: 25px;">客户档案</span>
+                        <span style="font-size: 25px;">车资料</span>
                     </div>
                 </el-col>
                 <el-col :span="5">
@@ -26,7 +26,7 @@
                         &nbsp;
                     </div>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="9">
                     <div class="grid-content bg-purple-dark">
                         <el-input placeholder="匹配名称/名称简码/手机/会员卡号/车牌号" v-model="input3" class="input-with-select">
                         </el-input>
@@ -37,11 +37,9 @@
                        &nbsp;
                     </div>
                 </el-col>
-                <el-col :span="6">
+                <el-col :span="5">
                     <div class="grid-content bg-purple-dark">
                         <el-button @click="aa" type="primary" icon="el-icon-search">查询</el-button>
-                        &nbsp;
-                        <el-button type="success" icon="el-icon-plus">添加</el-button>
                         &nbsp;
                         <el-button type="info">关闭</el-button>
                     </div>
@@ -206,8 +204,8 @@
 <script type="text/javascript" src="../../js/axios.min.js" ></script>
 <script type="text/javascript" src="../../js/echarts.min.js" ></script>
 <script>
-    const clientApp=new Vue({
-        el:'#clientApp',
+    const carInfosApp=new Vue({
+        el:'#carInfosApp',
         data() {
             return {
                 input3:'',
