@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>班组技工</title>
+		<!--<link rel="stylesheet" type="text/css" href="../css/element.css" />-->
+		<style type="text/css">
+			.el-header {
+				background-color: #B3C0D1;
+				color: #333;
+				line-height: 60px;
+			}
+			
+			.el-input {
+				width: 130px;
+			}
+			
+			.el-aside {
+				color: #333;
+			}
+			
+			.i,
+			.el-button {
+				margin: 5px;
+			}
+			
+			#search {
+				margin: 0px 0px 0px 100px;
+			}
+			
+			.head {
+				background-color: ghostwhite;
+				color: #444;
+				line-height: 60px;
+			}
+			
+			#shiftTheMechanic {
+				zoom: 0.9;
+			}
+			
+			.el-tabs {
+				width: 85%;
+			}
+			
+			.hiddenContent {
+				opacity: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="shiftTheMechanic">
+			<el-row>
+				<el-col :span="2">
+					<div class="hiddenContent">hiddenContent</div>
+				</el-col>
+				<el-col :span="20">
+					<!--<el-container>
+			  <el-header>
+			  	<div>
+					<h3>技工星级&nbsp;						
+								<el-input placeholder="星级"></el-input>
+								<el-button icon="el-icon-search" circle></el-button>						
+					</h3>			
+				</div>
+			  </el-header>
+			  <el-main>
+			  	<div>
+					<i class="el-icon-plus"></i>
+				<el-button type="text">增加员工</el-button>
+				<i class="el-icon-edit"></i>
+				<el-button type="text">修改</el-button>
+				<i class="el-icon-error"></i>
+				<el-button type="text">删除</el-button>
+				<i class="el-icon-info"></i>
+				<el-button type="text">查询</el-button>
+				<i class="el-icon-close"></i>
+				<el-button type="text">置空密码</el-button>
+				<i class="el-icon-check"></i>
+				<el-button type="text">班组权重</el-button>
+				<i class="el-icon-sort"></i>
+				<el-button type="text">导出</el-button>
+				</div>
+			  </el-main>
+			</el-container>-->
+					<div class="head">
+						<div>
+							<h3>班组技工&nbsp;	</h3>
+						</div>
+						<div>
+							<i class="el-icon-plus"></i>
+							<el-button type="text">增加员工</el-button>
+							<i class="el-icon-edit"></i>
+							<el-button type="text">修改</el-button>
+							<i class="el-icon-error"></i>
+							<el-button type="text">删除</el-button>
+							<i class="el-icon-info"></i>
+							<el-button type="text">查询</el-button>
+							<i class="el-icon-close"></i>
+							<el-button type="text">置空密码</el-button>
+							<i class="el-icon-check"></i>
+							<el-button type="text">班组权重</el-button>
+							<i class="el-icon-sort"></i>
+							<el-button type="text">导出</el-button>
+						</div>
+					</div>
+					<el-container style="height: 500px; border: 1px solid #eee">
+						<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+							<el-menu :default-openeds="['0', '99']">
+								<el-submenu index="1">
+									<template slot="title"><i class="el-icon-info"></i>10-自建</template>
+									<!--<el-menu-item-group>
+										<template slot="title">分组一</template>
+										<el-menu-item index="1-1">选项1</el-menu-item>
+										<el-menu-item index="1-2">选项2</el-menu-item>
+									</el-menu-item-group>
+									<el-menu-item-group title="分组2">
+										<el-menu-item index="1-3">选项3</el-menu-item>
+									</el-menu-item-group>
+									<el-submenu index="1-4">
+										<template slot="title">选项4</template>
+										<el-menu-item index="1-4-1">选项4-1</el-menu-item>
+									</el-submenu>-->
+								</el-submenu>
+								<el-submenu index="2">
+									<template slot="title"><i class="el-icon-info"></i>11-联队</template>
+									<!--<el-menu-item-group>
+										<template slot="title">分组一</template>
+										<el-menu-item index="2-1">选项1</el-menu-item>
+										<el-menu-item index="2-2">选项2</el-menu-item>
+									</el-menu-item-group>
+									<el-menu-item-group title="分组2">
+										<el-menu-item index="2-3">选项3</el-menu-item>
+									</el-menu-item-group>
+									<el-submenu index="2-4">
+										<template slot="title">选项4</template>
+										<el-menu-item index="2-4-1">选项4-1</el-menu-item>
+									</el-submenu>-->
+								</el-submenu>
+								<el-submenu index="3">
+									<template slot="title"><i class="el-icon-info"></i>12-加盟</template>
+									<!--<el-menu-item-group>
+										<template slot="title">分组一</template>
+										<el-menu-item index="3-1">选项1</el-menu-item>
+										<el-menu-item index="3-2">选项2</el-menu-item>
+									</el-menu-item-group>
+									<el-menu-item-group title="分组2">
+										<el-menu-item index="3-3">选项3</el-menu-item>
+									</el-menu-item-group>
+									<el-submenu index="3-4">
+										<template slot="title">选项4</template>
+										<el-menu-item index="3-4-1">选项4-1</el-menu-item>
+									</el-submenu>-->
+								</el-submenu>
+								<el-submenu index="4">
+									<template slot="title"><i class="el-icon-info"></i>13-合伙人</template>
+									<!--<el-menu-item-group>
+										<template slot="title">分组一</template>
+										<el-menu-item index="3-1">选项1</el-menu-item>
+										<el-menu-item index="3-2">选项2</el-menu-item>
+									</el-menu-item-group>
+									<el-menu-item-group title="分组2">
+										<el-menu-item index="3-3">选项3</el-menu-item>
+									</el-menu-item-group>
+									<el-submenu index="3-4">
+										<template slot="title">选项4</template>
+										<el-menu-item index="3-4-1">选项4-1</el-menu-item>
+									</el-submenu>-->
+								</el-submenu>
+							</el-menu>
+						</el-aside>
+
+						<el-container>
+							<el-header style="text-align: right; font-size: 12px">
+								<el-dropdown>
+									<i class="el-icon-setting" style="margin-right: 15px"></i>
+									<el-dropdown-menu slot="dropdown">
+										<el-dropdown-item>查看</el-dropdown-item>
+										<el-dropdown-item>新增</el-dropdown-item>
+										<el-dropdown-item>删除</el-dropdown-item>
+									</el-dropdown-menu>
+								</el-dropdown>
+							</el-header>
+
+							<el-main>
+								<el-table :data="shiftTheMechanicList">
+									<el-table-column prop="mID" label="班组编号" width="300">
+									</el-table-column>
+									<el-table-column prop="mName" label="班组名称" width="300">
+									</el-table-column>
+									<el-table-column prop="aID" label="技工编号" width="300">
+									</el-table-column>
+									<el-table-column prop="aName" label="技工姓名" width="300">
+									</el-table-column>
+									<el-table-column prop="aSex" label="性别" width="300">
+									</el-table-column>
+									<el-table-column prop="aPhone" label="手机" width="300">
+									</el-table-column>
+									<el-table-column prop="aAddress" label="地址" width="300">
+									</el-table-column>
+									<el-table-column prop="aBronDate" label="出生日期" width="300">
+									</el-table-column>
+									<el-table-column prop="groupLeader" label="组长" width="300">
+									</el-table-column>
+									<el-table-column prop="loginAccount" label="登录账号" width="300">
+									</el-table-column>
+									<el-table-column prop="weChatAccount" label="微信号" width="300">
+									</el-table-column>
+									<el-table-column prop="idCard" label="身份证号" width="300">
+									</el-table-column>
+									<el-table-column prop="residence" label="户口地址" width="300">
+									</el-table-column>
+									<el-table-column prop="depositBank" label="开户银行" width="300">
+									</el-table-column>
+									<el-table-column prop="starLevel" label="星级" width="300">
+									</el-table-column>
+									<el-table-column prop="maintenanceAndRepairWork" label="维修工种" width="300">
+									</el-table-column>
+									<el-table-column prop="brandMaintain" label="维系品牌" width="300">
+									</el-table-column>
+								</el-table>
+							</el-main>
+						</el-container>
+					</el-container>
+			</el-row>
+			</el-col>
+			<el-col :span="2">
+				<div class="hiddenContent">hiddenContent</div>
+			</el-col>
+			</el-row>
+		</div>
+	</body>
+	<!--<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/axios_cfg.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript">
+		var StarEmployees = new Vue({
+			el: "#shiftTheMechanic",
+			data() {
+				return {
+					shiftTheMechanicList: []
+				}
+			},
+			methods: {
+
+			}
+		});
+	</script>
+
+</html>

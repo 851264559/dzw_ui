@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="first" align="center" style="margin-top: 10%;">
+			<h1 style="font-size: 26px;">欢迎使用汽修系统</h1>
+			<el-row type="flex" style="margin: 20px;" justify="center" :gutter="30">
+				<el-col :span="6">
+					<el-card shadow="hover">
+						总是显示
+					</el-card>
+				</el-col>
+				<el-col :span="6">
+					<el-card shadow="hover">
+						鼠标悬浮时显示
+					</el-card>
+				</el-col>
+				<el-col :span="6">
+					<el-card shadow="hover">
+						从不显示
+					</el-card>
+				</el-col>
+				<el-col :span="6">
+					<el-card shadow="hover">
+						从不显示
+					</el-card>
+				</el-col>
+			</el-row>
+		</div>
+	</body>
+	<script>
+		var first = new Vue({
+			el:"#first"
+		})
+	</script>
+
+</html>

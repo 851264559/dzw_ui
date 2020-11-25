@@ -1,5 +1,6 @@
 	//服务接待
 	var fuwu = [{
+<<<<<<< HEAD
 			title: "服务接待",
 			option: [{
 					itemTitle: "维修接车",
@@ -68,10 +69,81 @@
 			]
 		}
 	];
+=======
+				title: "服务接待",
+				option: [{
+						itemTitle: "维修接车",
+						url: "../CWL/PickUpCarRegistration.html"
+					},
+					{
+						itemTitle: "竣工检验",
+						url: "../CWL/TestOnCompletion.html"
+					},
+					{
+						itemTitle: "保险对价",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "车间管理",
+				option: [{
+						itemTitle: "调度派工",
+						url: "add.html"
+					},
+					{
+						itemTitle: "班组施工",
+						url: "add.html"
+					},
+					{
+						itemTitle: "施工登记",
+						url: "add.html"
+					},
+					{
+						itemTitle: "客户看板",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "三包索赔",
+				option: [{
+						itemTitle: "索赔申报",
+						url: "add.html"
+					},
+					{
+						itemTitle: "确认索赔",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "业务分析",
+				option: [{
+						itemTitle: "维修监管",
+						url: "add.html"
+					},
+					{
+						itemTitle: "台次日统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "误工率统计",
+						url: "add.html"
+					},
+					{
+						itemTitle: "返工率统计",
+						url: "add.html"
+					}
+				]
+			}
+		];
+>>>>>>> e1e8d72ade3b44c85d6132056c6578c1022c12d8
 	//备品管理
 	var guanli
 	//结算中心
 	var jiesuan = [{
+<<<<<<< HEAD
 			title: "前台结算",
 			option: [{
 					itemTitle: "结算中心",
@@ -168,6 +240,34 @@
 		option: [{
 				itemTitle: "发动机品牌",
 				url: "../WZY/engineBrand.html"
+=======
+				title: "前台结算",
+				option: [{
+						itemTitle: "结算中心",
+						url: "../CT/summary.html"
+					},
+					{
+						itemTitle: "快速通道",
+						url: "add.html"
+					},
+					{
+						itemTitle: "出厂放行",
+						url: "add.html"
+					},
+					{
+						itemTitle: "维修退货",
+						url: "add.html"
+					},
+					{
+						itemTitle: "其它收入",
+						url: "add.html"
+					},
+					{
+						itemTitle: "预收定金",
+						url: "add.html"
+					}
+				]
+>>>>>>> e1e8d72ade3b44c85d6132056c6578c1022c12d8
 			},
 			{
 				itemTitle: "车型档案",
@@ -185,12 +285,68 @@
 				itemTitle: "供货单位",
 				url: "add.html"
 			}
+<<<<<<< HEAD
 		]
 	}, {
 		title: "卡定义",
 		option: []
 	}]
+=======
+		];
+	//客户档案
+	var dangan=[
+		{
+			title: "客户档案",
+			option: [
+			{
+					itemTitle: "客户信息",
+					url: "../CT/client.html"
+			},
+			{
+					itemTitle: "车资料",
+					url: "../CT/carInfos.html"
+			}]
+		}
+	]
+	//基础数据
+	var jichu
+>>>>>>> e1e8d72ade3b44c85d6132056c6578c1022c12d8
 	//财务管理
 	var caiwu
 	//行政人事
-	var renshi
+	var renshi = [{
+				title: "员工资料",
+				option: [
+				]
+			},
+			{
+				title: "技工管理",
+				option: [{
+						itemTitle: "技工星级",
+						url: "../CWL/StarEmployees.html"
+					},
+					{
+						itemTitle: "班组技工",
+						url: "../CWL/ShiftTheMechanic.html"
+					},
+					{
+						itemTitle: "外勤车辆",
+						url: "../CWL/FieldOfVehicle.html"
+					},
+					{
+						itemTitle: "技工提成比",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "维修工具",
+				option: [
+				]
+			},
+			{
+				title: "办公用品",
+				option: [
+				]
+			}
+		];

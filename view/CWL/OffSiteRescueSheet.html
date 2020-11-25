@@ -13,184 +13,197 @@
 			.el-form-item {
 				width: 200px;
 			}
+			
+			#offSiteRescueSheet {
+				zoom: 0.6;
+			}
+			
+			.el-tabs {
+				width: 85%;
+			}
+			
+			.hiddenContent {
+				opacity: 0;
+			}
 		</style>
 	</head>
 
 	<body>
 		<div id="offSiteRescueSheet">
-			<el-container>
-				<el-header>
-					<h1>
+			<el-row>
+				<el-col :span="2">
+					<div class="hiddenContent">hiddenContent</div>
+				</el-col>
+				<el-col :span="20">
+					<div>
+						<el-container>
+							<el-header>
+								<h1>
 						站外救援单
 					<el-button type="success" icon="el-icon-check" circle></el-button>
 					</h1>
 
-				</el-header>
-				<el-main>
-					<el-form :inline="true" :model="OffSiteRescueSheet" :disabled="false" class="demo-form-inline">
-						<el-form-item label="单号">
-							<el-input v-model="OffSiteRescueSheet.oddNumber" placeholder="单号"></el-input>
-						</el-form-item>
-						<el-form-item label="车牌号">
-							<el-input v-model="OffSiteRescueSheet.carNumbers" placeholder="车牌号"></el-input>
-						</el-form-item>
-						<el-form-item label="车型">
-							<el-input v-model="OffSiteRescueSheet.carType" placeholder="车型"></el-input>
-						</el-form-item>
-						<el-form-item label="车辆品牌">
-							<el-input v-model="OffSiteRescueSheet.bland" placeholder="车辆品牌"></el-input>
-						</el-form-item>
-						<el-form-item label="发动机品牌">
-							<!--<el-input v-model="RepairBill.engineBrand" placeholder="发动机品牌"></el-input>-->
-							<template>
-								<el-select v-model="OffSiteRescueSheet.engineBrand" placeholder="请选择">
-									<el-option v-for="item in engineBrands" :key="item.values" :label="item.name" :value="item.values">
-									</el-option>
-								</el-select>
-							</template>
-						</el-form-item>
-						<el-form-item label="发动机号">
-							<el-input v-model="OffSiteRescueSheet.engineNumber" placeholder="发动机号"></el-input>
-						</el-form-item>
-						<el-form-item label="车架号">
-							<el-input v-model="OffSiteRescueSheet.VIN" placeholder="车架号"></el-input>
-						</el-form-item>
-						<el-form-item label="服务顾问">
-							<el-input v-model="OffSiteRescueSheet.server" placeholder="服务顾问"></el-input>
-						</el-form-item>
-						<el-form-item label="车主名称">
-							<el-input v-model="OffSiteRescueSheet.carOwnName" placeholder="车主名称"></el-input>
-						</el-form-item>
-						<el-form-item label="驾驶员">
-							<el-input v-model="OffSiteRescueSheet.driver" placeholder="驾驶员"></el-input>
-						</el-form-item>
-						<el-form-item label="联系电话">
-							<el-input v-model="OffSiteRescueSheet.phone" placeholder="联系电话"></el-input>
-						</el-form-item>
-						<el-form-item label="进厂里程">
-							<el-input v-model="OffSiteRescueSheet.milesIntoTheFactory" placeholder="进厂里程"></el-input>
-						</el-form-item>
-						<el-form-item label="进厂油量">
-							<el-input v-model="OffSiteRescueSheet.oilIntoTheFactory" placeholder="进厂油量"></el-input>
-						</el-form-item>
-						<el-form-item label="上次里程">
-							<el-input v-model="OffSiteRescueSheet.theLastTimeTheMileage" placeholder="上次里程"></el-input>
-						</el-form-item>
-						<el-form-item label="进厂时间">
-							<!--<el-input v-model="RepairBill.timeIntoTheFactory" placeholder="进厂时间"></el-input>-->
-							<div class="block">
-								<el-date-picker v-model="OffSiteRescueSheet.timeIntoTheFactory" type="datetime" placeholder="选择日期时间">
-								</el-date-picker>
-							</div>
-						</el-form-item>
-						<el-form-item label="业务类别">
-							<!--<el-input v-model="RepairBill.classOfBusiness" placeholder="业务类别"></el-input>-->
-							<template>
-								<el-select v-model="OffSiteRescueSheet.classOfBusiness" placeholder="请选择">
-									<el-option v-for="item in classOfBusinesses" :key="item.values" :label="item.name" :value="item.values">
-									</el-option>
-								</el-select>
-							</template>
-						</el-form-item>
-						<el-form-item label="施工班次">
-							<!--<el-input v-model="RepairBill.constructionDivisions" placeholder="施工班次"></el-input>-->
-							<template>
-								<el-select v-model="OffSiteRescueSheet.constructionDivisions" placeholder="请选择">
-									<el-option v-for="item in constructionDivisionsList" :key="item.values" :label="item.name" :value="item.values">
-									</el-option>
-								</el-select>
-							</template>
-						</el-form-item>
-						<el-form-item label="接车人">
-							<el-input v-model="OffSiteRescueSheet.pickOne" placeholder="接车人"></el-input>
-						</el-form-item>
-						<el-form-item label="预计完工">
-							<el-input v-model="OffSiteRescueSheet.expectedCompletion" placeholder="预计完工"></el-input>
-						</el-form-item>
-						<el-form-item label="结算方式">
-							<el-input v-model="OffSiteRescueSheet.clearingForm" placeholder="结算方式"></el-input>
-						</el-form-item>
-						<el-form-item label="赔款公司">
-							<el-input v-model="OffSiteRescueSheet.indemnityCompany" placeholder="赔款公司"></el-input>
-						</el-form-item>
-						<el-form-item label="上次进厂">
-							<el-input v-model="OffSiteRescueSheet.theLasTtimeIntoTheFactory" placeholder="上次进厂"></el-input>
-						</el-form-item>
-						<el-form-item label="预估金额">
-							<el-input v-model="OffSiteRescueSheet.estimatedAmount" placeholder="预估金额"></el-input>
-						</el-form-item>
-						<el-form-item label="完工时间">
-							<el-input v-model="OffSiteRescueSheet.timeOfCompletion" placeholder="完工时间"></el-input>
-						</el-form-item>
-						<br />
-						<el-form-item label="接待备注">
-							<el-input v-model="OffSiteRescueSheet.receptionNote" placeholder="接待备注" type="textarea" style="width: 1050px;"></el-input>
-						</el-form-item>
-						<br />
-						<el-form-item label="维修备注">
-							<el-input v-model="OffSiteRescueSheet.maintenanceNote" placeholder="维修备注" type="textarea" style="width: 1050px;"></el-input>
-						</el-form-item>
-						<br />
-						<el-form-item label="救援地址">
-							<el-input v-model="OffSiteRescueSheet.rescueTheAddress" placeholder="救援地址" type="textarea" style="width: 1050px;"></el-input>
-						</el-form-item>
-						<br />
-						<el-form-item label="维修陈述">
-							<el-input v-model="OffSiteRescueSheet.repairStatement" placeholder="维修陈述" type="textarea" style="width: 1050px;"></el-input>
-						</el-form-item>
-						<br />
-						<el-form-item label="救援陈述">
-							<el-input v-model="OffSiteRescueSheet.rescueStatement" placeholder="救援陈述" type="textarea" style="width: 1050px;"></el-input>
-						</el-form-item>
-				</el-main>
-			</el-container>
-			<template>
-				<el-tabs v-model="activeName">
-					<el-tab-pane label="维修项目" name="first">
-						<el-table ref="multipleTable" :data="MaintenanceItems" tooltip-effect="dark" style="width: 100%">
-							<el-table-column type="selection" width="55">
-							</el-table-column>
-							<!--<el-table-column label="日期" width="120">
-								<template slot-scope="scope">{{ scope.row.date }}</template>
-							</el-table-column>-->
-							<el-table-column prop="oid" label="项目编号">
-							</el-table-column>
-							<el-table-column prop="oName" label="项目名称" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="number" label="数量" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="priceClass" label="价类" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="unitPrice" label="单价" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="money" label="金额" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="settlementPrice" label="技师结算价" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="errorDesc" label="故障描述" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="errorCause" label="故障原因" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="theMaintenanceCrew" label="维修班组" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="busyWorkGroup" label="作业人员" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="server" label="服务顾问" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="workOrderNumber" label="工单号" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="freeOfChargeFor" label="免单原因" show-overflow-tooltip>
-							</el-table-column>
-						</el-table>
-					</el-tab-pane>
-					<el-tab-pane label="领料情况" name="second">
-						<el-button type="text" @click="showView">维修领料单</el-button>
+							</el-header>
+							<el-main>
+								<el-form :inline="true" :model="OffSiteRescueSheet" :disabled="false" class="demo-form-inline">
+									<el-form-item label="单号">
+										<el-input v-model="OffSiteRescueSheet.oddNumber" placeholder="单号"></el-input>
+									</el-form-item>
+									<el-form-item label="车牌号">
+										<el-input v-model="OffSiteRescueSheet.carNumbers" placeholder="车牌号"></el-input>
+									</el-form-item>
+									<el-form-item label="车型">
+										<el-input v-model="OffSiteRescueSheet.carType" placeholder="车型"></el-input>
+									</el-form-item>
+									<el-form-item label="车辆品牌">
+										<el-input v-model="OffSiteRescueSheet.bland" placeholder="车辆品牌"></el-input>
+									</el-form-item>
+									<el-form-item label="发动机品牌">
+										<!--<el-input v-model="RepairBill.engineBrand" placeholder="发动机品牌"></el-input>-->
+										<template>
+											<el-select v-model="OffSiteRescueSheet.engineBrand" placeholder="请选择">
+												<el-option v-for="item in engineBrands" :key="item.values" :label="item.name" :value="item.values">
+												</el-option>
+											</el-select>
+										</template>
+									</el-form-item>
+									<el-form-item label="发动机号">
+										<el-input v-model="OffSiteRescueSheet.engineNumber" placeholder="发动机号"></el-input>
+									</el-form-item>
+									<el-form-item label="车架号">
+										<el-input v-model="OffSiteRescueSheet.VIN" placeholder="车架号"></el-input>
+									</el-form-item>
+									<el-form-item label="服务顾问">
+										<el-input v-model="OffSiteRescueSheet.server" placeholder="服务顾问"></el-input>
+									</el-form-item>
+									<el-form-item label="车主名称">
+										<el-input v-model="OffSiteRescueSheet.carOwnName" placeholder="车主名称"></el-input>
+									</el-form-item>
+									<el-form-item label="驾驶员">
+										<el-input v-model="OffSiteRescueSheet.driver" placeholder="驾驶员"></el-input>
+									</el-form-item>
+									<el-form-item label="联系电话">
+										<el-input v-model="OffSiteRescueSheet.phone" placeholder="联系电话"></el-input>
+									</el-form-item>
+									<el-form-item label="进厂里程">
+										<el-input v-model="OffSiteRescueSheet.milesIntoTheFactory" placeholder="进厂里程"></el-input>
+									</el-form-item>
+									<el-form-item label="进厂油量">
+										<el-input v-model="OffSiteRescueSheet.oilIntoTheFactory" placeholder="进厂油量"></el-input>
+									</el-form-item>
+									<el-form-item label="上次里程">
+										<el-input v-model="OffSiteRescueSheet.theLastTimeTheMileage" placeholder="上次里程"></el-input>
+									</el-form-item>
+									<el-form-item label="进厂时间">
+										<!--<el-input v-model="RepairBill.timeIntoTheFactory" placeholder="进厂时间"></el-input>-->
+										<div class="block">
+											<el-date-picker v-model="OffSiteRescueSheet.timeIntoTheFactory" type="datetime" placeholder="选择日期时间">
+											</el-date-picker>
+										</div>
+									</el-form-item>
+									<el-form-item label="业务类别">
+										<!--<el-input v-model="RepairBill.classOfBusiness" placeholder="业务类别"></el-input>-->
+										<template>
+											<el-select v-model="OffSiteRescueSheet.classOfBusiness" placeholder="请选择">
+												<el-option v-for="item in classOfBusinesses" :key="item.values" :label="item.name" :value="item.values">
+												</el-option>
+											</el-select>
+										</template>
+									</el-form-item>
+									<el-form-item label="施工班次">
+										<!--<el-input v-model="RepairBill.constructionDivisions" placeholder="施工班次"></el-input>-->
+										<template>
+											<el-select v-model="OffSiteRescueSheet.constructionDivisions" placeholder="请选择">
+												<el-option v-for="item in constructionDivisionsList" :key="item.values" :label="item.name" :value="item.values">
+												</el-option>
+											</el-select>
+										</template>
+									</el-form-item>
+									<el-form-item label="接车人">
+										<el-input v-model="OffSiteRescueSheet.pickOne" placeholder="接车人"></el-input>
+									</el-form-item>
+									<el-form-item label="预计完工">
+										<el-input v-model="OffSiteRescueSheet.expectedCompletion" placeholder="预计完工"></el-input>
+									</el-form-item>
+									<el-form-item label="结算方式">
+										<el-input v-model="OffSiteRescueSheet.clearingForm" placeholder="结算方式"></el-input>
+									</el-form-item>
+									<el-form-item label="赔款公司">
+										<el-input v-model="OffSiteRescueSheet.indemnityCompany" placeholder="赔款公司"></el-input>
+									</el-form-item>
+									<el-form-item label="上次进厂">
+										<el-input v-model="OffSiteRescueSheet.theLasTtimeIntoTheFactory" placeholder="上次进厂"></el-input>
+									</el-form-item>
+									<el-form-item label="预估金额">
+										<el-input v-model="OffSiteRescueSheet.estimatedAmount" placeholder="预估金额"></el-input>
+									</el-form-item>
+									<el-form-item label="完工时间">
+										<el-input v-model="OffSiteRescueSheet.timeOfCompletion" placeholder="完工时间"></el-input>
+									</el-form-item>
+									<br />
+									<el-form-item label="接待备注">
+										<el-input v-model="OffSiteRescueSheet.receptionNote" placeholder="接待备注" type="textarea" style="width: 1050px;"></el-input>
+									</el-form-item>
+									<br />
+									<el-form-item label="维修备注">
+										<el-input v-model="OffSiteRescueSheet.maintenanceNote" placeholder="维修备注" type="textarea" style="width: 1050px;"></el-input>
+									</el-form-item>
+									<br />
+									<el-form-item label="救援地址">
+										<el-input v-model="OffSiteRescueSheet.rescueTheAddress" placeholder="救援地址" type="textarea" style="width: 1050px;"></el-input>
+									</el-form-item>
+									<br />
+									<el-form-item label="维修陈述">
+										<el-input v-model="OffSiteRescueSheet.repairStatement" placeholder="维修陈述" type="textarea" style="width: 1050px;"></el-input>
+									</el-form-item>
+									<br />
+									<el-form-item label="救援陈述">
+										<el-input v-model="OffSiteRescueSheet.rescueStatement" placeholder="救援陈述" type="textarea" style="width: 1050px;"></el-input>
+									</el-form-item>
+							</el-main>
+						</el-container>
+						<template>
+							<el-tabs v-model="activeName">
+								<el-tab-pane label="维修项目" name="first">
+									<el-table ref="multipleTable" :data="MaintenanceItems" tooltip-effect="dark" style="width: 100%">
+										<el-table-column type="selection" width="55">
+										</el-table-column>
+										<el-table-column prop="oid" label="项目编号">
+										</el-table-column>
+										<el-table-column prop="oName" label="项目名称" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="number" label="数量" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="priceClass" label="价类" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="unitPrice" label="单价" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="money" label="金额" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="settlementPrice" label="技师结算价" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="errorDesc" label="故障描述" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="errorCause" label="故障原因" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="theMaintenanceCrew" label="维修班组" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="busyWorkGroup" label="作业人员" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="server" label="服务顾问" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="workOrderNumber" label="工单号" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="freeOfChargeFor" label="免单原因" show-overflow-tooltip>
+										</el-table-column>
+									</el-table>
+								</el-tab-pane>
+								<el-tab-pane label="领料情况" name="second">
+									领料情况
+									<!--<el-button type="text" @click="showView">维修领料单</el-button>
 						<el-table ref="multipleTable" :data="AcquisitionConditions" tooltip-effect="dark" style="width: 100%">
 							<el-table-column type="selection" width="55">
 							</el-table-column>
-							<!--<el-table-column label="日期" width="120">
-								<template slot-scope="scope">{{ scope.row.date }}</template>
-							</el-table-column>-->
 							<el-table-column prop="type" label="类别">
 							</el-table-column>
 							<el-table-column prop="pDate" label="领料日期" show-overflow-tooltip>
@@ -213,65 +226,69 @@
 							</el-table-column>
 							<el-table-column prop="freeOfChargeFor" label="免单原因" show-overflow-tooltip>
 							</el-table-column>
-						</el-table>
-					</el-tab-pane>
-					<el-tab-pane label="结算信息" name="third">
-						<el-table ref="multipleTable" :data="BillingInfo" tooltip-effect="dark" style="width: 100%">
-							<el-table-column type="selection" width="55">
-							</el-table-column>
-							<!--<el-table-column label="日期" width="120">
-								<template slot-scope="scope">{{ scope.row.date }}</template>
-							</el-table-column>-->
-							<el-table-column prop="bStatic" label="结算状态">
-							</el-table-column>
-							<el-table-column prop="bMoney" label="结算金额" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="materialsExpenses" label="材料费" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="costOfLabor" label="工时费" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="bDate" label="结算日期" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="bMan" label="结算人" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="cash" label="现金" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="bankCard" label="银行卡" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="bill" label="票据" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="paymentOfTheAmount" label="挂账金额" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="atTheCards" label="冲储值卡" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="atTheDeposit" label="冲定金" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="collectTaxes" label="收税金" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="invoiceNumber" label="发票号" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="internalAccount" label="内部帐" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="pointsDeduction" label="积分抵扣" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="toAccountProfitAndLoss" label="到账盈亏" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="TypeOfInvoice" label="发票种类" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="invoiceValue" label="发票金额" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="vouchers" label="抵用卷" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="wipeTheMantissa" label="抹尾数" show-overflow-tooltip>
-							</el-table-column>
-						</el-table>
-					</el-tab-pane>
-				</el-tabs>
-			</template>
-			<el-dialog title="维修领料单" :visible.sync="isShow" width="80%">
-				<div id="show"></div>
-			</el-dialog>
-			</el-form>
+						</el-table>-->
+								</el-tab-pane>
+								<el-tab-pane label="结算信息" name="third">
+									<el-table ref="multipleTable" :data="BillingInfo" tooltip-effect="dark" style="width: 100%">
+										<el-table-column type="selection" width="55">
+										</el-table-column>
+										<el-table-column prop="bStatic" label="结算状态">
+										</el-table-column>
+										<el-table-column prop="bMoney" label="结算金额" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="materialsExpenses" label="材料费" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="costOfLabor" label="工时费" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="bDate" label="结算日期" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="bMan" label="结算人" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="cash" label="现金" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="bankCard" label="银行卡" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="bill" label="票据" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="paymentOfTheAmount" label="挂账金额" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="atTheCards" label="冲储值卡" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="atTheDeposit" label="冲定金" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="collectTaxes" label="收税金" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="invoiceNumber" label="发票号" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="internalAccount" label="内部帐" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="pointsDeduction" label="积分抵扣" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="toAccountProfitAndLoss" label="到账盈亏" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="TypeOfInvoice" label="发票种类" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="invoiceValue" label="发票金额" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="vouchers" label="抵用卷" show-overflow-tooltip>
+										</el-table-column>
+										<el-table-column prop="wipeTheMantissa" label="抹尾数" show-overflow-tooltip>
+										</el-table-column>
+									</el-table>
+								</el-tab-pane>
+							</el-tabs>
+						</template>
+						<el-dialog title="维修领料单" :visible.sync="isShow" width="80%">
+							<div id="show"></div>
+						</el-dialog>
+						</el-form>
+					</div>
+				</el-col>
+				<el-col :span="2">
+					<div class="hiddenContent">hiddenContent</div>
+				</el-col>
+			</el-row>
+
 		</div>
 	</body>
 	<!--<script src="../js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
