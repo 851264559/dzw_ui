@@ -97,9 +97,9 @@
 			data: {
 				options: [],
 				activeIndex: '1',
-				editableTabsValue: '',
+				editableTabsValue: '1',
 				editableTabs: [],
-				tabIndex: ''
+				tabIndex: '1'
 			},
 			methods: {
 				addTab(targetName, title, url) {
@@ -116,11 +116,15 @@
 						content: ''
 					});
 					this.editableTabsValue = newTabName;
+					//dom渲染后执行
 					this.$nextTick(() => {
 						$(`#${newTabName}`).load(url);
 					})
 				},
 				removeTab(targetName) {
+					if(targetName==2){
+						return;
+					}
 					let tabs = this.editableTabs;
 					let activeName = this.editableTabsValue;
 					if(activeName === targetName) {
@@ -159,6 +163,7 @@
 			},
 			mounted() {
 				this.options = fuwu;
+				this.addTab(this.editableTabsValue, "首页", "first.html")
 			}
 		})
 	</script>
