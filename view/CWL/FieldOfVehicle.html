@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>外勤车辆</title>
+		<!--<link rel="stylesheet" type="text/css" href="../css/element.css" />-->
+		<style type="text/css">
+			.el-input {
+				width: 130px;
+			}
+			
+			#fieldOfVehicle {
+				zoom: 0.8;
+			}
+			
+			.el-tabs {
+				width: 100%;
+			}
+			
+			.hiddenContent {
+				opacity: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="fieldOfVehicle">
+			<el-row>
+				<el-col :span="2">
+					<div class="hiddenContent">hiddenContent</div>
+				</el-col>
+				<el-col :span="20">
+					<el-container>
+						<el-header>
+							<h3>外勤车辆</h3>
+						</el-header>
+						<el-main>
+							<el-form :inline="true" :model="this.fieldOfVehicle" class="demo-form-inline">
+								<el-form-item label="车牌号">
+									<el-input v-model="fieldOfVehicle.carNumber" placeholder="车牌号"></el-input>
+								</el-form-item>
+								<el-form-item label="品牌">
+									<el-input v-model="fieldOfVehicle.brand" placeholder="品牌"></el-input>
+								</el-form-item>
+								<el-form-item label="车型">
+									<el-input v-model="fieldOfVehicle.carType" placeholder="车型"></el-input>
+								</el-form-item>
+								<el-form-item label="进厂时间">
+									<el-input v-model="fieldOfVehicle.timeIntoTheFactory" placeholder="进厂时间"></el-input>
+								</el-form-item>
+								<el-form-item label="归属班组">
+									<template>
+										<el-select v-model="fieldOfVehicle.ownershipShift" placeholder="请选择">
+											<el-option v-for="item in fieldOfVehicle.ownershipShifts" :key="item.index" :label="item.value" :value="item.value">
+											</el-option>
+										</el-select>
+									</template>
+								</el-form-item>
+								<el-form-item>
+									<i class="el-icon-edit"></i>
+									<el-button type="text">增加</el-button>
+									<i class="el-icon-close"></i>
+									<el-button type="text">删除</el-button>
+									<i class="el-icon-check"></i>
+									<el-button type="text">保存</el-button>
+								</el-form-item>
+							</el-form>
+							<template>
+								<el-table :data="fieldOfVehicles" style="width: 65%">
+									<el-table-column prop="carNumber" label="车牌号" width="180">
+									</el-table-column>
+									<el-table-column prop="brand" label="品牌" width="180">
+									</el-table-column>
+									<el-table-column prop="carType" label="车型">
+									</el-table-column>
+									<el-table-column prop="timeIntoTheFactory" label="进厂时间">
+									</el-table-column>
+									<el-table-column prop="ownershipShift" label="归属班组">
+									</el-table-column>
+								</el-table>
+							</template>
+						</el-main>
+					</el-container>
+			</el-row>
+			</el-col>
+			<el-col :span="2">
+				<div class="hiddenContent">hiddenContent</div>
+			</el-col>
+			</el-row>
+		</div>
+	</body>
+	<!--<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/axios_cfg.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript">
+		var StarEmployees = new Vue({
+			el: "#fieldOfVehicle",
+			data() {
+				return {
+					fieldOfVehicle: {
+						carNumber: "",
+						brand: "",
+						carType: "",
+						timeIntoTheFactory: "",
+						ownershipShifts: [{
+								index: 1,
+								value: "一"
+							},
+							{
+								index: 2,
+								value: "二"
+							},
+							{
+								index: 3,
+								value: "三"
+							},
+							{
+								index: 4,
+								value: "四"
+							}
+						],
+						ownershipShift: ""
+					},
+					fieldOfVehicles: [{
+						carNumber: "001",
+						brand: "大众",
+						carType: "大众01",
+						timeIntoTheFactory: "100",
+						ownershipShift: "武昌队"
+					}, {
+						carNumber: "001",
+						brand: "大众",
+						carType: "大众01",
+						timeIntoTheFactory: "100",
+						ownershipShift: "武昌队"
+					}, {
+						carNumber: "001",
+						brand: "大众",
+						carType: "大众01",
+						timeIntoTheFactory: "100",
+						ownershipShift: "武昌队"
+					}, {
+						carNumber: "001",
+						brand: "大众",
+						carType: "大众01",
+						timeIntoTheFactory: "100",
+						ownershipShift: "武昌队"
+					}]
+				}
+			},
+			methods: {
+
+			}
+		});
+	</script>
+
+</html>

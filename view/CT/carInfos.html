@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    	#carInfosApp{
+        	zoom: 0.8;
+        }
+        .clientCente{
+            background-color: #fafafa;
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/element.css">
+</head>
+<body>
+    <div id="carInfosApp">
+        <div>
+            <el-row>
+                <br>
+                <el-col :span="4">
+                    <div class="grid-content bg-purple-dark">
+                        <span style="font-size: 25px;">车资料</span>
+                    </div>
+                </el-col>
+                <el-col :span="5">
+                    <div class="grid-content bg-purple-dark">
+                        &nbsp;
+                    </div>
+                </el-col>
+                <el-col :span="9">
+                    <div class="grid-content bg-purple-dark">
+                        <el-input placeholder="匹配名称/名称简码/手机/会员卡号/车牌号" v-model="input3" class="input-with-select">
+                        </el-input>
+                    </div>
+                </el-col>
+                <el-col :span="1">
+                    <div class="grid-content bg-purple-dark">
+                       &nbsp;
+                    </div>
+                </el-col>
+                <el-col :span="5">
+                    <div class="grid-content bg-purple-dark">
+                        <el-button @click="aa" type="primary" icon="el-icon-search">查询</el-button>
+                        &nbsp;
+                        <el-button type="info">关闭</el-button>
+                    </div>
+                </el-col>
+            </el-row>
+        </div>
+        <br>
+        <br>
+        <div class="clientCente">
+            <el-row>
+                <el-col :span="24">
+                    <el-table
+                        :data="tableData"
+                        :border="true"
+                        highlight-current-row
+                        @current-change="handleCurrentChange"
+                        style="width: 100%"
+                        max-height="310">
+                        <el-table-column
+                            type="index"
+                            label="序号"
+                            width="150">
+                        </el-table-column>
+                        <el-table-column
+                            prop="name"
+                            label="姓名"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            prop="name"
+                            label="姓名"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            prop="name"
+                            label="姓名"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            prop="name"
+                            label="姓名"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            prop="name"
+                            label="姓名"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            prop="province"
+                            label="省份"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            prop="city"
+                            label="市区"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            prop="address"
+                            label="地址"
+                            width="300">
+                        </el-table-column>
+                        <el-table-column
+                            prop="zip"
+                            label="邮编"
+                            width="120">
+                        </el-table-column>
+                        <el-table-column
+                            fixed="right"
+                            label="操作"
+                            width="120">
+                            <template slot-scope="scope">
+                                <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
+                                                                 移除
+                                </el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-col>
+            </el-row>
+        </div>
+        <br>
+        <br>
+        <div class="clientCente">
+            <el-row>
+                <el-col :span="24">
+                    <el-tabs v-model="activeName">
+                        <el-tab-pane label="车辆信息" name="first">
+                            <el-table :data="tableData" :border="true" style="width: 100%" max-height="200">
+						        <el-table-column type="index" label="定时任务补偿" width="150">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="province" label="省份" width="120">
+						        </el-table-column>
+						        <el-table-column prop="city" label="市区" width="120">
+						        </el-table-column>
+						        <el-table-column prop="address" label="地址" width="300">
+						        </el-table-column>
+						        <el-table-column prop="zip" label="邮编" width="120">
+						        </el-table-column>
+						        <el-table-column fixed="right" label="操作" width="120">
+						            <template slot-scope="scope">
+						                <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
+						                    	移除
+						                </el-button>
+						            </template>
+						        </el-table-column>
+					    	</el-table>
+                        </el-tab-pane>
+                        <el-tab-pane label="历史记录" name="second">
+                            <el-table :data="tableData" :border="true" style="width: 100%" max-height="200">
+						        <el-table-column type="index" label="ee" width="150">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="name" label="姓名" width="120">
+						        </el-table-column>
+						        <el-table-column prop="province" label="省份" width="120">
+						        </el-table-column>
+						        <el-table-column prop="city" label="市区" width="120">
+						        </el-table-column>
+						        <el-table-column prop="address" label="地址" width="300">
+						        </el-table-column>
+						        <el-table-column prop="zip" label="邮编" width="120">
+						        </el-table-column>
+						        <el-table-column fixed="right" label="操作" width="120">
+						            <template slot-scope="scope">
+						                <el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
+						                    	移除
+						                </el-button>
+						            </template>
+						        </el-table-column>
+					    	</el-table>
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-col>
+            </el-row>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../js/vue.js" ></script>
+<script type="text/javascript" src="../../js/element.js" ></script>
+<script type="text/javascript" src="../../js/jquery-1.12.4.js" ></script>
+<script type="text/javascript" src="../../js/left.js" ></script>
+<script type="text/javascript" src="../../js/axios_cfg.js" ></script>
+<script type="text/javascript" src="../../js/axios.min.js" ></script>
+<script type="text/javascript" src="../../js/echarts.min.js" ></script>
+<script>
+    const carInfosApp=new Vue({
+        el:'#carInfosApp',
+        data() {
+            return {
+                input3:'',
+                activeName: 'first',
+                tableData: [
+                    {
+                        date: '2016-05-01',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    },
+                    {
+                        date: '2016-05-01',
+                        name: '王小虎',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1518 弄',
+                        zip: 200333
+                    }
+                ]
+            }
+        },
+        methods: {
+            aa(){
+                alert(1)
+            },
+            deleteRow(index, rows) {
+                rows.splice(index, 1);
+            },
+            handleCurrentChange(ss){
+                console.log(ss)
+            }
+        },
+    })
+</script>
+</html>
