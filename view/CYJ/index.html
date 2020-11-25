@@ -30,7 +30,7 @@
 		<div id="index">
 			<el-container style='height:95vh; border: 1px solid #eee'>
 				<el-header>
-					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+					<el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect">
 						<el-menu-item><img src="../../img/1606181050(1).jpg" alt="" /></el-menu-item>
 						<el-menu-item index="1">服务接待</el-menu-item>
 						<el-menu-item index="2">备品管理</el-menu-item>
@@ -56,7 +56,7 @@
 					</el-menu>
 				</el-header>
 				<el-container>
-					<el-aside id="left" width="200px">
+					<el-aside id="left" width="220px">
 						<el-menu>
 							<el-submenu v-for="(item,index) in options" :key="index" :index="(index+1)+''">
 								<template slot="title">
@@ -90,16 +90,15 @@
 	<script type="text/javascript" src="../../js/axios.min.js"></script>
 	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
 	<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="../../js/left.js" ></script>
+	<script type="text/javascript" src="../../js/left.js"></script>
 	<script>
 		var index = new Vue({
 			el: "#index",
 			data: {
 				options: [],
-				activeIndex: '1',
-				editableTabsValue: '',
+				editableTabsValue: '1',
 				editableTabs: [],
-				tabIndex: ''
+				tabIndex: '1'
 			},
 			methods: {
 				addTab(targetName, title, url) {
@@ -116,11 +115,15 @@
 						content: ''
 					});
 					this.editableTabsValue = newTabName;
+					//dom渲染后执行
 					this.$nextTick(() => {
 						$(`#${newTabName}`).load(url);
 					})
 				},
 				removeTab(targetName) {
+					if(targetName == 2) {
+						return;
+					}
 					let tabs = this.editableTabs;
 					let activeName = this.editableTabsValue;
 					if(activeName === targetName) {
@@ -141,17 +144,17 @@
 					if(key == 1) {
 						this.options = fuwu;
 					} else if(key == 2) {
-						
+
 					} else if(key == 3) {
 						this.options = jiesuan;
 					} else if(key == 4) {
-						this.options=dangan;
+						this.options = dangan;
 					} else if(key == 5) {
-						
+
 					} else if(key == 6) {
 
 					} else if(key == 7) {
-						
+
 					} else if(key == 8) {
 
 					}
@@ -159,6 +162,7 @@
 			},
 			mounted() {
 				this.options = fuwu;
+				this.addTab(this.editableTabsValue, "首页", "first.html")
 			}
 		})
 	</script>
