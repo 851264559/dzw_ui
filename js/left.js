@@ -68,7 +68,7 @@
 				}
 			]
 		}
-	];
+	,{
 				title: "服务接待",
 				option: [{
 						itemTitle: "维修接车",
@@ -236,7 +236,7 @@
 		title: "主数据",
 		option: [{
 				itemTitle: "发动机品牌",
-				url: "../WZY/engineBrand.html"
+				url: "../WZY/engineBrand.html",
 				title: "前台结算",
 				option: [{
 						itemTitle: "结算中心",
@@ -285,7 +285,6 @@
 		title: "卡定义",
 		option: []
 	}]
-		];
 	//客户档案
 	var dangan=[
 		{
@@ -369,4 +368,4 @@
 						url: "../TY/txml.html"
 					}]
 				}];
-		];
+	
