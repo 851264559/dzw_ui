@@ -3,11 +3,11 @@
 				title: "服务接待",
 				option: [{
 						itemTitle: "维修接车",
-						url: "../CWL/OffSiteRescueSheet.html"
+						url: "../CWL/PickUpCarRegistration.html"
 					},
 					{
 						itemTitle: "竣工检验",
-						url: "add.html"
+						url: "../CWL/TestOnCompletion.html"
 					},
 					{
 						itemTitle: "保险对价",
@@ -167,4 +167,39 @@
 	//财务管理
 	var caiwu
 	//行政人事
-	var renshi
+	var renshi = [{
+				title: "员工资料",
+				option: [
+				]
+			},
+			{
+				title: "技工管理",
+				option: [{
+						itemTitle: "技工星级",
+						url: "../CWL/StarEmployees.html"
+					},
+					{
+						itemTitle: "班组技工",
+						url: "../CWL/ShiftTheMechanic.html"
+					},
+					{
+						itemTitle: "外勤车辆",
+						url: "../CWL/FieldOfVehicle.html"
+					},
+					{
+						itemTitle: "技工提成比",
+						url: "add.html"
+					}
+				]
+			},
+			{
+				title: "维修工具",
+				option: [
+				]
+			},
+			{
+				title: "办公用品",
+				option: [
+				]
+			}
+		];

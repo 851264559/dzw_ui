@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>竣工检验</title>
+		<!--<link rel="stylesheet" type="text/css" href="../css/element.css" />-->
+		<style type="text/css">
+			.el-input {
+				width: 200px;
+			}
+			
+			#testOnCompletion {
+				zoom: 0.8;
+			}
+						
+			.hiddenContent {
+				opacity: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="testOnCompletion">
+			<el-row>
+				<el-col :span="2">
+					<div class="hiddenContent">hiddenContent</div>
+				</el-col>
+				<el-col :span="20">
+					<el-row>
+						<el-col :span="24">
+							<div>
+								<h1>竣工检验</h1>
+								<span class="demonstration">开单日期</span>
+								<el-date-picker v-model="startTime" type="datetime" placeholder="选择开始时间">
+								</el-date-picker>
+								<el-date-picker v-model="endTime" type="datetime" placeholder="选择结束时间">
+								</el-date-picker>
+								<span class="demonstration">维修单号</span>
+								<el-input v-model="repairOrder" placeholder="维修单号"></el-input>
+								<br />
+								<br />
+								<span class="demonstration">单据状态</span>
+								<template>
+									<el-select v-model="theDocumentsState" placeholder="请选择">
+										<el-option v-for="item in theDocumentsStates" :key="item.values" :label="item.name" :value="item.values">
+										</el-option>
+									</el-select>
+								</template>
+								<span class="demonstration">车牌号</span>
+								<el-input v-model="licensePlateNumber" placeholder="车牌号"></el-input>
+								<span class="demonstration">车架号</span>
+								<el-input v-model="VIN" placeholder="车架号"></el-input>
+							</div>
+						</el-col>
+					</el-row>
+					<el-row>
+						<el-col :span="24">
+							<div>
+								<el-table ref="multipleTable" :data="testOnCompletions" tooltip-effect="dark" style="width: 100%">
+									<el-table-column type="selection" width="55">
+									</el-table-column>
+									<!--<el-table-column label="日期" width="120">
+								<template slot-scope="scope">{{ scope.row.date }}</template>
+							</el-table-column>-->
+									<el-table-column prop="testOnCompletions.repairOrder" label="维修单号">
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.typeOfDocument" label="单据类型" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.businessType" label="业务类型" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.constructionDivisions" label="施工班次" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.ownerName" label="车主姓名" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.licensePlateNumber" label="车牌号" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.carType" label="车型" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.VIN" label="车架号" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.pickUpCarTime" label="接车时间" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.expectedCompletion" label="预计完工" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.timeOfCompletion" label="完工时间" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.delaysReason" label="误工原因" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.numberOfRework" label="返工数" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.penaltyAmount" label="处罚金额" show-overflow-tooltip>
+									</el-table-column>
+									<el-table-column prop="testOnCompletions.reworkReason" label="返工原因" show-overflow-tooltip>
+									</el-table-column>
+								</el-table>
+							</div>
+						</el-col>
+					</el-row>
+			</el-row>
+			</el-col>
+			<el-col :span="2">
+				<div class="hiddenContent">hiddenContent</div>
+			</el-col>
+			</el-row>
+
+		</div>
+	</body>
+	<!--<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/axios_cfg.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript">
+		var testOnCompletion = new Vue({
+			el: "#testOnCompletion",
+			data() {
+				return {
+					startTime: "",
+					endTime: "",
+					repairOrder: "",
+					theDocumentsState: "",
+					theDocumentsStates: [{
+						values: "states01",
+						name: "状态一"
+					}, {
+						values: "states02",
+						name: "状态二"
+					}, {
+						values: "states03",
+						name: "状态三"
+					}],
+					licensePlateNumber: "",
+					VIN: "",
+					testOnCompletions: []
+				}
+			}
+		});
+	</script>
+
+</html>
