@@ -51,23 +51,31 @@
 								</el-form-item>
 								<el-form-item>
 									<i class="el-icon-edit"></i>
-									<el-button type="text">增加</el-button>
+									<el-button type="text" @click="addStarEmployeesInfos">增加</el-button>
 									<i class="el-icon-close"></i>
-									<el-button type="text">删除</el-button>
+									<el-button type="text" @click="removeStarEmployeesInfos">删除</el-button>
 									<i class="el-icon-check"></i>
-									<el-button type="text">保存</el-button>
+									<el-button type="text" @click="modifyStarEmployeesInfos">保存</el-button>
 								</el-form-item>
 							</el-form>
 							<template>
 								<el-table :data="starEmployees" style="width: 65%">
+
 									<el-table-column prop="id" label="等级编码" width="180">
 									</el-table-column>
-									<el-table-column prop="starLevel" label="星级" width="180">
+									<el-table-column prop="starlevel" label="星级" width="180">
 									</el-table-column>
 									<el-table-column prop="level" label="等级">
 									</el-table-column>
-									<el-table-column prop="cutTheWeight" label="提成权重">
+									<el-table-column prop="cuttheweight" label="提成权重">
 									</el-table-column>
+
+									<el-table-column label="">
+										<template slot-scope="scope">
+											<input type="radio" @click="getIndex(scope.row)" name="radio"/>
+										</template>
+									</el-table-column>
+
 								</el-table>
 							</template>
 						</el-main>
@@ -95,35 +103,78 @@
 						level: "",
 						cutTheWeight: ""
 					},
-					starEmployees: [{
-							id: '1',
-							starLevel: '1',
-							level: "1",
-							cutTheWeight: "1"
-						},
-						{
-							id: '2',
-							starLevel: '2',
-							level: "2",
-							cutTheWeight: "2.0"
-						}, {
-							id: '3',
-							starLevel: '3',
-							level: "3",
-							cutTheWeight: "3.0"
-						}, {
-							id: '4',
-							starLevel: '4',
-							level: "4",
-							cutTheWeight: "4.0"
-						}
-					]
+					starEmployees: [],
+					indexID:""
 				}
 			},
 			methods: {
-				onSubmit() {
-					console.log('submit!');
+				getStarEmployeesInfos() {
+					let _This = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/starEmployees/queryAll`).then(function(success) {
+						_This.starEmployees = success.data;
+						console.log(JSON.stringify(_This.starEmployees));
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},
+				getIndex(index) {
+					/*this.$alert(JSON.stringify(index));*/
+					this.starEmployee.id = index.id;
+					this.starEmployee.starLevel = index.starlevel;
+					this.starEmployee.level = index.level;
+					this.starEmployee.cutTheWeight = index.cuttheweight;
+					this.indexID = index.id;
+				},
+				addStarEmployeesInfos(){
+					if(this.starEmployee.id==this.indexID){
+						this.$alert("id is Already Exist");
+						return false;
+					}
+					let _this = this;
+					axios.post(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/starEmployees/saveStarEmployees`, this.starEmployee).then(function(success) {
+						if(success.data.msg == "success") {
+							_this.$alert("success");
+						/*	location.href = "../CYJ/index.html";*/
+							/*this.getStarEmployeesInfos();*/
+							this.close();
+						} else {
+							_this.$alert("error");
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},
+				modifyStarEmployeesInfos(){
+					let _this = this;
+					axios.put(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/starEmployees/modifyStarEmployees`, this.starEmployee).then(function(success) {
+						if(success.data.msg == "success") {
+							_this.$alert("success");
+							/*location.href = "elementIndex.html";*/
+							this.getStarEmployeesInfos();
+						} else {
+							_this.$alert("error");
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},
+				removeStarEmployeesInfos(){
+					let _this = this;
+					axios.delete(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/starEmployees/starEmployee/${this.starEmployee.id}`, ).then(function(success) {
+						if(success.data.msg == "success") {
+							_this.$alert("success");
+							/*location.href = "elementIndex.html";*/
+							this.getStarEmployeesInfos();
+						} else {
+							_this.$alert("error");
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
 				}
+			},
+			mounted() {
+				this.getStarEmployeesInfos();
 			}
 		});
 	</script>
