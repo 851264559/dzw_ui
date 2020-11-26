@@ -127,6 +127,16 @@
 				},
 				handlerOpenn() {
 					$("#cntt").load("../TY/xgyg.html");
+				},
+				addPerson() {
+					axios.post("http://127.0.0.1:8080/dzw_sys/api/ment/m", this.person).then(function(resp) {
+						if(resp.data.code == "200") {
+							showAlertDialog('新增成功');
+							closeWindowDialog();
+							//personListVm.goToPage(1,3);
+							csListVm.goToPage(csListVm.pg.lastPage, csListVm.pg.pageSize);
+						}
+					}).catch(function(e) {});
 				}
 			},mounted() {
 				let _this = this;
