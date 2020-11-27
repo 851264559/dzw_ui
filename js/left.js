@@ -240,6 +240,22 @@
 	var renshi = [{
 				title: "员工资料",
 				option: [
+				{
+						itemTitle: "组织机构",
+						url: "../TY/zzjg.html"
+					},
+					{
+						itemTitle: "岗位定义",
+						url: "../TY/gwdy.html"
+					},
+					{
+						itemTitle: "离职登记",
+						url: "../TY/lzdj.html"
+					},
+					{
+						itemTitle: "通讯名录",
+						url: "../TY/txml.html"
+					}
 				]
 			},
 			{
