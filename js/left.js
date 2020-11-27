@@ -144,7 +144,7 @@
 			title: "前台结算",
 			option: [{
 					itemTitle: "结算中心",
-					url: "add.html"
+					url: "../CT/summary.html"
 				},
 				{
 					itemTitle: "快速通道",
@@ -229,8 +229,6 @@
 			]
 		}
 	];
-	//客户档案
-	var dangan
 	//基础数据
 	var jichu = [{
 		title: "主数据",
@@ -341,8 +339,6 @@
 				]
 			}
 		];
-	//客户档案
-	var dangan
 	//基础数据
 	var jichu
 	//财务管理
