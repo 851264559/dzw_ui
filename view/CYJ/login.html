@@ -22,7 +22,10 @@
 
 	<body>
 		<div id="loginApp" align="center">
-			<h2>登录</h2>
+			<h2>
+				<i class="el-icon-menu"></i>
+				汽修管理系统-登录
+			</h2>
 			<div>
 				<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 					<el-form-item label="账号：" prop="username">
@@ -88,7 +91,7 @@
 							return false;
 						}
 					});
-					
+
 				},
 				resetForm(formName) {
 					this.$refs[formName].resetFields();
