@@ -59,25 +59,32 @@
 								</el-form-item>
 								<el-form-item>
 									<i class="el-icon-edit"></i>
-									<el-button type="text">增加</el-button>
+									<el-button type="text" @click="addFieldOfVehiclesInfos">增加</el-button>
 									<i class="el-icon-close"></i>
-									<el-button type="text">删除</el-button>
+									<el-button type="text" @click="removeFieldOfVehiclesInfos">删除</el-button>
 									<i class="el-icon-check"></i>
-									<el-button type="text">保存</el-button>
+									<el-button type="text" @click="modifyFieldOfVehiclesInfos">保存</el-button>
 								</el-form-item>
 							</el-form>
 							<template>
 								<el-table :data="fieldOfVehicles" style="width: 65%">
-									<el-table-column prop="carNumber" label="车牌号" width="180">
+									<el-table-column prop="carnumber" label="车牌号" width="180">
 									</el-table-column>
 									<el-table-column prop="brand" label="品牌" width="180">
 									</el-table-column>
-									<el-table-column prop="carType" label="车型">
+									<el-table-column prop="cartype" label="车型">
 									</el-table-column>
-									<el-table-column prop="timeIntoTheFactory" label="进厂时间">
+									<el-table-column prop="timeintothefactory" label="进厂时间">
 									</el-table-column>
-									<el-table-column prop="ownershipShift" label="归属班组">
+									<el-table-column prop="ownershipshift" label="归属班组">
 									</el-table-column>
+									
+									<el-table-column label="">
+										<template slot-scope="scope">
+											<input type="radio" @click="getIndex(scope.row)" name="radio"/>
+										</template>
+									</el-table-column>
+									
 								</el-table>
 							</template>
 						</el-main>
@@ -123,35 +130,76 @@
 						],
 						ownershipShift: ""
 					},
-					fieldOfVehicles: [{
-						carNumber: "001",
-						brand: "大众",
-						carType: "大众01",
-						timeIntoTheFactory: "100",
-						ownershipShift: "武昌队"
-					}, {
-						carNumber: "001",
-						brand: "大众",
-						carType: "大众01",
-						timeIntoTheFactory: "100",
-						ownershipShift: "武昌队"
-					}, {
-						carNumber: "001",
-						brand: "大众",
-						carType: "大众01",
-						timeIntoTheFactory: "100",
-						ownershipShift: "武昌队"
-					}, {
-						carNumber: "001",
-						brand: "大众",
-						carType: "大众01",
-						timeIntoTheFactory: "100",
-						ownershipShift: "武昌队"
-					}]
+					fieldOfVehicles: [],
+					indexID:""
 				}
 			},
 			methods: {
-
+				getFieldOfVehiclesInfos() {
+					let _This = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/queryAll`).then(function(success) {
+						_This.fieldOfVehicles = success.data;
+						console.log(JSON.stringify(_This.fieldOfVehicles));
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},
+				getIndex(index) {
+					/*this.$alert(JSON.stringify(index));*/
+					this.fieldOfVehicle.carNumber = index.carnumber;
+					this.fieldOfVehicle.brand = index.brand;
+					this.fieldOfVehicle.carType = index.cartype;
+					this.fieldOfVehicle.timeIntoTheFactory = index.timeintothefactory;
+					this.fieldOfVehicle.ownershipShift = index.ownershipshift;
+					this.indexID = index.carnumber;
+				},
+				addFieldOfVehiclesInfos(){
+					if(this.fieldOfVehicle.carNumber==this.indexID){
+						this.$alert("carNumber is Already Exist");
+						return false;
+					}
+					let _this = this;
+					axios.post(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/saveFieldOfVehicle`, this.fieldOfVehicle).then(function(success) {
+						if(success.data.msg == "success") {
+							_this.$alert("success");
+						_this.getFieldOfVehiclesInfos();
+						} else {
+							_this.$alert("error");
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},
+				modifyFieldOfVehiclesInfos(){
+					let _this = this;
+					axios.put(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/modifyFieldOfVehicle`, this.fieldOfVehicle).then(function(success) {
+						if(success.data.msg == "success") {
+							_this.$alert("success");
+							_this.getFieldOfVehiclesInfos();
+							
+						} else {
+							_this.$alert("error");
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},
+				removeFieldOfVehiclesInfos(){
+					let _this = this;
+					axios.delete(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/FieldOfVehicle/${this.fieldOfVehicle.carNumber}`, ).then(function(success) {
+						if(success.data.msg == "success") {
+							_this.$alert("success");
+							_this.getFieldOfVehiclesInfos();
+						} else {
+							_this.$alert("error");
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
+				}
+			},
+			mounted(){
+				this.getFieldOfVehiclesInfos();
 			}
 		});
 	</script>

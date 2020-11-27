@@ -134,9 +134,7 @@
 					axios.post(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/starEmployees/saveStarEmployees`, this.starEmployee).then(function(success) {
 						if(success.data.msg == "success") {
 							_this.$alert("success");
-						/*	location.href = "../CYJ/index.html";*/
-							/*this.getStarEmployeesInfos();*/
-							this.close();
+							_this.getStarEmployeesInfos();
 						} else {
 							_this.$alert("error");
 						}
@@ -149,8 +147,7 @@
 					axios.put(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/starEmployees/modifyStarEmployees`, this.starEmployee).then(function(success) {
 						if(success.data.msg == "success") {
 							_this.$alert("success");
-							/*location.href = "elementIndex.html";*/
-							this.getStarEmployeesInfos();
+							_this.getStarEmployeesInfos();
 						} else {
 							_this.$alert("error");
 						}
@@ -163,8 +160,7 @@
 					axios.delete(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/starEmployees/starEmployee/${this.starEmployee.id}`, ).then(function(success) {
 						if(success.data.msg == "success") {
 							_this.$alert("success");
-							/*location.href = "elementIndex.html";*/
-							this.getStarEmployeesInfos();
+							_this.getStarEmployeesInfos();
 						} else {
 							_this.$alert("error");
 						}

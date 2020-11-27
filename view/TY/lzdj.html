@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>人事-离职登记</title>
+		<!--<link rel="stylesheet" href="../../css/index.css" />-->
+	</head>
+	<body>
+		<div id="pw" class="pb">
+			<el-container>
+				<el-header>
+					<h1 style="text-align: center;">离职登记</h1></el-header>
+				<el-container>
+					<el-main>
+						<template>
+							<el-row :gutter="20">
+								<el-col>
+									<el-button @click="isShow=true" type="warning" size="mini">离职</el-button>
+									<el-dialog :before-close="handlerClose" @opened="handlerOpen" :visible.sync="isShow" title="离职登记" center>
+										<div id="cnt" v-loading="loading">
+										</div>
+									</el-dialog>
+									<el-button type="primary" size="mini">回滚</el-button>
+								</el-col>
+							</el-row>
+							<el-table ref="singleTable" :data="tableData" highlight-current-row @current-change="handleCurrentChange" style="width: 100%">
+								<el-table-column property="ment" label="部门" width="120">
+								</el-table-column>
+								<el-table-column property="zw" label="职位" width="120">
+								</el-table-column>
+								<el-table-column property="bh" label="员工编号">
+								</el-table-column>
+								<el-table-column property="name" label="姓名" width="120">
+								</el-table-column>
+								<el-table-column property="sex" label="性别" width="120">
+								</el-table-column>
+								<el-table-column property="time" label="离职时间">
+								</el-table-column>
+								<el-table-column property="yy" label="离职原因">
+								</el-table-column>
+							</el-table>
+							<br />
+							<div align="center">
+								<input type="button" value="首页" />
+								<input type="button" value="上一页" />
+								<input type="button" value="下一页" />
+								<input type="button" value="尾页" />
+							</div>
+						</template>
+					</el-main>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<!--<script type="text/javascript" src="../../js/jquery-1.12.4.js" ></script>
+	<script type="text/javascript" src="../../js/vue.js" ></script>
+	<script type="text/javascript" src="../../js/axios.min.js" ></script>
+	<script type="text/javascript" src="../../js/axios_cfg.js" ></script>
+	<script type="text/javascript" src="../../js/index.js" ></script>-->
+	<script>
+		var ppp = new Vue({
+			data() {
+				return {
+					loading:true,
+					isShow:false,
+					tableData: [{
+						ment: '人事部',
+						zw: '经理',
+						bh:'111',
+						name:'王小虎',
+						sex:'男',
+						time:'2020-09-09',
+						yy:'钱少'
+					}, {
+						ment: '人事部',
+						zw: '经理',
+						bh:'111',
+						name:'王小虎',
+						sex:'男',
+						time:'2020-09-09',
+						yy:'钱少'
+					}],
+					person: [{
+						mentt: 'qq'
+					}, {
+						mentt: 'ww'
+					}],
+					currentRow: null
+
+				}
+			},
+			methods: {
+				setCurrent(row) {
+					this.$refs.singleTable.setCurrentRow(row);
+				},
+				handleCurrentChange(val) {
+					this.currentRow = val;
+				},
+				handlerClose(done) {
+					this.$confirm('是否关闭?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						done(); //关闭
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消删除'
+						});
+					});
+				},
+				handlerOpen() {
+					$("#cnt").load("../TY/xzlz.html");
+				}
+			}
+
+		}).$mount("#pw");
+	</script>
+</html>
