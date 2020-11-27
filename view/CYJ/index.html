@@ -121,6 +121,9 @@
 					})
 				},
 				removeTab(targetName) {
+					if(targetName==1){
+						return;
+					}
 					let tabs = this.editableTabs;
 					let activeName = this.editableTabsValue;
 					if(activeName === targetName) {
@@ -159,6 +162,7 @@
 			},
 			mounted() {
 				this.options = fuwu;
+				this.addTab(this.editableTabsValue,'首页','first.html')
 			}
 		})
 	</script>
