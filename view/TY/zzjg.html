@@ -4,15 +4,11 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>人事-组织机构</title>
-		<link rel="stylesheet" href="../../css/element.css" />
 	</head>
 
 	<body>
 		<div class="pb" id="tppp">
 			<el-container>
-				<el-header>
-					<h1 style="text-align: center;">组织机构</h1>
-				</el-header>
 				<el-container>
 					<el-aside style="width:230px;">
 						<template>
@@ -31,9 +27,8 @@
 						</template>
 					</el-aside>
 					<el-main>
-						<template>
 							<el-row>
-								<el-col align="right">
+								<el-col :span="20" align="right">
 									<el-button @click="isShow=true" type="primary" size="mini">新增员工</el-button>
 									<el-dialog :before-close="handlerClose" @opened="handlerOpen" :visible.sync="isShow" title="新增员工" center>
 										<div id="cnt" v-loading="loading">
@@ -47,7 +42,7 @@
 									<el-button type="danger" size="mini">删除员工</el-button>
 								</el-col>
 							</el-row>
-							<el-table ref="singleTable" :data="tableData.list" highlight-current-row @current-change="handleCurrentChange">
+							<el-table style="width:90%;" ref="singleTable" :data="tableData.list" highlight-current-row @current-change="handleCurrentChange">
 								<el-table-column label="编号" type="index">
 									<template slot-scope="temp">
 										{{temp.$index+1}}
@@ -89,7 +84,6 @@
 								<el-pagination :current-page="tableData.pageNum" @current-change="handleCurrentChange" :page-size="3" layout="total, prev, pager, next" :total=tableData.total>
 								</el-pagination>
 							</div>
-						</template>
 					</el-main>
 				</el-container>
 			</el-container>
