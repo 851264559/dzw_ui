@@ -26,75 +26,61 @@
 
 	<body>
 		<div id="fieldOfVehicle">
-			<el-row>
-				<el-col :span="2">
-					<div class="hiddenContent">hiddenContent</div>
-				</el-col>
-				<el-col :span="20">
-					<el-container>
-						<el-header>
-							<h3>外勤车辆</h3>
-						</el-header>
-						<el-main>
-							<el-form :inline="true" :model="this.fieldOfVehicle" class="demo-form-inline">
-								<el-form-item label="车牌号">
-									<el-input v-model="fieldOfVehicle.carNumber" placeholder="车牌号"></el-input>
-								</el-form-item>
-								<el-form-item label="品牌">
-									<el-input v-model="fieldOfVehicle.brand" placeholder="品牌"></el-input>
-								</el-form-item>
-								<el-form-item label="车型">
-									<el-input v-model="fieldOfVehicle.carType" placeholder="车型"></el-input>
-								</el-form-item>
-								<el-form-item label="进厂时间">
-									<el-input v-model="fieldOfVehicle.timeIntoTheFactory" placeholder="进厂时间"></el-input>
-								</el-form-item>
-								<el-form-item label="归属班组">
-									<template>
-										<el-select v-model="fieldOfVehicle.ownershipShift" placeholder="请选择">
-											<el-option v-for="item in fieldOfVehicle.ownershipShifts" :key="item.index" :label="item.value" :value="item.value">
-											</el-option>
-										</el-select>
-									</template>
-								</el-form-item>
-								<el-form-item>
-									<i class="el-icon-edit"></i>
-									<el-button type="text" @click="addFieldOfVehiclesInfos">增加</el-button>
-									<i class="el-icon-close"></i>
-									<el-button type="text" @click="removeFieldOfVehiclesInfos">删除</el-button>
-									<i class="el-icon-check"></i>
-									<el-button type="text" @click="modifyFieldOfVehiclesInfos">保存</el-button>
-								</el-form-item>
-							</el-form>
-							<template>
-								<el-table :data="fieldOfVehicles" style="width: 65%">
-									<el-table-column prop="carnumber" label="车牌号" width="180">
-									</el-table-column>
-									<el-table-column prop="brand" label="品牌" width="180">
-									</el-table-column>
-									<el-table-column prop="cartype" label="车型">
-									</el-table-column>
-									<el-table-column prop="timeintothefactory" label="进厂时间">
-									</el-table-column>
-									<el-table-column prop="ownershipshift" label="归属班组">
-									</el-table-column>
-									
-									<el-table-column label="">
+
+			<h3>外勤车辆</h3>
+			<br />
+			<el-form :inline="true" :model="this.fieldOfVehicle" class="demo-form-inline">
+				<el-form-item label="车牌号">
+					<el-input v-model="fieldOfVehicle.carNumber" placeholder="车牌号"></el-input>
+				</el-form-item>
+				<el-form-item label="品牌">
+					<el-input v-model="fieldOfVehicle.brand" placeholder="品牌"></el-input>
+				</el-form-item>
+				<el-form-item label="车型">
+					<el-input v-model="fieldOfVehicle.carType" placeholder="车型"></el-input>
+				</el-form-item>
+				<el-form-item label="进厂时间">
+					<el-input v-model="fieldOfVehicle.timeIntoTheFactory" placeholder="进厂时间"></el-input>
+				</el-form-item>
+				<el-form-item label="归属班组">
+					<template>
+						<el-select v-model="fieldOfVehicle.ownershipShift" placeholder="请选择">
+							<el-option v-for="item in fieldOfVehicle.ownershipShifts" :key="item.index" :label="item.value" :value="item.value">
+							</el-option>
+						</el-select>
+					</template>
+				</el-form-item>
+				<el-form-item>
+					<i class="el-icon-edit"></i>
+					<el-button type="text" @click="addFieldOfVehiclesInfos">增加</el-button>
+					<i class="el-icon-close"></i>
+					<el-button type="text" @click="removeFieldOfVehiclesInfos">删除</el-button>
+					<i class="el-icon-check"></i>
+					<el-button type="text" @click="modifyFieldOfVehiclesInfos">保存</el-button>
+				</el-form-item>
+			</el-form>
+			<template>
+				<el-table :data="fieldOfVehicles" @row-click="getIndex" style="width: 65%">
+					<el-table-column prop="carnumber" label="车牌号" width="180">
+					</el-table-column>
+					<el-table-column prop="brand" label="品牌" width="180">
+					</el-table-column>
+					<el-table-column prop="cartype" label="车型">
+					</el-table-column>
+					<el-table-column prop="timeintothefactory" label="进厂时间">
+					</el-table-column>
+					<el-table-column prop="ownershipshift" label="归属班组">
+					</el-table-column>
+
+					<!--<el-table-column label="">
 										<template slot-scope="scope">
 											<input type="radio" @click="getIndex(scope.row)" name="radio"/>
 										</template>
-									</el-table-column>
-									
-								</el-table>
-							</template>
-						</el-main>
-					</el-container>
-			</el-row>
-			</el-col>
-			<el-col :span="2">
-				<div class="hiddenContent">hiddenContent</div>
-			</el-col>
-			</el-row>
+									</el-table-column>-->
+
+				</el-table>
+			</template>
+
 		</div>
 	</body>
 	<!--<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -131,7 +117,7 @@
 						ownershipShift: ""
 					},
 					fieldOfVehicles: [],
-					indexID:""
+					indexID: ""
 				}
 			},
 			methods: {
@@ -153,8 +139,8 @@
 					this.fieldOfVehicle.ownershipShift = index.ownershipshift;
 					this.indexID = index.carnumber;
 				},
-				addFieldOfVehiclesInfos(){
-					if(this.fieldOfVehicle.carNumber==this.indexID){
+				addFieldOfVehiclesInfos() {
+					if(this.fieldOfVehicle.carNumber == this.indexID) {
 						this.$alert("carNumber is Already Exist");
 						return false;
 					}
@@ -162,7 +148,7 @@
 					axios.post(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/saveFieldOfVehicle`, this.fieldOfVehicle).then(function(success) {
 						if(success.data.msg == "success") {
 							_this.$alert("success");
-						_this.getFieldOfVehiclesInfos();
+							_this.getFieldOfVehiclesInfos();
 						} else {
 							_this.$alert("error");
 						}
@@ -170,13 +156,13 @@
 						console.log(error);
 					});
 				},
-				modifyFieldOfVehiclesInfos(){
+				modifyFieldOfVehiclesInfos() {
 					let _this = this;
 					axios.put(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/modifyFieldOfVehicle`, this.fieldOfVehicle).then(function(success) {
 						if(success.data.msg == "success") {
 							_this.$alert("success");
 							_this.getFieldOfVehiclesInfos();
-							
+
 						} else {
 							_this.$alert("error");
 						}
@@ -184,7 +170,7 @@
 						console.log(error);
 					});
 				},
-				removeFieldOfVehiclesInfos(){
+				removeFieldOfVehiclesInfos() {
 					let _this = this;
 					axios.delete(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/FieldOfVehicle/${this.fieldOfVehicle.carNumber}`, ).then(function(success) {
 						if(success.data.msg == "success") {
@@ -198,7 +184,7 @@
 					});
 				}
 			},
-			mounted(){
+			mounted() {
 				this.getFieldOfVehiclesInfos();
 			}
 		});
