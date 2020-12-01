@@ -46,7 +46,7 @@
 			}
 			
 			.el-menu {
-				border-right:none;
+				border-right: none;
 				margin: 5px;
 				min-height: 95%;
 			}
@@ -61,7 +61,7 @@
 				min-height: 90%;
 				padding: 30px;
 			}
-	</style>
+		</style>
 	</head>
 
 	<body>
@@ -121,7 +121,7 @@
 	<script type="text/javascript" src="../../js/axios.min.js"></script>
 	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
 	<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="../../js/menu_const.js" ></script>
+	<script type="text/javascript" src="../../js/menu_const.js"></script>
 	<script>
 		var index = new Vue({
 			el: "#index",
@@ -170,14 +170,15 @@
 					this.editableTabsValue = activeName;
 					this.editableTabs = tabs.filter(tab => tab.name !== targetName);
 				}
-			}
+
 			},
 			mounted() {
 				this.addTab(this.editableTabsValue, '首页', 'sy001');
-axios.get(`http://127.0.0.1:8080/dzw_sys//ty/api/employee/getFunTree`).then(resp => {
-this.options = resp.data;
-})
-}
-})</script>
+				axios.get(`http://127.0.0.1:8080/dzw_sys//ty/api/employee/getFunTree`).then(resp => {
+					this.options = resp.data;
+				})
+			}
+		})
+	</script>
 
 </html>
