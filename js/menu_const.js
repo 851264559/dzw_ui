@@ -9,4 +9,13 @@ var menuMapping = {
 	"f002": "../WZY/engineBrand.html",
 	"c001": "../WZY/vehicleFile.html",
 	"w003": "../WZY/maintenanceItems.html",
+	"k002": "../CT/client.html",
+	"c001": "../CT/carInfos.html",
+	"j004": "../CT/summary.html",
+	"h001": "../CT/member.html",
+	"z001": "../TY/zzjg.html",
+	"g001": "../TY/gwdy.html",
+	"l001": "../TY/lzdj.html",
+	"t001": "../TY/txml.html"
+
 }
