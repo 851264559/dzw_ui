@@ -3,79 +3,114 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>主页</title>
+		<title></title>
 		<link rel="stylesheet" href="../../css/element.css" />
 		<style>
-			* {
-				margin: 0px;
-				padding: 0px;
-			}
-			
-			.el-header {
-				padding: 0;
+			.el-header,
+			.el-footer {
+				background-color: #0067C0;
+				color: #333;
+				line-height: 60px;
 			}
 			
 			.el-aside {
-				height: 89vh;
-				border-right: 1px solid #e6e6e6;
+				background-color: #D3DCE6;
+				color: #333;
+				line-height: 200px;
+			}
+			
+			.el-main {
+				background-color: #E9EEF3;
+				color: #333;
+			}
+			
+			body>.el-container {
+				margin-bottom: 40px;
+			}
+			
+			.el-container:nth-child(5) .el-aside,
+			.el-container:nth-child(6) .el-aside {
+				line-height: 260px;
+			}
+			
+			.el-container:nth-child(7) .el-aside {
+				line-height: 320px;
+			}
+			
+			.el-header {
+				color: white;
+				font-weight: bold;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
 			}
 			
 			.el-menu {
-				border: 0px;
+				border-right:none;
+				margin: 5px;
+				min-height: 95%;
 			}
-		</style>
+			
+			.el-icon-user {
+				color: white;
+				font-size: 18px;
+			}
+			
+			.tab-content {
+				background: white;
+				min-height: 90%;
+				padding: 30px;
+			}
+	</style>
 	</head>
 
 	<body>
 		<div id="index">
-			<el-container style='height:99vh; border: 1px solid #eee;'>
-				<el-header>
-					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-						<el-menu-item><img src="../../img/1606181050(1).jpg" alt="" /></el-menu-item>
-						<el-menu-item index="1">服务接待</el-menu-item>
-						<el-menu-item index="2">结算中心</el-menu-item>
-						<el-menu-item index="3">客户档案</el-menu-item>
-						<el-menu-item index="4">基础数据</el-menu-item>
-						<el-menu-item index="5">财务管理</el-menu-item>
-						<el-menu-item index="6">行政人事</el-menu-item>
-						<el-menu-item index="7">系统设置</el-menu-item>
-						<el-menu-item index="8" style="float: right;">
-							<el-dropdown>
-								<i class="el-icon-user" style="margin-right: 15px"></i>
-								<el-dropdown-menu slot="dropdown">
-									<el-dropdown-item>用户名：
-										<!--{{username}}-->
-									</el-dropdown-item>
-									<el-dropdown-item>
-										<el-button type="success" size="small">退出登录</el-button>
-									</el-dropdown-item>
-								</el-dropdown-menu>
-							</el-dropdown>
-						</el-menu-item>
-					</el-menu>
-				</el-header>
-				<el-container>
-					<el-aside id="left" width="200px">
+			<el-header style="font-size: 12px">
+				<div>
+					<span style="font-size: 18px;">汽修管理系统</span>
+				</div>
+				<div>
+					<el-dropdown>
+						<i class="el-icon-user" style="margin-right: 15px"></i>
+						<el-dropdown-menu slot="dropdown">
+							<el-dropdown-item>用户名：
+								<!--{{username}}-->
+							</el-dropdown-item>
+							<el-dropdown-item>
+								<el-button type="success" size="small">退出登录</el-button>
+							</el-dropdown-item>
+						</el-dropdown-menu>
+					</el-dropdown>
+				</div>
+			</el-header>
+			<el-container style="height:90vh; border: 1px solid #eee">
+				<el-aside width="230px">
+					<el-menu>
 						<el-menu>
 							<el-submenu v-for="(item,index) in options" :key="index" :index="(index+1)+''">
 								<template slot="title">
 									<i class="el-icon-user"></i>
-									<span>{{item.title}}</span>
+									<span>{{item.text}}</span>
 								</template>
 								<el-menu-item-group>
-									<el-menu-item v-for="(temp,i) in item.option" :key="i" :index="(index+1)+'-'+(i+1)" @click="addTab(editableTabsValue,temp.itemTitle,temp.url)">
-										<i class="el-icon-message"></i>{{temp.itemTitle}}
+									<el-menu-item v-for="(temp,i) in item.children" :key="i" :index="(index+1)+'-'+(i+1)" @click="addTab(editableTabsValue,temp.text,temp.id)">
+										<i class="el-icon-message"></i>{{temp.text}}
 									</el-menu-item>
 								</el-menu-item-group>
 							</el-submenu>
 						</el-menu>
-					</el-aside>
+					</el-menu>
+				</el-aside>
+				<el-container>
 					<el-main>
-						<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
-							<el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name">
-								<div :id="item.name"></div>
-							</el-tab-pane>
-						</el-tabs>
+						<div class="tab-content">
+							<el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+								<el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name">
+									<div :id="item.name"></div>
+								</el-tab-pane>
+							</el-tabs>
+						</div>
 					</el-main>
 				</el-container>
 			</el-container>
@@ -86,7 +121,7 @@
 	<script type="text/javascript" src="../../js/axios.min.js"></script>
 	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
 	<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="../../js/left.js"></script>
+	<script type="text/javascript" src="../../js/menu_const.js" ></script>
 	<script>
 		var index = new Vue({
 			el: "#index",
@@ -113,7 +148,7 @@
 					});
 					this.editableTabsValue = newTabName;
 					this.$nextTick(() => {
-						$(`#${newTabName}`).load(url);
+						$(`#${newTabName}`).load(menuMapping[url]);
 					})
 				},
 				removeTab(targetName) {
@@ -134,30 +169,13 @@
 					}
 					this.editableTabsValue = activeName;
 					this.editableTabs = tabs.filter(tab => tab.name !== targetName);
-				},
-				handleSelect(key, keyPath) {
-					console.log(key, keyPath);
-					if(key == 1) {
-						this.options = fuwu;
-					} else if(key == 2) {
-						this.options = jiesuan;
-					} else if(key == 3) {
-						this.options = dangan;
-					} else if(key == 4) {
-						this.options = jichu;
-
-					} else if(key == 5) {
-
-					} else if(key == 6) {
-						this.options = renshi;
-					} else if(key == 7) {
-
-					}
-				},
+				}
 			},
 			mounted() {
-				this.options = fuwu;
-				this.addTab(this.editableTabsValue, '首页', 'first.html')
+				this.addTab(this.editableTabsValue, '首页', 'sy001');
+				axios.get(`http://127.0.0.1:8080/dzw_sys//ty/api/employee/getFunTree`).then(resp => {
+					this.options = resp.data;
+				})
 			}
 		})
 	</script>
