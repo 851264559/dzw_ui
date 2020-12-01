@@ -11,7 +11,7 @@
 			}
 			
 			#testOnCompletion {
-				zoom: 0.8;
+				zoom: 0.9;
 			}
 						
 			.hiddenContent {
@@ -22,19 +22,12 @@
 
 	<body>
 		<div id="testOnCompletion">
-			<el-row>
-				<el-col :span="2">
-					<div class="hiddenContent">hiddenContent</div>
-				</el-col>
-				<el-col :span="20">
-					<el-row>
-						<el-col :span="24">
 							<div>
 								<h1>竣工检验</h1>
 								<span class="demonstration">开单日期</span>
-								<el-date-picker v-model="startTime" type="datetime" placeholder="选择开始时间">
+								<el-date-picker v-model="startTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择开始时间">
 								</el-date-picker>
-								<el-date-picker v-model="endTime" type="datetime" placeholder="选择结束时间">
+								<el-date-picker v-model="endTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择结束时间">
 								</el-date-picker>
 								<span class="demonstration">维修单号</span>
 								<el-input v-model="repairOrder" placeholder="维修单号"></el-input>
@@ -51,59 +44,42 @@
 								<el-input v-model="licensePlateNumber" placeholder="车牌号"></el-input>
 								<span class="demonstration">车架号</span>
 								<el-input v-model="VIN" placeholder="车架号"></el-input>
+								<button @click="getTestOnCompletionInfos">查询</button>
 							</div>
-						</el-col>
-					</el-row>
-					<el-row>
-						<el-col :span="24">
 							<div>
-								<el-table ref="multipleTable" :data="testOnCompletions" tooltip-effect="dark" style="width: 100%">
-									<el-table-column type="selection" width="55">
+								<el-table ref="multipleTable" :data="this.testOnCompletions" @row-click="getIndex" tooltip-effect="dark" style="width: 100%">
+									<el-table-column prop="repairorder" label="维修单号">
 									</el-table-column>
-									<!--<el-table-column label="日期" width="120">
-								<template slot-scope="scope">{{ scope.row.date }}</template>
-							</el-table-column>-->
-									<el-table-column prop="testOnCompletions.repairOrder" label="维修单号">
+									<el-table-column prop="typeofdocument" label="单据类型" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.typeOfDocument" label="单据类型" show-overflow-tooltip>
+									<el-table-column prop="businesstype" label="业务类型" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.businessType" label="业务类型" show-overflow-tooltip>
+									<el-table-column prop="constructiondivisions" label="施工班次" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.constructionDivisions" label="施工班次" show-overflow-tooltip>
+									<el-table-column prop="ownername" label="车主姓名" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.ownerName" label="车主姓名" show-overflow-tooltip>
+									<el-table-column prop="licenseplatenumber" label="车牌号" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.licensePlateNumber" label="车牌号" show-overflow-tooltip>
+									<el-table-column prop="cartype" label="车型" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.carType" label="车型" show-overflow-tooltip>
+									<el-table-column prop="vin" label="车架号" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.VIN" label="车架号" show-overflow-tooltip>
+									<el-table-column prop="pickupcartime" label="接车时间" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.pickUpCarTime" label="接车时间" show-overflow-tooltip>
+									<el-table-column prop="expectedcompletion" label="预计完工" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.expectedCompletion" label="预计完工" show-overflow-tooltip>
+									<el-table-column prop="timeofcompletion" label="完工时间" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.timeOfCompletion" label="完工时间" show-overflow-tooltip>
+									<el-table-column prop="delaysreason" label="误工原因" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.delaysReason" label="误工原因" show-overflow-tooltip>
+									<el-table-column prop="numberofrework" label="返工数" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.numberOfRework" label="返工数" show-overflow-tooltip>
+									<el-table-column prop="penaltyamount" label="处罚金额" show-overflow-tooltip>
 									</el-table-column>
-									<el-table-column prop="testOnCompletions.penaltyAmount" label="处罚金额" show-overflow-tooltip>
-									</el-table-column>
-									<el-table-column prop="testOnCompletions.reworkReason" label="返工原因" show-overflow-tooltip>
+									<el-table-column prop="reworkreason" label="返工原因" show-overflow-tooltip>
 									</el-table-column>
 								</el-table>
 							</div>
-						</el-col>
-					</el-row>
-			</el-row>
-			</el-col>
-			<el-col :span="2">
-				<div class="hiddenContent">hiddenContent</div>
-			</el-col>
-			</el-row>
-
 		</div>
 	</body>
 	<!--<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
@@ -115,10 +91,10 @@
 			el: "#testOnCompletion",
 			data() {
 				return {
-					startTime: "",
-					endTime: "",
-					repairOrder: "",
-					theDocumentsState: "",
+					startTime: "请选择",
+					endTime: "请选择",
+					repairOrder: "请输入",
+					theDocumentsState: "请选择",
 					theDocumentsStates: [{
 						values: "states01",
 						name: "状态一"
@@ -129,10 +105,40 @@
 						values: "states03",
 						name: "状态三"
 					}],
-					licensePlateNumber: "",
-					VIN: "",
+					licensePlateNumber: "请输入",
+					VIN: "请输入",
 					testOnCompletions: []
 				}
+			},methods:{
+				getTestOnCompletionInfos() {
+					if(this.repairOrder==''){
+						this.repairOrder="请输入";
+					}
+					if(this.licensePlateNumber==''){
+						this.licensePlateNumber="请输入";
+					}
+					if(this.VIN){
+						this.VIN="请输入";
+					}
+					let _This = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/testOnCompletion/queryByCondition/${this.startTime}/${this.endTime}/${this.repairOrder}/${this.theDocumentsState}/${this.licensePlateNumber}/${this.VIN}`).then(function(success) {
+						_This.testOnCompletions = success.data;
+						console.log(JSON.stringify(_This.testOnCompletions));
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},getIndex(indexValues) {
+					this.$alert(JSON.stringify(indexValues.typeofdocument));
+					/*location.href = "../CWL/OffSiteRescueSheet.html";*/
+					sessionStorage.setItem("repairOrder",indexValues.repairorder);
+					if(indexValues.typeofdocument=="救援"){
+						index.addTab(index.editableTabsValue,'站外救援单','../CWL/OffSiteRescueSheet.html');
+					}else if(indexValues.typeofdocument=="维修"){
+						index.addTab(index.editableTabsValue,'维修单','../CWL/RepairBill.html');
+					}					
+				}
+			},mounted(){
+				this.getTestOnCompletionInfos();
 			}
 		});
 	</script>
