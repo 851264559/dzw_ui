@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>主页</title>
 		<link rel="stylesheet" href="../../css/element.css" />
 		<style>
 			* {
@@ -28,19 +28,18 @@
 
 	<body>
 		<div id="index">
-			<el-container style='height:95vh; border: 1px solid #eee'>
+			<el-container style='height:99vh; border: 1px solid #eee;'>
 				<el-header>
 					<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 						<el-menu-item><img src="../../img/1606181050(1).jpg" alt="" /></el-menu-item>
 						<el-menu-item index="1">服务接待</el-menu-item>
-						<el-menu-item index="2">备品管理</el-menu-item>
-						<el-menu-item index="3">结算中心</el-menu-item>
-						<el-menu-item index="4">客户档案</el-menu-item>
-						<el-menu-item index="5">基础数据</el-menu-item>
-						<el-menu-item index="6">财务管理</el-menu-item>
-						<el-menu-item index="7">行政人事</el-menu-item>
-						<el-menu-item index="8">系统设置</el-menu-item>
-						<el-menu-item index="9" style="float: right;">
+						<el-menu-item index="2">结算中心</el-menu-item>
+						<el-menu-item index="3">客户档案</el-menu-item>
+						<el-menu-item index="4">基础数据</el-menu-item>
+						<el-menu-item index="5">财务管理</el-menu-item>
+						<el-menu-item index="6">行政人事</el-menu-item>
+						<el-menu-item index="7">系统设置</el-menu-item>
+						<el-menu-item index="8" style="float: right;">
 							<el-dropdown>
 								<i class="el-icon-user" style="margin-right: 15px"></i>
 								<el-dropdown-menu slot="dropdown">
@@ -77,9 +76,6 @@
 								<div :id="item.name"></div>
 							</el-tab-pane>
 						</el-tabs>
-						<div id="cnt">
-
-						</div>
 					</el-main>
 				</el-container>
 			</el-container>
@@ -90,7 +86,7 @@
 	<script type="text/javascript" src="../../js/axios.min.js"></script>
 	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
 	<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="../../js/left.js" ></script>
+	<script type="text/javascript" src="../../js/left.js"></script>
 	<script>
 		var index = new Vue({
 			el: "#index",
@@ -121,7 +117,7 @@
 					})
 				},
 				removeTab(targetName) {
-					if(targetName==1){
+					if(targetName == 1) {
 						return;
 					}
 					let tabs = this.editableTabs;
@@ -144,25 +140,28 @@
 					if(key == 1) {
 						this.options = fuwu;
 					} else if(key == 2) {
-						
-					} else if(key == 3) {
 						this.options = jiesuan;
+					} else if(key == 3) {
+						this.options = dangan;
 					} else if(key == 4) {
+<<<<<<< HEAD
 						this.options=dangan;
-					} else if(key == 5) {
-						
-					} else if(key == 6) {
+=======
+						this.options = jichu;
 
-					} else if(key == 7) {
+>>>>>>> 338585f0751b08fc99fde353c6c5f7d6620106bd
+					} else if(key == 5) {
+
+					} else if(key == 6) {
 						this.options = renshi;
-					} else if(key == 8) {
+					} else if(key == 7) {
 
 					}
 				},
 			},
 			mounted() {
 				this.options = fuwu;
-				this.addTab(this.editableTabsValue,'首页','first.html')
+				this.addTab(this.editableTabsValue, '首页', 'first.html')
 			}
 		})
 	</script>

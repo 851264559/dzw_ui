@@ -68,8 +68,6 @@
 				]
 			}
 		];
-	//备品管理
-	var guanli
 	//结算中心
 	var jiesuan = [{
 			title: "前台结算",
