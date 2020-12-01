@@ -3,142 +3,126 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<!--<link rel="stylesheet" href="../../css/bootstrap.min.css" />-->
 	</head>
 	<body>
-		<div class="container">
-			
+		<div class="container" id="xzyg">
 			<div class="row">
-				<div class="col-md-12">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<div class="col-sm-9">
-								*职工名称：<input style="width: 300px;" type="text" class="form-control" id="inputEmail3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*职工密码：<input style="width: 300px;" type="password" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								职工性别：<input value="0" name="ww" type="radio">男
-								<input value="1" name="ww" type="radio">女
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*出生日期：<input style="width: 300px;" type="date" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*手机电话：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*联系电话：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*联系地址：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*紧急人联系电话：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*紧急人联系地址：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*紧急人联系电话：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*紧急人联系地址：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*职工工资：<input style="width: 300px;" type="text" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*入职时间：<input style="width: 300px;" type="date" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*试用结束时间：<input style="width: 300px;" type="date" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*合同开始时间：<input style="width: 300px;" type="date" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*合同结束时间：<input style="width: 300px;" type="date" class="form-control" id="inputPassword3">
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*部门：<select>
-									<option>1</option>
+				<table>
+					<tr>
+						<td>*职工名称：<input v-model="person.yname" style="width: 300px;" type="text" class="form-control" id="inputEmail3"></td>
+					</tr>
+					<tr>
+						<td>*职工账号：<input v-model="person.yaccount" style="width: 300px;" type="text" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*职工密码：<input v-model="person.ypwd" style="width: 300px;" type="password" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>
+							职工性别：<input v-model="person.ysex" value="0" name="ww" type="radio">男
+								   <input v-model="person.ysex" value="1" name="ww" type="radio">女
+						</td>
+					</tr>
+					<tr>
+						<td>*出生日期：<input v-model="person.ybirth" style="width: 300px;" type="date" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*手机电话：<input v-model="person.yphone" style="width: 300px;" type="text" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*联系电话：<input v-model="person.ytel" style="width: 300px;" type="text" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*联系地址：<input v-model="person.yaddress" style="width: 300px;" type="text" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*紧急人联系电话：<input v-model="person.yjphone" style="width: 300px;" type="text" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*紧急人联系姓名：<input v-model="person.yjname" style="width: 300px;" type="text" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*职工工资：<input v-model="person.ymoney" style="width: 300px;" type="text" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*入职时间：<input v-model="person.yrdate" style="width: 300px;" type="date" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*试用结束时间：<input v-model="person.yjsdate" style="width: 300px;" type="date" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*合同开始时间：<input v-model="person.yhdate" style="width: 300px;" type="date" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>*合同结束时间：<input v-model="person.yhjdate" style="width: 300px;" type="date" class="form-control" id="inputPassword3"></td>
+					</tr>
+					<tr>
+						<td>
+							*部门：<select v-model="person.ymentid">
+									<option :value="temp.bid" v-for="(temp,i) in tableData">{{temp.bname}}</option>
 								</select>
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-9">
-								*职务：<select>
-									<option>1</option>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							*职务：<select v-model="person.ypostid">
+									<option :value="temp.zid" v-for="(temp,i) in tableData1">{{temp.zname}}</option>
 								</select>
-							</div>
-						</div>
-						<br />
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<input @click="updatePerson" type="button" class="btn btn-default" value="立即创建" />
-								<button type="submit" class="btn btn-default">返回</button>
-								<br /><br />
-							</div>
-						</div>
-					</form>
-				</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input @click="addPerson" type="button" class="btn btn-default" value="立即创建" />
+							<input type="button" class="btn btn-default" value="返回" />
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</body>
-	<!--<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="../../js/vue.js"></script>
-	<script type="text/javascript" src="../../js/axios.min.js"></script>
-	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
-	<script type="text/javascript" src="../../js/index.js"></script>-->
+	<script>
+		var xzyg = new Vue({
+			data() {
+				return {
+					person: {
+					},
+					tableData: {},
+					tableData1: {}
+				}
+			},
+			methods: {
+				addPerson() {
+					let _this = this;
+					axios.post("http://127.0.0.1:8080/dzw_sys/ty/api/employee/employee", this.person).then(function(resp) {
+						if(resp.data.code == "200") {
+							_this.$message({
+								message: '新增成功',
+								type: 'success'
+							})
+							sss.isShow = false;
+						}
+					}).catch(function(e) {});
+				},
+				query() {
+					let _this = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/ww`).then(function(resp) {
+						_this.tableData = resp.data;
+					})
+				},
+				queryAll() {
+					let _this = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/zw`).then(function(resp) {
+						_this.tableData1 = resp.data;
+					})
+				}
+
+				
+			},
+			mounted() {
+				this.query();
+				this.queryAll();
+			}
+
+		}).$mount("#xzyg");
+	</script>
 </html>
