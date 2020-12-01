@@ -16,6 +16,6 @@ var menuMapping = {
 	"z001": "../TY/zzjg.html",
 	"g001": "../TY/gwdy.html",
 	"l001": "../TY/lzdj.html",
-	"t001": "../TY/txml.html"
-
+	"t001": "../TY/txml.html",
+	"w003": "../WZY/maintenanceItems.html"
 }
