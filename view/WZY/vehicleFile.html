@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>车型档案</title>
+	</head>
+	<body>
+		<div id="vehicleFile">
+			<el-container>
+				<el-main style="border: solid red 0px;width: 370px;">
+					<template>
+						<el-button type="primary">增加品牌</el-button>
+						<el-input style="width: 220px;" placeholder="匹配 匹配编码/匹配名称/首字母"></el-input>
+						<el-button type="primary">查询</el-button>
+					</template>
+					<template>
+						<el-table :data="brand" style="width: 460px" height="250">
+							<el-table-column align="center" prop="vbrandid" label="编码" width="60">
+							</el-table-column>
+							<el-table-column align="center" prop="vbrandname" label="品牌名称" width="140">
+							</el-table-column>
+							<el-table-column align="center" prop="vbrandno" label="首字母" width="80">
+							</el-table-column>
+							<el-table-column align="center" label="操作" width="180">
+								<template slot-scope="scope">
+									<el-button type="primary" icon="el-icon-edit" circle></el-button>
+									<el-button type="danger" icon="el-icon-delete" circle></el-button>
+									<el-button type="success" icon="el-icon-check" circle></el-button>
+								</template>
+							</el-table-column>
+						</el-table>
+					</template>
+				</el-main>
+				<el-main style="border: solid red 0px;width: 500px;">
+					<template>
+						<el-button type="primary">增加车型</el-button>
+						<el-input style="width: 220px;" placeholder="匹配 车型编码/车型名称"></el-input>
+						<el-button type="primary">查询</el-button>
+					</template>
+					<template>
+						<el-table :data="brand" style="width: 660px" height="250">
+							<el-table-column align="center" prop="vbrandid" label="车型ID" width="65">
+							</el-table-column>
+							<el-table-column align="center" prop="vbrandname" label="发动机品牌" width="100">
+							</el-table-column>
+							<el-table-column align="center" prop="vbrandno" label="车辆品牌" width="90">
+							</el-table-column>
+							<el-table-column align="center" prop="vbrandno" label="车型名称" width="90">
+							</el-table-column>
+							<el-table-column align="center" prop="vbrandno" label="参考价格" width="90">
+							</el-table-column>
+							<el-table-column align="center" label="操作" width="155">
+								<template slot-scope="scope">
+									<el-button type="primary" icon="el-icon-edit" circle></el-button>
+									<el-button type="danger" icon="el-icon-delete" circle></el-button>
+								</template>
+							</el-table-column>
+						</el-table>
+					</template>
+				</el-main>
+			</el-container>
+		</div>
+	</body>
+	
+	<script>
+		var vehicleFile=new Vue({
+			el:"#vehicleFile",
+			data(){
+				return {
+					brand:[
+						{
+							vbrandid:'1',
+							vbrandno:'d',
+							vbrandname:'大众'
+						}
+					],
+					vehicle:[]
+				}
+			}
+		});
+	</script>
+</html>
