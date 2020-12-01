@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>登录页面</title>
 		<link rel="stylesheet" href="../../css/element.css" />
 		<style>
 			body {
@@ -22,7 +22,10 @@
 
 	<body>
 		<div id="loginApp" align="center">
-			<h2>登录</h2>
+			<h2>
+				<i class="el-icon-menu"></i>
+				汽修管理系统-登录
+			</h2>
 			<div>
 				<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 					<el-form-item label="账号：" prop="username">
@@ -33,7 +36,7 @@
 					</el-form-item>
 
 					<el-form-item>
-						<el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+						<el-button type="primary" @click="submitForm('ruleForm',ruleForm.username,ruleForm.pwd)">登录</el-button>
 						<el-button @click="resetForm('ruleForm')">清空</el-button>
 					</el-form-item>
 				</el-form>
@@ -79,16 +82,28 @@
 				}
 			},
 			methods: {
-				submitForm(formName) {
+				submitForm(formName, username, pwd) {
 					this.$refs[formName].validate((valid) => {
 						if(valid) {
-							alert('submit!');
+							axios.get(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/login/${username}/${pwd}`).then(resp => {
+								if(resp.data.code == "200") {
+									this.$alert('登录成功', {
+										confirmButtonText: '确定',
+										callback: action => {
+											window.sessionStorage.setItem("EMPLOYEE", resp.data.employee)
+											location.href = "index.html";
+										}
+									});
+								} else {
+									this.$alert("用户名或密码错误！")
+								}
+							})
 						} else {
 							console.log('error submit!!');
 							return false;
 						}
 					});
-					
+
 				},
 				resetForm(formName) {
 					this.$refs[formName].resetFields();

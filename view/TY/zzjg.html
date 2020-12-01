@@ -15,7 +15,7 @@
 							<el-button @click="addPerson()" type="primary" size="mini">新增</el-button>
 							<el-button @click="updatePerson" type="warning" size="mini">修改</el-button>
 							<el-button @click="deletecs(person.bid)" type="danger" size="mini">删除</el-button><br /><br />
-							<input v-model="person.bname" type="text" name="xment" />
+							<el-input v-model="person.bname" type="text" name="xment" size="small"/></el-input>
 							<el-table  @current-change="fuzhi" :data="person1" ref="singleTable" highlight-current-row @current-change="handleCurrentChange">
 								<el-table-column label="北京德招文卡车系统">
 									<template slot-scope="temp" >
