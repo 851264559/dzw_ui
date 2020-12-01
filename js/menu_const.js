@@ -8,5 +8,5 @@ var menuMapping = {
 	"j002": "../CWL/TestOnCompletion.html",
 	"f002": "../WZY/engineBrand.html",
 	"c001": "../WZY/vehicleFile.html",
-	"w003": "../WZY/maintenanceItems.html",
+	"w003": "../WZY/maintenanceItems.html"
 }
