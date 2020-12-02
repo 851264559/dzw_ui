@@ -39,10 +39,10 @@
 										<div id="cntt" v-loading="loading">
 										</div>
 									</el-dialog>
-									<el-button type="danger" size="mini">删除员工</el-button>
+									<el-button @click="deleteyid(tableData.yid)" type="danger" size="mini">删除员工</el-button>
 								</el-col>
 							</el-row>
-							<el-table style="width:90%;" ref="singleTable" :data="tableData.list" highlight-current-row @current-change="handleCurrentChange">
+							<el-table @row-click="xg" style="width:90%;" ref="singleTable" :data="tableData.list" highlight-current-row @current-change="handleCurrentChange">
 								<el-table-column label="编号" type="index">
 									<template slot-scope="temp">
 										{{temp.$index+1}}
@@ -55,7 +55,12 @@
 								</el-table-column>
 								<el-table-column property="ysex" label="性别">
 									<template slot-scope="temp">
-										{{temp.row.ysex}}
+										<template v-if="temp.row.ysex=='0'">
+											男
+										</template>
+										<template v-if="temp.row.ysex=='1'">
+											女
+										</template>
 									</template>
 								</el-table-column>
 								<el-table-column property="yphone" label="手机号码">
@@ -112,7 +117,8 @@
 						zname: ''
 					},
 					currentRow: null,
-					bid:0
+					bid:0,
+					xg1:{}
 
 				}
 			},
@@ -200,6 +206,24 @@
 				add(id){
 					this.bid = id;
 					this.goToPage(1,3)
+				},
+				deleteyid(yid) {
+					let _this = this;
+					var yid = sss.xg1["yid"];
+					axios.delete(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/hhh/${yid}`).then(function(resp) {
+						if(resp.data.code == "200") {
+							_this.$message({
+								message: '移除成功',
+								type: 'success'
+							})
+							_this.goToPage(1,3);
+						}
+					}).catch(function(e) {});
+				},
+				xg(row){
+					//alert(row.yid)
+					this.xg1["yid"]=row.yid;
+					alert(this.xg1["yid"])
 				}
 			},
 			mounted() {

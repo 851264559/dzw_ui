@@ -14,7 +14,7 @@
 				background-color: #fafafa;
 			}
 		</style>
-		<link rel="stylesheet" href="../../css/element.css">
+		<!--<link rel="stylesheet" href="../../css/element.css">-->
 	</head>
 
 	<body>
@@ -195,7 +195,7 @@
 				},
 				showCarInfos() {
 					let _this = this
-					axios.get("http://localhost:8080/dzw/api/vehicle/queryAll").then(function(resp) {
+					axios.get("http://localhost:8080/dzw_sys/api/vehicle/queryAll").then(function(resp) {
 						_this.vehicleShow = resp.data
 					})
 
