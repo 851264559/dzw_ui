@@ -146,36 +146,38 @@
 				</el-form>
 					<el-tabs v-model="activeName" style="width: 150%">
 						<el-tab-pane label="维修项目" name="first">
+							<el-button type="text" @click="add">新增</el-button>
+							<el-dialog title="新增项目维修" :visible.sync="isShow" width="80%">
+								<div id="show"></div>
+							</el-dialog>
 							<el-table ref="multipleTable" :data="MaintenanceItems" tooltip-effect="dark">
-								<el-table-column type="selection" width="55">
-								</el-table-column>
 								<el-table-column prop="oid" label="项目编号">
 								</el-table-column>
-								<el-table-column prop="oName" label="项目名称" show-overflow-tooltip>
+								<el-table-column prop="oname" label="项目名称" show-overflow-tooltip>
 								</el-table-column>
 								<el-table-column prop="number" label="数量" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="priceClass" label="价类" show-overflow-tooltip>
+								<el-table-column prop="priceclass" label="价类" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="unitPrice" label="单价" show-overflow-tooltip>
+								<el-table-column prop="unitprice" label="单价" show-overflow-tooltip>
 								</el-table-column>
 								<el-table-column prop="money" label="金额" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="settlementPrice" label="技师结算价" show-overflow-tooltip>
+								<el-table-column prop="settlementprice" label="技师结算价" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="errorDesc" label="故障描述" show-overflow-tooltip>
+								<el-table-column prop="errordesc" label="故障描述" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="errorCause" label="故障原因" show-overflow-tooltip>
+								<el-table-column prop="errorcause" label="故障原因" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="theMaintenanceCrew" label="维修班组" show-overflow-tooltip>
+								<el-table-column prop="themaintenancecrew" label="维修班组" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="busyWorkGroup" label="作业人员" show-overflow-tooltip>
+								<el-table-column prop="busyworkgroup" label="作业人员" show-overflow-tooltip>
 								</el-table-column>
 								<el-table-column prop="server" label="服务顾问" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="workOrderNumber" label="工单号" show-overflow-tooltip>
+								<el-table-column prop="workordernumber" label="工单号" show-overflow-tooltip>
 								</el-table-column>
-								<el-table-column prop="freeOfChargeFor" label="免单原因" show-overflow-tooltip>
+								<el-table-column prop="freeofchargefor" label="免单原因" show-overflow-tooltip>
 								</el-table-column>
 							</el-table>
 						</el-tab-pane>
@@ -238,7 +240,7 @@
 	<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/axios_cfg.js" type="text/javascript" charset="utf-8"></script>-->
 	<script type="text/javascript">
-		var StarEmployees = new Vue({
+		var repairBill = new Vue({
 			el: "#repairBill",
 			data() {
 				return {
@@ -303,7 +305,8 @@
 					activeName: 'first',
 					MaintenanceItems: [],
 					AcquisitionConditions: [],
-					BillingInfo: []
+					BillingInfo: [],
+					isShow:false
 				}
 			},
 			methods: {
@@ -315,10 +318,27 @@
 					}).catch(function(error) {
 						console.log(error);
 					});
+				},
+				getmaintenanceItemInfosByWorkOrderNum() {
+					let _This = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/${this.RepairBill.roddnumber}`).then(function(success) {
+						_This.MaintenanceItems = success.data;
+						console.log(JSON.stringify(_This.MaintenanceItems));
+					}).catch(function(error) {
+						console.log(error);
+					});
+				},
+				add(){
+					this.isShow = true;
+					//解决预加载问题
+					this.$nextTick(() => {
+						$("#show").load('../CWL/addMaintenanceItem.html');
+					})
 				}
 			},mounted(){
 				this.RepairBill.roddnumber = sessionStorage.getItem("repairOrder");
 				this.getRepairBillInfosByrOddNum();
+				this.getmaintenanceItemInfosByWorkOrderNum();
 			}
 		});
 	</script>

@@ -168,7 +168,13 @@
 					axios.post(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/add`, this.maintenanceItem).then(function(success) {
 						if(success.data == 1) {
 							_This.$alert("success");
-							offSiteRescueSheet.getOffSiteRescueSheetInfosByOddNum();
+							if(sessionStorage.getItem("typeOfDocument")=="救援"){
+								offSiteRescueSheet.getmaintenanceItemInfosByWorkOrderNum();
+								offSiteRescueSheet.isShow = false;
+							}else if(sessionStorage.getItem("typeOfDocument")=="维修"){
+								repairBill.getmaintenanceItemInfosByWorkOrderNum();
+								repairBill.isShow = false;
+							}				
 						} else {
 							_This.$alert("error");
 						}
