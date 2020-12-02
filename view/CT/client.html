@@ -18,7 +18,7 @@
 				background-color: #fafafa;
 			}
 		</style>
-		<link rel="stylesheet" href="../../css/element.css">
+		<!--<link rel="stylesheet" href="../../css/element.css">-->
 	</head>
 
 	<body>
@@ -685,13 +685,12 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript" src="../../js/vue.js"></script>
+	<!--<script type="text/javascript" src="../../js/vue.js"></script>
 	<script type="text/javascript" src="../../js/element.js"></script>
-	<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
 	<script type="text/javascript" src="../../js/left.js"></script>
 	<script type="text/javascript" src="../../js/axios.min.js"></script>
 	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
-	<script type="text/javascript" src="../../js/echarts.min.js"></script>
+	<script type="text/javascript" src="../../js/echarts.min.js"></script>-->
 	<script>
 		const clientApp = new Vue({
 			el: '#clientApp',
@@ -841,7 +840,7 @@
 							} else {
 								let _this=this
 								this.$set(this.client_vehicles, this.updateIndex, this.client_vehiclesUpdate)
-								axios.put("http://localhost:8080/dzw/api/vehicle/updateVehicle", this.client_vehiclesUpdate).then(function(resp) {
+								axios.put("http://localhost:8080/dzw_sys/api/vehicle/updateVehicle", this.client_vehiclesUpdate).then(function(resp) {
 									if(resp.data) {
 										//_this.showClient();
 										_this.dialogVisible2 = false
@@ -934,7 +933,7 @@
 					}).then(() => {
 						this.client_vehicles.splice(index, 1)
 						let _this = this
-						axios.delete("http://localhost:8080/dzw/api/vehicle/removeVehicle/" + id).then(function(resp) {
+						axios.delete("http://localhost:8080/dzw_sys/api/vehicle/removeVehicle/" + id).then(function(resp) {
 							if(resp.data) {
 								_this.$message({
 									message: '删除成功！',
@@ -957,7 +956,7 @@
 						cancelButtonText: '取消',
 						type: 'warning'
 					}).then(() => {
-						axios.delete("http://localhost:8080/dzw/api/client/removeClient/" + cid).then(function(resp) {
+						axios.delete("http://localhost:8080/dzw_sys/api/client/removeClient/" + cid).then(function(resp) {
 							if(resp.data) {
 								_this.showClient();
 								_this.$message({
@@ -985,7 +984,7 @@
 				//查询信息
 				showClient() {
 					let _this = this
-					axios.get("http://localhost:8080/dzw/api/client/selectAll").then(function(resp) {
+					axios.get("http://localhost:8080/dzw_sys/api/client/selectAll").then(function(resp) {
 						_this.client_Client = resp.data
 					})
 				},
@@ -994,7 +993,7 @@
 					let _this = this;
 					this.$refs[formName].validate((valid) => {
 						if(valid) {
-							axios.post("http://localhost:8080/dzw/api/client/add", _this.ruleForm).then(function(resp) {
+							axios.post("http://localhost:8080/dzw_sys/api/client/add", _this.ruleForm).then(function(resp) {
 								if(resp.data) {
 									_this.showClient();
 									_this.dialogVisible = false
@@ -1039,7 +1038,7 @@
 					let _this = this;
 					this.$refs[formName].validate((valid) => {
 						if(valid) {
-							axios.put("http://localhost:8080/dzw/api/client/updateClient", _this.updateClientData).then(function(resp) {
+							axios.put("http://localhost:8080/dzw_sys/api/client/updateClient", _this.updateClientData).then(function(resp) {
 								if(resp.data) {
 									_this.showClient();
 									_this.dialogVisible2 = false
