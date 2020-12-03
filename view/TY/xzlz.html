@@ -4,34 +4,76 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<!--<link rel="stylesheet" href="../../css/bootstrap.min.css" />-->
 	</head>
 
 	<body>
-		<div class="container">
+		<div class="container" id="xzlz">
 			<div class="row">
 				<div class="col-md-12">
-					<form class="form-horizontal">
-						<br />
-						部门：<select name="">
-									<option>1</option>
-							</select>
-						员工：
-						<select name="">
-							<option>1</option>
-						</select>
-						<br />
-						<br />
-						离职原因：<input type="text" />  <input style="border: 0; color: white; width: 50px; height: 30px; background-color: #269ABC;" type="button" value="离职" />
-					</form>
+					<!--<table>
+						<tr>
+							<td>
+								部门：<select v-model="person.ymentid" onchange="queryll()">
+										<option :value="temp.bid" v-for="(temp,i) in tableData">{{temp.bname}}</option>
+									</select>
+								员工：<select v-model="person.ypostid">
+									<option :value="temp.zid" v-for="(temp,i) in tableData1">{{temp.zname}}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								离职原因：<input type="text" />  <input style="border: 0; color: white; width: 50px; height: 30px; background-color: #269ABC;" type="button" value="离职" />
+							</td>
+						</tr>
+					</table>-->
+					<template>
+						<el-select v-model="person.ymentid" placeholder="请选择" @change="queryll">
+							<el-option v-for="(temp,i) in tableData" :value="temp.bid" :label="temp.bname">
+							</el-option>
+						</el-select>
+						<el-select v-model="person.ypostid" placeholder="请选择">
+							<el-option v-for="(temp,i) in tableData1" :value="temp.yname">
+							</el-option>
+						</el-select>
+					</template>
+					<br/>
+					<el-input v-model="input" placeholder="请输入内容"></el-input><el-button type="primary">提交</el-button>
 				</div>
 			</div>
 		</div>
 	</body>
-	<!--<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
-	<script type="text/javascript" src="../../js/vue.js"></script>
-	<script type="text/javascript" src="../../js/axios.min.js"></script>
-	<script type="text/javascript" src="../../js/axios_cfg.js"></script>
-	<script type="text/javascript" src="../../js/index.js"></script>-->
+	<script>
+		var xzlz = new Vue({
+			data() {
+				return {
+					person: {},
+					tableData: {},
+					tableData1: {}
+				}
+			},
+			methods: {
+				query() {
+					let _this = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/ww`).then(function(resp) {
+						_this.tableData = resp.data;
+					})
+				},
+				queryll(ymentid) {
+					let _this = this;
+					//var ymentid = this.person.ymentid;
+					//alert(ymentid)
+					axios.get(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/xzlz/${ymentid}`).then(function(resp) {
+						_this.tableData1 = resp.data;
+					})
+				}
+			},
+			mounted() {
+				this.query();
+				this.queryll();
+			}
+
+		}).$mount("#xzlz");
+	</script>
 
 </html>
