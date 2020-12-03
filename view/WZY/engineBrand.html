@@ -67,7 +67,7 @@
 						if(resp.data.length > 0) {
 							_this.engineBrand = resp.data;
 						} else {
-							_this.$message.error('未找到该品牌');
+							_this.$message.error('没有匹配的相关资源');
 						}
 						console.log(_this.engineBrand);
 					}).catch(function(e) {
