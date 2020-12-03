@@ -22,7 +22,7 @@
         	zoom: 0.8;
         }
     </style>
-    <link rel="stylesheet" href="../../css/element.css">
+    <!--<link rel="stylesheet" href="../../css/element.css">-->
 </head>
 <body>
     <div id="summaryApp">
@@ -47,7 +47,7 @@
         			销售单号：
 					    <el-input style="width: 200px;"></el-input>
         			结算状态：
-						<el-select v-model="value" style="width: 160px;" placeholder="请选择">
+						<el-select :popper-append-to-body="false" v-model="value" style="width: 160px;" placeholder="请选择">
 						    <el-option
 						      v-for="item in options"
 						      :key="item.value"
@@ -61,7 +61,7 @@
     						<br />
     						<br />
 					客户名称：
-						<el-select v-model="value" style="width: 160px;" placeholder="请选择">
+						<el-select :popper-append-to-body="false" v-model="value" style="width: 160px;" placeholder="请选择">
 						    <el-option
 						      v-for="item in options"
 						      :key="item.value"
@@ -70,7 +70,7 @@
 						    </el-option>
 					  	</el-select>
         			客户顾问：
-						<el-select v-model="value" style="width: 160px;" placeholder="请选择">
+						<el-select :popper-append-to-body="false" v-model="value" style="width: 160px;" placeholder="请选择">
 						    <el-option
 						      v-for="item in options"
 						      :key="item.value"
@@ -79,7 +79,7 @@
 						    </el-option>
 					  	</el-select>
         			业务类型：
-						<el-select v-model="value" style="width: 160px;" placeholder="请选择">
+						<el-select :popper-append-to-body="false" v-model="value" style="width: 160px;" placeholder="请选择">
 						    <el-option
 						      v-for="item in options"
 						      :key="item.value"
@@ -88,7 +88,7 @@
 						    </el-option>
 					  	</el-select>
         			单据类型：
-						<el-select style="width: 160px;" v-model="value" placeholder="请选择">
+						<el-select :popper-append-to-body="false" style="width: 160px;" v-model="value" placeholder="请选择">
 						    <el-option
 						      v-for="item in options"
 						      :key="item.value"
@@ -113,13 +113,13 @@
         </div>
     </div>
 </body>
-<script type="text/javascript" src="../../js/vue.js" ></script>
+<!--<script type="text/javascript" src="../../js/vue.js" ></script>
 <script type="text/javascript" src="../../js/element.js" ></script>
 <script type="text/javascript" src="../../js/jquery-1.12.4.js" ></script>
 <script type="text/javascript" src="../../js/left.js" ></script>
 <script type="text/javascript" src="../../js/axios_cfg.js" ></script>
 <script type="text/javascript" src="../../js/axios.min.js" ></script>
-<script type="text/javascript" src="../../js/echarts.min.js" ></script>
+<script type="text/javascript" src="../../js/echarts.min.js" ></script>-->
 <script>
     const summaryApp=new Vue({
         el:'#summaryApp',

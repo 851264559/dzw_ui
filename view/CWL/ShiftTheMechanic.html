@@ -6,19 +6,12 @@
 		<title>班组技工</title>
 		<!--<link rel="stylesheet" type="text/css" href="../css/element.css" />-->
 		<style type="text/css">
-			.el-header {
-				background-color: #B3C0D1;
-				color: #333;
-				line-height: 60px;
-			}
 			
 			.el-input {
 				width: 130px;
 			}
 			
-			.el-aside {
-				color: #333;
-			}
+			
 			
 			.i,
 			.el-button {
@@ -29,11 +22,7 @@
 				margin: 0px 0px 0px 100px;
 			}
 			
-			.head {
-				background-color: ghostwhite;
-				color: #444;
-				line-height: 60px;
-			}
+		
 			
 			#shiftTheMechanic {
 				zoom: 0.9;
@@ -51,10 +40,6 @@
 
 	<body>
 		<div id="shiftTheMechanic">
-			<el-row>
-				<el-col :span="2">
-					<div class="hiddenContent">hiddenContent</div>
-				</el-col>
 				<el-col :span="20">
 					<!--<el-container>
 			  <el-header>
@@ -85,28 +70,25 @@
 			  </el-main>
 			</el-container>-->
 					<div class="head">
-						<div>
-							<h3>班组技工&nbsp;	</h3>
-						</div>
-						<div>
-							<i class="el-icon-plus"></i>
-							<el-button type="text">增加员工</el-button>
-							<i class="el-icon-edit"></i>
-							<el-button type="text">修改</el-button>
-							<i class="el-icon-error"></i>
-							<el-button type="text">删除</el-button>
-							<i class="el-icon-info"></i>
-							<el-button type="text">查询</el-button>
-							<i class="el-icon-close"></i>
-							<el-button type="text">置空密码</el-button>
-							<i class="el-icon-check"></i>
-							<el-button type="text">班组权重</el-button>
-							<i class="el-icon-sort"></i>
-							<el-button type="text">导出</el-button>
+						<div align="center">
+							
+							<el-button ><i class="el-icon-plus"></i> 增加员工</el-button>
+							
+							<el-button ><i class="el-icon-edit"></i> 修改</el-button>
+							
+							<el-button><i class="el-icon-error"></i> 删除</el-button>
+							 
+							<el-button ><i class="el-icon-info"></i> 查询</el-button>
+							
+							<el-button ><i class="el-icon-close"></i> 置空密码</el-button>
+							
+							<el-button ><i class="el-icon-check"></i> 班组权重</el-button>
+							
+							<el-button ><i class="el-icon-sort"></i> 导出</el-button>
 						</div>
 					</div>
-					<el-container style="height: 500px; border: 1px solid #eee">
-						<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+					<el-row>
+						<el-col :span="6">
 							<el-menu :default-openeds="['0', '99']">
 								<el-submenu index="1">
 									<template slot="title"><i class="el-icon-info"></i>10-自建</template>
@@ -169,22 +151,9 @@
 									</el-submenu>-->
 								</el-submenu>
 							</el-menu>
-						</el-aside>
-
-						<el-container>
-							<el-header style="text-align: right; font-size: 12px">
-								<el-dropdown>
-									<i class="el-icon-setting" style="margin-right: 15px"></i>
-									<el-dropdown-menu slot="dropdown">
-										<el-dropdown-item>查看</el-dropdown-item>
-										<el-dropdown-item>新增</el-dropdown-item>
-										<el-dropdown-item>删除</el-dropdown-item>
-									</el-dropdown-menu>
-								</el-dropdown>
-							</el-header>
-
-							<el-main>
-								<el-table :data="shiftTheMechanicList">
+						</el-col>
+						<el-col :span="18">
+							<el-table :data="shiftTheMechanicList">
 									<el-table-column prop="mID" label="班组编号" width="300">
 									</el-table-column>
 									<el-table-column prop="mName" label="班组名称" width="300">
@@ -220,9 +189,8 @@
 									<el-table-column prop="brandMaintain" label="维系品牌" width="300">
 									</el-table-column>
 								</el-table>
-							</el-main>
-						</el-container>
-					</el-container>
+						</el-col>
+					</el-row>
 			</el-row>
 			</el-col>
 			<el-col :span="2">

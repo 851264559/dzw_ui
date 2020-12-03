@@ -29,249 +29,239 @@
 	</head>
 
 	<body>
-		<div id="pickUpCarRegistration">
-			<el-row>
-				<el-col :span="2">
-					<div class="hiddenContent">hiddenContent</div>
-				</el-col>
-				<el-col :span="20">
-					<h1>接车登记</h1>
-					<div id="infos">
-						<el-row>
-							<el-col :span="1">
-								<div class="hiddenContent">hiddenContent</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>公众号会员码</span>
-									<el-input placeholder="公众号会员码"></el-input>
-								</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>车牌号</span>
-									<template>
-										<el-select v-model="carNumber" placeholder="请选择">
-											<el-option v-for="item in carNumbers" :key="item.values" :label="item.name" :value="item.values">
-											</el-option>
-										</el-select>
-									</template>
-								</div>
-							</el-col>
-						</el-row>
-						<el-row>
-							<el-col :span="6">
-								<div>
-									<span>车主信息:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>车辆信息:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-						</el-row>
-						<el-row>
-							<el-col :span="6">
-								<div>
-									<span>姓名:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>品牌:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-						</el-row>
-						<el-row>
-							<el-col :span="6">
-								<div>
-									<span>地址:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>发动机:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-						</el-row>
-						<el-row>
-							<el-col :span="6">
-								<div>
-									<span>驾驶员:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>保养日期:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-						</el-row>
-						<el-row>
-							<el-col :span="6">
-								<div>
-									<span>手机:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>积分:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-						</el-row>
-						<el-row>
-							<el-col :span="6">
-								<div>
-									<span>储值卡金额:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-							<el-col :span="6">
-								<div>
-									<span>挂账金额:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-						</el-row>
-						<el-row>
-							<el-col :span="6">
-								<div>
-									<span>定金金额:</span>
-									<span>{{infos}}</span>
-								</div>
-							</el-col>
-							<!--<el-col :span="6">
+		<div id="pickUpCarRegistration" align="center">
+
+			<div id="infos">
+				<el-row>
+					<el-col :span="1">
+						<div class="hiddenContent">hiddenContent</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>公众号会员码</span>
+							<el-input placeholder="公众号会员码"></el-input>
+						</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>车牌号</span>
+							<template>
+								<el-select v-model="carNumber" placeholder="请选择">
+									<el-option v-for="item in carNumbers" :key="item.values" :label="item.name" :value="item.values">
+									</el-option>
+								</el-select>
+							</template>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="6">
+						<div>
+							<span>车主信息:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>车辆信息:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="6">
+						<div>
+							<span>姓名:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>品牌:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="6">
+						<div>
+							<span>地址:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>发动机:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="6">
+						<div>
+							<span>驾驶员:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>保养日期:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="6">
+						<div>
+							<span>手机:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>积分:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="6">
+						<div>
+							<span>储值卡金额:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+					<el-col :span="6">
+						<div>
+							<span>挂账金额:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="6">
+						<div>
+							<span>定金金额:</span>
+							<span>{{infos}}</span>
+						</div>
+					</el-col>
+					<!--<el-col :span="6">
 								<div>
 									<span>车主信息</span>
 									<span>{{infos}}</span>
 								</div>
 							</el-col>-->
-						</el-row>
-					</div>
-					<el-row>
-						<el-col :span="24">
-							<el-tabs v-model="activeName">
-								<el-tab-pane label="作业中的车辆" name="first">
+				</el-row>
+			</div>
+			<el-row>
+				<el-col :span="24">
+					<el-tabs v-model="activeName">
+						<el-tab-pane label="作业中的车辆" name="first">
 							<el-table ref="multipleTable" :data="listOne" tooltip-effect="dark" style="width: 100%">
-							<el-table-column type="selection" width="55">
-										</el-table-column>
-							<el-table-column prop="" label="票据状态">
-							</el-table-column>
-							<el-table-column prop="" label="业务类型" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="客户名称" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="车牌号" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="手机" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="会员卡号" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="维修单" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="单据类型" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="开单时间" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="预计完工" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="完工时间" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="结算时间" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="预计金额" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="服务顾问" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="接车人" show-overflow-tooltip>
-							</el-table-column>
-						</el-table>
-								</el-tab-pane>
-								<el-tab-pane label="维修历史" name="second">
-									<el-table ref="multipleTable" :data="listTwo" tooltip-effect="dark" style="width: 100%">
-							<el-table-column type="selection" width="55">
-										</el-table-column>
-							<el-table-column prop="" label="维修单号">
-							</el-table-column>
-							<el-table-column prop="" label="接车时间" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="业务类型" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="完工时间" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="客户名称" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="车牌号" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="手机" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="会员卡号" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="结束时间" show-overflow-tooltip>
-							</el-table-column>
-							<el-table-column prop="" label="消费金额" show-overflow-tooltip>
-							</el-table-column>
-						</el-table>
+								<el-table-column type="selection" width="55">
+								</el-table-column>
+								<el-table-column prop="" label="票据状态">
+								</el-table-column>
+								<el-table-column prop="" label="业务类型" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="客户名称" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="车牌号" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="手机" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="会员卡号" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="维修单" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="单据类型" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="开单时间" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="预计完工" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="完工时间" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="结算时间" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="预计金额" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="服务顾问" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="接车人" show-overflow-tooltip>
+								</el-table-column>
+							</el-table>
+						</el-tab-pane>
+						<el-tab-pane label="维修历史" name="second">
+							<el-table ref="multipleTable" :data="listTwo" tooltip-effect="dark" style="width: 100%">
+								<el-table-column type="selection" width="55">
+								</el-table-column>
+								<el-table-column prop="" label="维修单号">
+								</el-table-column>
+								<el-table-column prop="" label="接车时间" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="业务类型" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="完工时间" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="客户名称" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="车牌号" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="手机" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="会员卡号" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="结束时间" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="" label="消费金额" show-overflow-tooltip>
+								</el-table-column>
+							</el-table>
 
-								</el-tab-pane>
-								<el-tab-pane label="维修项目" name="third">
-									<el-table ref="multipleTable" :data="MaintenanceItems" tooltip-effect="dark" style="width: 100%">
-										<el-table-column type="selection" width="55">
-										</el-table-column>
-										<el-table-column prop="oid" label="项目编号">
-										</el-table-column>
-										<el-table-column prop="oName" label="项目名称" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="number" label="数量" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="priceClass" label="价类" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="unitPrice" label="单价" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="money" label="金额" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="settlementPrice" label="技师结算价" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="errorDesc" label="故障描述" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="errorCause" label="故障原因" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="theMaintenanceCrew" label="维修班组" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="busyWorkGroup" label="作业人员" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="server" label="服务顾问" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="workOrderNumber" label="工单号" show-overflow-tooltip>
-										</el-table-column>
-										<el-table-column prop="freeOfChargeFor" label="免单原因" show-overflow-tooltip>
-										</el-table-column>
-									</el-table>
-								</el-tab-pane>
-								<el-tab-pane label="领料情况" name="fourth">
-									领料情况
+						</el-tab-pane>
+						<el-tab-pane label="维修项目" name="third">
+							<el-table ref="multipleTable" :data="MaintenanceItems" tooltip-effect="dark" style="width: 100%">
+								<el-table-column type="selection" width="55">
+								</el-table-column>
+								<el-table-column prop="oid" label="项目编号">
+								</el-table-column>
+								<el-table-column prop="oName" label="项目名称" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="number" label="数量" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="priceClass" label="价类" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="unitPrice" label="单价" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="money" label="金额" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="settlementPrice" label="技师结算价" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="errorDesc" label="故障描述" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="errorCause" label="故障原因" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="theMaintenanceCrew" label="维修班组" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="busyWorkGroup" label="作业人员" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="server" label="服务顾问" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="workOrderNumber" label="工单号" show-overflow-tooltip>
+								</el-table-column>
+								<el-table-column prop="freeOfChargeFor" label="免单原因" show-overflow-tooltip>
+								</el-table-column>
+							</el-table>
+						</el-tab-pane>
+						<el-tab-pane label="领料情况" name="fourth">
+							领料情况
 
-								</el-tab-pane>
-								<el-tab-pane label="历史回访" name="fifth">
-									历史回访
+						</el-tab-pane>
+						<el-tab-pane label="历史回访" name="fifth">
+							历史回访
 
-								</el-tab-pane>
-							</el-tabs>
-						</el-col>
-					</el-row>
-				</el-col>
-				<el-col :span="2">
-					<div class="hiddenContent">hiddenContent</div>
+						</el-tab-pane>
+					</el-tabs>
 				</el-col>
 			</el-row>
 		</div>

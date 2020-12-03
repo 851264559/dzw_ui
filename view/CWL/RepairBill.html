@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>站外救援单</title>
+		<title>维修单</title>
 		<!--<link rel="stylesheet" type="text/css" href="../css/element.css" />-->
 		<style type="text/css">
 			.el-form {
@@ -14,7 +14,7 @@
 				width: 200px;
 			}
 			
-			#offSiteRescueSheet {
+			#repairBill {
 				zoom: 0.9;
 			}
 			
@@ -30,142 +30,125 @@
 	</head>
 
 	<body>
-		<div id="offSiteRescueSheet">
+		<div id="repairBill">
 			<h1>
-						站外救援单
-					<el-button type="success" icon="el-icon-check" @click="modifyOffSiteRescueSheetInfoByOddNum" circle></el-button>
+						维修单
+					<el-button type="success" icon="el-icon-check" circle></el-button>
 					</h1>
-
-			<el-form :inline="true" :model="OffSiteRescueSheet" :disabled="false" class="demo-form-inline">
+			<el-form :inline="true" :model="RepairBill" :disabled="true" class="demo-form-inline">
 				<el-form-item label="单号">
-					<el-input :disabled="true" v-model="OffSiteRescueSheet.oddnumber" placeholder="单号"></el-input>
+					<el-input v-model="RepairBill.roddnumber" placeholder="单号"></el-input>
 				</el-form-item>
 				<el-form-item label="车牌号">
-					<el-input :disabled="true" v-model="OffSiteRescueSheet.carnumbers" placeholder="车牌号"></el-input>
+					<el-input v-model="RepairBill.carnumbers" placeholder="车牌号"></el-input>
+				</el-form-item>
+				<el-form-item label="车架号">
+					<el-input v-model="RepairBill.vin" placeholder="车架号"></el-input>
 				</el-form-item>
 				<el-form-item label="车型">
-					<el-input v-model="OffSiteRescueSheet.cartype" placeholder="车型"></el-input>
+					<el-input v-model="RepairBill.cartype" placeholder="车型"></el-input>
 				</el-form-item>
 				<el-form-item label="车辆品牌">
-					<el-input v-model="OffSiteRescueSheet.bland" placeholder="车辆品牌"></el-input>
+					<el-input v-model="RepairBill.bland" placeholder="车辆品牌"></el-input>
+				</el-form-item>
+				<el-form-item label="发动机号">
+					<el-input v-model="RepairBill.enginenumber" placeholder="发动机号"></el-input>
 				</el-form-item>
 				<el-form-item label="发动机品牌">
-					<!--<el-input v-model="RepairBill.engineBrand" placeholder="发动机品牌"></el-input>-->
 					<template>
-						<el-select v-model="OffSiteRescueSheet.enginebrand" placeholder="请选择">
+						<el-select v-model="RepairBill.enginebrand" placeholder="请选择">
 							<el-option v-for="item in engineBrands" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
 					</template>
 				</el-form-item>
-				<el-form-item label="发动机号">
-					<el-input v-model="OffSiteRescueSheet.enginenumber" placeholder="发动机号"></el-input>
-				</el-form-item>
-				<el-form-item label="车架号">
-					<el-input v-model="OffSiteRescueSheet.vin" placeholder="车架号"></el-input>
-				</el-form-item>
 				<el-form-item label="服务顾问">
-					<el-input v-model="OffSiteRescueSheet.server" placeholder="服务顾问"></el-input>
+					<el-input v-model="RepairBill.server" placeholder="服务顾问"></el-input>
 				</el-form-item>
 				<el-form-item label="车主名称">
-					<el-input v-model="OffSiteRescueSheet.carownname" placeholder="车主名称"></el-input>
+					<el-input v-model="RepairBill.carownname" placeholder="车主名称"></el-input>
 				</el-form-item>
 				<el-form-item label="驾驶员">
-					<el-input v-model="OffSiteRescueSheet.driver" placeholder="驾驶员"></el-input>
+					<el-input v-model="RepairBill.driver" placeholder="驾驶员"></el-input>
 				</el-form-item>
 				<el-form-item label="联系电话">
-					<el-input v-model="OffSiteRescueSheet.phone" placeholder="联系电话"></el-input>
+					<el-input v-model="RepairBill.phone" placeholder="联系电话"></el-input>
 				</el-form-item>
 				<el-form-item label="进厂里程">
-					<el-input v-model="OffSiteRescueSheet.milesintothefactory" placeholder="进厂里程"></el-input>
+					<el-input v-model="RepairBill.milesintothefactory" placeholder="进厂里程"></el-input>
 				</el-form-item>
 				<el-form-item label="进厂油量">
-					<el-input v-model="OffSiteRescueSheet.oilintothefactory" placeholder="进厂油量"></el-input>
+					<el-input v-model="RepairBill.oilintothefactory" placeholder="进厂油量"></el-input>
 				</el-form-item>
 				<el-form-item label="上次里程">
-					<el-input v-model="OffSiteRescueSheet.thelasttimethemileage" placeholder="上次里程"></el-input>
+					<el-input v-model="RepairBill.thelasttimetheMileage" placeholder="上次里程"></el-input>
 				</el-form-item>
 				<el-form-item label="进厂时间">
-					<el-input v-model="OffSiteRescueSheet.timeintothefactory" placeholder="进厂时间"></el-input>
+					<el-input v-model="RepairBill.timeintothefactory" placeholder="上次里程"></el-input>
 				</el-form-item>
 				<el-form-item label="业务类别">
-					<!--<el-input v-model="RepairBill.classOfBusiness" placeholder="业务类别"></el-input>-->
 					<template>
-						<el-select v-model="OffSiteRescueSheet.classofbusiness" placeholder="请选择">
+						<el-select v-model="RepairBill.classofbusiness" placeholder="请选择">
 							<el-option v-for="item in classOfBusinesses" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
 					</template>
 				</el-form-item>
 				<el-form-item label="施工班次">
-					<!--<el-input v-model="RepairBill.constructionDivisions" placeholder="施工班次"></el-input>-->
 					<template>
-						<el-select v-model="OffSiteRescueSheet.constructiondivisions" placeholder="请选择">
+						<el-select v-model="RepairBill.constructiondivisions" placeholder="请选择">
 							<el-option v-for="item in constructionDivisionsList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
 					</template>
 				</el-form-item>
 				<el-form-item label="接车人">
-					<el-input v-model="OffSiteRescueSheet.pickone" placeholder="接车人"></el-input>
+					<el-input v-model="RepairBill.pickone" placeholder="接车人"></el-input>
 				</el-form-item>
 				<el-form-item label="预计完工">
-					<!--<el-input v-model="OffSiteRescueSheet.expectedcompletion" placeholder="预计完工"></el-input>-->
+					<!--<el-input v-model="RepairBill.expectedcompletion" placeholder="预计完工"></el-input>-->
 					<div class="block">
-						<el-date-picker v-model="OffSiteRescueSheet.expectedcompletion" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间">
+						<el-date-picker v-model="RepairBill.expectedcompletion" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间">
 						</el-date-picker>
 					</div>
 				</el-form-item>
 				<el-form-item label="结算方式">
-					<el-input v-model="OffSiteRescueSheet.clearingform" placeholder="结算方式"></el-input>
+					<el-input v-model="RepairBill.clearingform" placeholder="结算方式"></el-input>
 				</el-form-item>
 				<el-form-item label="赔款公司">
-					<el-input v-model="OffSiteRescueSheet.indemnitycompany" placeholder="赔款公司"></el-input>
+					<el-input v-model="RepairBill.indemnitycompany" placeholder="赔款公司"></el-input>
+				</el-form-item>
+				<el-form-item label="完工时间">
+					<!--<el-input v-model="RepairBill.timeofcompletion" placeholder="完工时间"></el-input>-->
+					<div class="block">
+						<el-date-picker v-model="RepairBill.timeofcompletion" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间">
+						</el-date-picker>
+					</div>
 				</el-form-item>
 				<el-form-item label="上次进厂">
-					<!--<el-input v-model="OffSiteRescueSheet.thelasttimeintothefactory" placeholder="上次进厂"></el-input>-->
+					<!--<el-input v-model="RepairBill.thelasttimeintothefactory" placeholder="上次进厂"></el-input>-->
 					<div class="block">
-						<el-date-picker v-model="OffSiteRescueSheet.thelasttimeintothefactory" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间">
+						<el-date-picker v-model="RepairBill.thelasttimeintothefactory" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间">
 						</el-date-picker>
 					</div>
 				</el-form-item>
 				<el-form-item label="预估金额">
-					<el-input v-model="OffSiteRescueSheet.estimatedamount" placeholder="预估金额"></el-input>
-				</el-form-item>
-				<el-form-item label="完工时间">
-					<!--<el-input v-model="OffSiteRescueSheet.timeofcompletion" placeholder="完工时间"></el-input>-->
-					<div class="block">
-						<el-date-picker v-model="OffSiteRescueSheet.timeofcompletion" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间">
-						</el-date-picker>
-					</div>
+					<el-input v-model="RepairBill.estimatedamount" placeholder="预估金额"></el-input>
 				</el-form-item>
 				<br />
 				<el-form-item label="接待备注">
-					<el-input v-model="OffSiteRescueSheet.receptionnote" placeholder="接待备注" type="textarea" style="width: 1050px;"></el-input>
-				</el-form-item>
-				<br />
-				<el-form-item label="维修备注">
-					<el-input v-model="OffSiteRescueSheet.maintenancenote" placeholder="维修备注" type="textarea" style="width: 1050px;"></el-input>
-				</el-form-item>
-				<br />
-				<el-form-item label="救援地址">
-					<el-input v-model="OffSiteRescueSheet.rescuetheaddress" placeholder="救援地址" type="textarea" style="width: 1050px;"></el-input>
+					<el-input v-model="RepairBill.receptionnote" placeholder="接待备注" type="textarea" style="width: 1050px;"></el-input>
 				</el-form-item>
 				<br />
 				<el-form-item label="维修陈述">
-					<el-input v-model="OffSiteRescueSheet.repairstatement" placeholder="维修陈述" type="textarea" style="width: 1050px;"></el-input>
+					<el-input v-model="RepairBill.repairstatement" placeholder="维修陈述" type="textarea" style="width: 1050px;"></el-input>
 				</el-form-item>
-				<br />
-				<el-form-item label="救援陈述">
-					<el-input v-model="OffSiteRescueSheet.rescuestatement" placeholder="救援陈述" type="textarea" style="width: 1050px;"></el-input>
-				</el-form-item>
-
-				<template>
-					<el-tabs v-model="activeName" style="width: 120%">
+				</el-form>
+					<el-tabs v-model="activeName" style="width: 150%">
 						<el-tab-pane label="维修项目" name="first">
 							<el-button type="text" @click="add">新增</el-button>
 							<el-dialog title="新增项目维修" :visible.sync="isShow" width="80%">
-							<div id="show"></div>
+								<div id="show"></div>
 							</el-dialog>
 							<el-table ref="multipleTable" :data="MaintenanceItems" tooltip-effect="dark">
 								<el-table-column prop="oid" label="项目编号">
@@ -199,7 +182,7 @@
 							</el-table>
 						</el-tab-pane>
 						<el-tab-pane label="结算信息" name="third">
-							<el-table ref="multipleTable" :data="BillingInfo" tooltip-effect="dark">
+							<el-table ref="multipleTable" :data="BillingInfo" tooltip-effect="dark" style="width: 100%">
 								<el-table-column type="selection" width="55">
 								</el-table-column>
 								<el-table-column prop="bStatic" label="结算状态">
@@ -250,27 +233,25 @@
 				</template>
 			</el-form>
 		</div>
-
 		</div>
 	</body>
-	<!--<script src="../js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/axios_cfg.js" type="text/javascript" charset="utf-8"></script>-->
 	<script type="text/javascript">
-		var offSiteRescueSheet = new Vue({
-			el: "#offSiteRescueSheet",
+		var repairBill = new Vue({
+			el: "#repairBill",
 			data() {
 				return {
-					OffSiteRescueSheet: {
-						oddnumber: "",
+					RepairBill: {
+						roddnumber: "",
 						carnumbers: "",
+						vin: "",
 						cartype: "",
 						bland: "",
-						enginebrand: "",
-						vin: "",
 						enginenumber: "",
+						enginebrand: "",
 						server: "",
 						carownname: "",
 						driver: "",
@@ -287,13 +268,9 @@
 						indemnitycompany: "",
 						timeofcompletion: "",
 						thelasttimeintothefactory: "",
-						receptionnote: "",
-						repairstatement: "",
-						rescuetheaddress: "",
-						timeofcompletion: "",
 						estimatedamount: "",
-						maintenancenote: "",
-						rescuestatement: ""
+						receptionnote: "",
+						repairstatement: ""
 					},
 					engineBrands: [{
 						values: "brand01",
@@ -333,30 +310,18 @@
 				}
 			},
 			methods: {
-				getOffSiteRescueSheetInfosByOddNum() {
+				getRepairBillInfosByrOddNum(){
 					let _This = this;
-					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/offSiteRescueSheet/${this.OffSiteRescueSheet.oddnumber}`).then(function(success) {
-						_This.OffSiteRescueSheet = success.data;
-						console.log(JSON.stringify(_This.OffSiteRescueSheet));
-					}).catch(function(error) {
-						console.log(error);
-					});
-				},
-				modifyOffSiteRescueSheetInfoByOddNum() {
-					let _This = this;
-					axios.put(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/offSiteRescueSheet/modify`, this.OffSiteRescueSheet).then(function(success) {
-						if(success.data == 1) {
-							_This.$alert("success");
-						} else {
-							_This.$alert("error");
-						}
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/repairBill/${this.RepairBill.roddnumber}`).then(function(success) {
+						_This.RepairBill = success.data;
+						console.log(JSON.stringify(_This.RepairBill));
 					}).catch(function(error) {
 						console.log(error);
 					});
 				},
 				getmaintenanceItemInfosByWorkOrderNum() {
 					let _This = this;
-					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/${this.OffSiteRescueSheet.oddnumber}`).then(function(success) {
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/${this.RepairBill.roddnumber}`).then(function(success) {
 						_This.MaintenanceItems = success.data;
 						console.log(JSON.stringify(_This.MaintenanceItems));
 					}).catch(function(error) {
@@ -370,10 +335,9 @@
 						$("#show").load('../CWL/addMaintenanceItem.html');
 					})
 				}
-			},
-			mounted() {
-				this.OffSiteRescueSheet.oddnumber = sessionStorage.getItem("repairOrder");
-				this.getOffSiteRescueSheetInfosByOddNum();
+			},mounted(){
+				this.RepairBill.roddnumber = sessionStorage.getItem("repairOrder");
+				this.getRepairBillInfosByrOddNum();
 				this.getmaintenanceItemInfosByWorkOrderNum();
 			}
 		});
