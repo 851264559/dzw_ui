@@ -93,6 +93,7 @@
 			methods: {
 				addPerson() {
 					let _this = this;
+					console.log(this.person)
 					axios.post("http://127.0.0.1:8080/dzw_sys/ty/api/employee/employee", this.person).then(function(resp) {
 						if(resp.data.code == "200") {
 							_this.$message({

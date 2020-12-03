@@ -20,4 +20,6 @@ var menuMapping = {
 	"w003": "../WZY/maintenanceItems.html",
 	"r001":"../CWL/RepairBill.html",
 	"o001":"../CWL/OffSiteRescueSheet.html",
+	"j005":"../CYJ/position.html",
+	"q002":"../CYJ/power.html"
 }
