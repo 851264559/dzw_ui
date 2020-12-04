@@ -90,7 +90,7 @@
 									this.$alert('登录成功', {
 										confirmButtonText: '确定',
 										callback: action => {
-											window.sessionStorage.setItem("EMPLOYEE", resp.data.employee)
+											window.sessionStorage.setItem("EMPLOYEE", JSON.stringify(resp.data.employee))
 											location.href = "index.html";
 										}
 									});
