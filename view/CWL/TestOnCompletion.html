@@ -134,6 +134,7 @@
 					location.href = "../CWL/OffSiteRescueSheet.html";*/
 					sessionStorage.setItem("repairOrder", indexValues.repairorder);
 					sessionStorage.setItem("typeOfDocument",indexValues.typeofdocument);
+					sessionStorage.setItem("testOnCompletion",JSON.stringify(indexValues));
 					if(indexValues.typeofdocument == "救援") {
 						index.addTab(index.editableTabsValue, '站外救援单', 'o001');
 					} else if(indexValues.typeofdocument == "维修") {
