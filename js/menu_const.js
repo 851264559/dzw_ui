@@ -4,7 +4,7 @@ var menuMapping = {
 	"j003": "../CWL/StarEmployees.html",
 	"b001": "../CWL/ShiftTheMechanic.html",
 	"w002": "../CWL/FieldOfVehicle.html",
-	"w001": "../CWL/PickUpCarRegistration.html",
+	"w001": "../CYJ/maintainBilling.html",
 	"j002": "../CWL/TestOnCompletion.html",
 	"f002": "../WZY/engineBrand.html",
 	"c001": "../WZY/vehicleFile.html",
