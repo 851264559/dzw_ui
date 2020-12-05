@@ -7,7 +7,7 @@ var menuMapping = {
 	"w001": "../CYJ/maintainBilling.html",
 	"j002": "../CWL/TestOnCompletion.html",
 	"f002": "../WZY/engineBrand.html",
-	"c001": "../WZY/vehicleFile.html",
+	"c002": "../WZY/vehicleFile.html",
 	"w003": "../WZY/maintenanceItems.html",
 	"k002": "../CT/client.html",
 	"c001": "../CT/carInfos.html",
