@@ -165,9 +165,9 @@
 				//派车
 				restaurants1: [],
 				state2: '',
-				
+
 				//标签页
-				 activeName: 'first',
+				activeName: 'first',
 
 				//今日维修列表
 				tableData: [{
@@ -203,7 +203,7 @@
 					shop: '王小虎夫妻店',
 					shopId: '10333'
 				}],
-				
+
 				//历史维修列表
 				tableData1: [{
 					id: '12987122',
@@ -240,6 +240,9 @@
 				}],
 			},
 			methods: {
+				handleClick(tab, event) {
+					console.log(tab, event);
+				},
 				//车牌输入框方法
 				querySearch(queryString, cb) {
 					var restaurants = this.restaurants;
@@ -332,7 +335,12 @@
 				}
 			},
 			mounted() {
-				this.restaurants = this.loadAll();
+				axios.get(`http://127.0.0.1:8080/dzw_sys/api/vehicle/queryAll`).then(resp => {
+					resp.data.forEach(temp=>{
+						this.restaurants.push({"value":temp.license})
+					})
+				})
+				
 				this.restaurants1 = this.loadAll();
 			}
 		})
