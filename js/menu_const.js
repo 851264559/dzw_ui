@@ -21,5 +21,7 @@ var menuMapping = {
 	"r001":"../CWL/RepairBill.html",
 	"o001":"../CWL/OffSiteRescueSheet.html",
 	"j005":"../CYJ/position.html",
-	"q002":"../CYJ/power.html"
+	"q002":"../CYJ/power.html",
+	"wx001":"../CYJ/instationmaintain.html",//站内
+	"jy001":"../CYJ/completedmaintain.html"//站外
 }
