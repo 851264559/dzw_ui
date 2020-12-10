@@ -172,7 +172,7 @@
 				},
 				deletecs(bid) {
 					let _this = this;
-					axios.get(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/bm/${this.bid}`).then(function(resp) {
+					axios.get(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/bm/${bid}`).then(function(resp) {
 						if(resp.data > 0) {
 							alert("该部门已有员工，不能进行删除")
 						} else {
