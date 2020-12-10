@@ -11,7 +11,7 @@
 				<el-form-item label="项目名称">
 					<!--<el-input v-model="RepairBill.engineBrand" placeholder="发动机品牌"></el-input>-->
 					<template>
-						<el-select v-model="maintenanceItem.oname" placeholder="请选择">
+						<el-select v-model="maintenanceItem.oname" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in oNameList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -28,7 +28,7 @@
 				</el-form-item>
 				<el-form-item label="价类">
 					<template>
-						<el-select v-model="maintenanceItem.priceclass" placeholder="请选择">
+						<el-select v-model="maintenanceItem.priceclass" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in priceClassList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -42,7 +42,7 @@
 				</el-form-item>
 				<el-form-item label="维修班组">
 					<template>
-						<el-select v-model="maintenanceItem.themaintenancecrew" placeholder="请选择">
+						<el-select v-model="maintenanceItem.themaintenancecrew" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in theMaintenanceCrewList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -53,14 +53,14 @@
 				</el-form-item>
 				<el-form-item label="免单原因">
 					<template>
-						<el-select v-model="maintenanceItem.freeofchargefor" placeholder="请选择">
+						<el-select v-model="maintenanceItem.freeofchargefor" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in freeOfChargeForList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
 					</template>
 				</el-form-item>
 				<el-form-item label="服务顾问">
-					<el-select v-model="maintenanceItem.server" placeholder="请选择">
+					<el-select v-model="maintenanceItem.server" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in serverList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 					</el-select>

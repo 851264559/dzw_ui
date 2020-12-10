@@ -9,17 +9,17 @@
 			<div class="row">
 				<div class="col-md-12">
 					<template>
-						<el-select v-model="person.ymentid" placeholder="请选择" @change="queryll">
+						部门：<el-select v-model="person.ymentid" placeholder="请选择" @change="queryll">
 							<el-option v-for="(temp,i) in tableData" :value="temp.bid" :label="temp.bname">
 							</el-option>
 						</el-select>
-						<el-select v-model="person.yname" placeholder="请选择">
+						员工：<el-select v-model="person.yname" placeholder="请选择">
 							<el-option v-for="(temp,i) in tableData1" :value="temp.yname" :label="temp.yname">
 							</el-option>
 						</el-select>
 					</template>
 					<br/>
-					<el-input v-model="person.lreason" placeholder="请输入内容"></el-input>
+					原因：<el-input v-model="person.lreason" placeholder="请输入内容"></el-input>
 					<el-button @click="addPerson" type="primary">提交</el-button>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 					axios.put(`http://127.0.0.1:8080/dzw_sys/ty/api/employee/jl/${this.person.lreason}/${this.person.ymentid}/${this.person.yname}`).then(function(resp) {
 						if(resp.data.code == "200") {
 							_this.$message({
-								message: '新增成功',
+								message: '离职成功',
 								type: 'success'
 							})
 							ppp.isShow = false;

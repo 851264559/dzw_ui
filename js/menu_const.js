@@ -2,7 +2,7 @@
 var menuMapping = {
 	"sy001": "first.html",
 	"j003": "../CWL/StarEmployees.html",
-	"b001": "../CWL/ShiftTheMechanic.html",
+	"b001": "../TY/bzjg.html",
 	"w002": "../CWL/FieldOfVehicle.html",
 	"w001": "../CYJ/maintainBilling.html",
 	"j002": "../CWL/TestOnCompletion.html",
@@ -22,6 +22,6 @@ var menuMapping = {
 	"o001":"../CWL/OffSiteRescueSheet.html",
 	"j005":"../CYJ/position.html",
 	"q002":"../CYJ/power.html",
-	"wx001":"../CYJ/instationmaintain.html",//站内
-	"jy001":"../CYJ/completedmaintain.html"//站外
+	"wx001":"../CWL/RepairBill.html",//站内
+	"jy001":"../CWL/OffSiteRescueSheet.html"//站外
 }
