@@ -181,16 +181,12 @@
 			el: "#billing",
 			data: {
 				//业务类型选项
-<<<<<<< HEAD
 				value: '维修接车',
 				Vehicle: {},
 				MaintenanceItems: [],
 				MaintenanceItemsByDay: [],
 				time:"",
-=======
 				value: '站内维修',
-
->>>>>>> f56b490caf4f39890433bbcae78ec1d3e22a1749
 				//车牌输入框
 				restaurants: [],
 				state1: '',
@@ -273,7 +269,6 @@
 						this.restaurants.push({"value":temp.license})
 					})
 				})
-<<<<<<< HEAD
 					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/queryAll`).then(resp1 => {
 					resp1.data.forEach(temp1=>{
 						this.restaurants1.push({"value":temp1.carnumber})
@@ -282,9 +277,7 @@
 				var newDate = new Date();
 				this.time = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate();
 				
-=======
 				this.restaurants1 = this.loadAll();
->>>>>>> f56b490caf4f39890433bbcae78ec1d3e22a1749
 			}
 		})
 	</script>
