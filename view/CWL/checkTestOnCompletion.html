@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>竣工检验</title>
 	</head>
-	<!--<link rel="stylesheet" type="text/css" href="../css/element.css" />-->
+	
 	<body>
 		<div id="checkTestOnCompletion">
 			<template>
@@ -21,7 +21,7 @@
 				</el-form-item>
 				<el-form-item label="返工原因">
 					<template>
-						<el-select v-model="testOnCompletion.reworkreason" placeholder="请选择">
+						<el-select v-model="testOnCompletion.reworkreason" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in reworkreasonList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -36,7 +36,7 @@
 				</el-form-item>
 				<el-form-item label="误工原因">
 					<template>
-						<el-select v-model="testOnCompletion.delaysreason" placeholder="请选择">
+						<el-select v-model="testOnCompletion.delaysreason" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in reworkreasonList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -47,7 +47,7 @@
 				</el-form-item>
 				<el-form-item label="质检员">
 					<template>
-						<el-select v-model="testOnCompletion.principal" placeholder="请选择">
+						<el-select v-model="testOnCompletion.principal" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in principalList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -57,10 +57,7 @@
 			</template>
 		</div>				
 	</body>
-	<!--<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/element.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/axios_cfg.js" type="text/javascript" charset="utf-8"></script>-->
+	
 	<script type="text/javascript">
 		checkTestOnCompletion = new Vue({
 			el:"#checkTestOnCompletion",
@@ -118,7 +115,8 @@
 						customername:"",
 						frameno:"",
 						vehiclemodel:"",
-						timeofcompletion:""
+						timeofcompletion:"",
+						zhuangtai:""
 					}
 				}
 			},methods:{
@@ -160,6 +158,7 @@
 					_This.closeanaccount.saleno = _This.testOnCompletion.repairorder;
 					_This.closeanaccount.receiptstype = _This.testOnCompletion.typeofdocument;
 					_This.closeanaccount.clearing = "现金";
+					_This.closeanaccount.zhuangtai="已结算";
 					_This.closeanaccount.clearingmoney = sessionStorage.getItem("totalSum");
 					_This.closeanaccount.principal = _This.testOnCompletion.principal;
 					_This.closeanaccount.license = _This.testOnCompletion.licenseplatenumber;
@@ -167,7 +166,7 @@
 					_This.closeanaccount.frameno = _This.testOnCompletion.vin;
 					_This.closeanaccount.vehiclemodel = _This.testOnCompletion.cartype;
 					_This.closeanaccount.timeofcompletion = _This.testOnCompletion.timeofcompletion;
-					_This.$alert(JSON.stringify(_This.closeanaccount));
+					//_This.$alert(JSON.stringify(_This.closeanaccount));
 					//return false;
 					axios.post(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/closeanaccount/add`, this.closeanaccount).then(function(success) {
 						if(success.data == 1) {

@@ -41,7 +41,7 @@
 				</el-form-item>
 				<el-form-item label="归属班组">
 					<template>
-						<el-select v-model="fieldOfVehicle.ownershipShift" placeholder="请选择">
+						<el-select v-model="fieldOfVehicle.ownershipShift" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in fieldOfVehicle.ownershipShifts" :key="item.index" :label="item.value" :value="item.value">
 							</el-option>
 						</el-select>

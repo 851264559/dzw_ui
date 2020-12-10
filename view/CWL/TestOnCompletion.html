@@ -23,11 +23,14 @@
 	<body>
 		<div id="testOnCompletion">
 			<div>
-				<h1>竣工检验</h1>
+				<h1>竣工检验   <el-button type="danger" size="small" @click="add">维修开单</el-button></h1>
+				<el-dialog title="维修开单" :visible.sync="isShow" width="80%">
+							<div id="show"></div>
+				</el-dialog>
 				<span class="demonstration">开单日期</span>
-				<el-date-picker v-model="startTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择开始时间">
+				<el-date-picker v-model="startTime" :popper-append-to-body="false" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择开始时间">
 				</el-date-picker>
-				<el-date-picker v-model="endTime" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择结束时间">
+				<el-date-picker v-model="endTime" :popper-append-to-body="false" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="选择结束时间">
 				</el-date-picker>
 				<span class="demonstration">维修单号</span>
 				<el-input v-model="repairOrder" placeholder="维修单号"></el-input>
@@ -35,7 +38,7 @@
 				<br />
 				<span class="demonstration">单据状态</span>
 				<template>
-					<el-select v-model="theDocumentsState" placeholder="请选择">
+					<el-select v-model="theDocumentsState" placeholder="请选择" :popper-append-to-body="false">
 						<el-option v-for="item in theDocumentsStates" :key="item.values" :label="item.name" :value="item.values">
 						</el-option>
 					</el-select>
@@ -109,7 +112,8 @@
 					}],
 					licensePlateNumber: "请输入",
 					VIN: "请输入",
-					testOnCompletions: []
+					testOnCompletions: [],
+					isShow:false
 				}
 			},
 			methods: {
@@ -142,6 +146,13 @@
 					} else if(indexValues.typeofdocument == "维修" && indexValues.thedocumentsstate !="完工") {
 						index.addTab(index.editableTabsValue, '维修单', 'r001');
 					}
+				},
+				add(){
+					this.isShow = true;
+					//解决预加载问题
+					this.$nextTick(() => {
+						$("#show").load('../CWL/addTestOnCompletion.html');
+					})
 				}
 			},
 			mounted() {
