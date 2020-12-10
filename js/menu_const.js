@@ -2,7 +2,7 @@
 var menuMapping = {
 	"sy001": "first.html",
 	"j003": "../CWL/StarEmployees.html",
-	"b001": "../CWL/ShiftTheMechanic.html",
+	"b001": "../TY/bzjg.html",
 	"w002": "../CWL/FieldOfVehicle.html",
 	"w001": "../CYJ/maintainBilling.html",
 	"j002": "../CWL/TestOnCompletion.html",

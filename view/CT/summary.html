@@ -27,67 +27,105 @@
 
 	<body>
 		<div id="summaryApp">
-			<div class="sum_title">
-				<el-row>
-					<el-col :span="24">
-						<span style="font-size: 26px;">结算中心</span>
-					</el-col>
-				</el-row>
-			</div>
+			<h1>结算中心</h1>
 			<div>
 				<el-row>
-					<el-col :span="8">
+					<el-col :span="2">
 						&nbsp;
 					</el-col>
-					<el-col :span="12">
+					<el-col :span="10">
+						完工时间：
+						<el-date-picker @change="dateTrue" value-format="yyyy-MM-dd" v-model="date1" :popper-append-to-body="false" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+						</el-date-picker>
+					</el-col>
+					<el-col :span="8">
 						结算状态：
-						<el-select :popper-append-to-body="false" @change="tiaojianCx()" v-model="value" style="width: 160px;" placeholder="请选择">
+						<el-select :popper-append-to-body="false" @change="tiaojianCx()" v-model="CloseanaccountVO.zhuangtai" style="width: 160px;" placeholder="请选择">
 							<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
 					</el-col>
-					<el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleCloses1">
-						<el-form :model="updateClientData" label-width="100px" class="demo-ruleForm" label-position="left">
-							<el-row>
-								<el-col :span="3">&nbsp;</el-col>
-								<el-col :span="21">
-									<h2>
-										<span style="color: red;">
-											应收金额：
-										</span>
-										<span style="text-decoration:underline;color: blue;">
-											{{clearingMoney}}
-										</span>
-									</h2>
-								</el-col>
-							</el-row>
-							<el-row>
-								<el-col :span="24">
-									<el-form-item>
-										<el-button type="primary" @click="jsSubmitForm('已结算')">立即结算</el-button>
-										<el-button @click="dialogVisible = false">关闭</el-button>
-									</el-form-item>
-								</el-col>
-							</el-row>
-						</el-form>
-						<!--<span slot="footer" class="dialog-footer">
+					<el-col :span="4">
+						<el-button type="primary" @click="queryWhere">查询</el-button>
+						<el-button type="success" v-if="jiesuanBtn" @click="settleAccounts2">结算</el-button>
+						<el-button type="success" v-else @click="settleAccounts">回滚</el-button>
+					</el-col>
+				</el-row>
+				<el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleCloses1">
+					<el-row>
+						<el-col :span="3">&nbsp;</el-col>
+						<el-col :span="21">
+							<h2>
+								<span style="color: red;">
+									应收金额：
+								</span>
+								<span style="text-decoration:underline;color: blue;">
+									{{clearingMoney}}
+								</span>
+							</h2>
+						</el-col>
+					</el-row>
+					<el-row>
+						<el-col :span="24">
+							<el-form-item>
+								<el-button type="primary" @click="jsSubmitForm('已结算')">立即结算</el-button>
+								<el-button @click="dialogVisible = false">关闭</el-button>
+							</el-form-item>
+						</el-col>
+					</el-row>
+					<!--<span slot="footer" class="dialog-footer">
 						    <el-button @click="dialogVisible = false">取 消</el-button>
 						    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   						</span>-->
-					</el-dialog>
-					<el-col :span="4">
-						<el-button type="primary" v-if="jiesuanBtn" @click="settleAccounts2">结算</el-button>
-						<el-button type="primary" v-else @click="settleAccounts">回滚</el-button>
-					</el-col>
-				</el-row>
+				</el-dialog>
 				<br />
 				<el-row :span="24">
 					<el-table ref="closeanaccount" :border="true" :data="closeanaccount" highlight-current-row @current-change="addCloseanaccount" max-height="600" style="width: 100%">
+						<el-table-column type="expand">
+							<template slot-scope="props">
+								<h3>订单明细：</h3>
+								<el-form label-position="left" label-width="100px" inline class="demo-table-expand">
+									<el-form-item label="销售单号：">
+										<div style="width: 100px;">{{ props.row.saleno }}</div>
+									</el-form-item>
+									<el-form-item label="单据状态：">
+										<div style="width: 100px;">{{ props.row.zhuangtai }}</div>
+									</el-form-item>
+									<el-form-item label="单据类型：">
+										<div style="width: 100px;">{{ props.row.receiptstype }}</div>
+									</el-form-item>
+									<br />
+									<el-form-item label="结算方式：">
+										<div style="width: 100px;">{{ props.row.clearing }}</div>
+									</el-form-item>
+									<el-form-item label="结算金额：">
+										<div style="width: 100px;">{{ props.row.clearingmoney }}</div>
+									</el-form-item>
+									<el-form-item label="负责人：">
+										<div style="width: 100px;">{{ props.row.principal }}</div>
+									</el-form-item>
+									<br />
+									<el-form-item label="车牌号:">
+										<div style="width: 100px;">{{ props.row.license }}</div>
+									</el-form-item>
+									<el-form-item label="客户名称:">
+										<div style="width: 100px;">{{ props.row.customername }}</div>
+									</el-form-item>
+									<el-form-item label="完工时间:">
+										<div style="width: 150px;">{{ props.row.timeofcompletion }}</div>
+									</el-form-item>
+									<br />
+									<el-form-item label="">
+										<el-button type="primary">查看维修项目</el-button>
+									</el-form-item>
+								</el-form>
+							</template>
+						</el-table-column>
 						<el-table-column type="index" label="序号" width="150">
 						</el-table-column>
 						<el-table-column property="saleno" label="销售单号" width="200">
 						</el-table-column>
-						<el-table-column property="zhuangtai" label="单据类型" width="200">
+						<el-table-column property="zhuangtai" label="单据状态" width="200">
 						</el-table-column>
 						<el-table-column property="receiptstype" label="单据类型" width="200">
 						</el-table-column>
@@ -132,7 +170,13 @@
 			el: '#summaryApp',
 			data: {
 				input3: '',
-				value1: '',
+				dateNow: '',
+				CloseanaccountVO: {
+					date1: '',
+					date2: '',
+					zhuangtai: '待结算',
+				},
+				date1: [],
 				checkedJs: true,
 				closeanaccount: [],
 				//				{
@@ -151,9 +195,6 @@
 				dialogVisible: false,
 				jiesuan: {},
 				clearingMoney: 0,
-				updateClientData: {
-					aa: "",
-				},
 				options: [{
 					value: '待结算',
 					label: '待结算'
@@ -165,19 +206,37 @@
 				value: '待结算'
 			},
 			methods: {
-				aa() {
-					alert(1)
+				getNowTime() {
+					var now = new Date();
+					var year = now.getFullYear(); //得到年份
+					var month = now.getMonth(); //得到月份
+					var date = now.getDate(); //得到日期
+					month = month + 1;
+					month = month.toString().padStart(2, "0");
+					date = date.toString().padStart(2, "0");
+					var defaultDate = `${year}-${month}-${date}`;
+					return defaultDate;
+				},
+				dateTrue() {
+					this.jiesuan = {}
+					this.CloseanaccountVO.date1 = this.date1[0]
+					this.CloseanaccountVO.date2 = this.date1[1]
+					this.showList()
+				},
+				queryWhere() {
+					this.showList()
 				},
 				addCloseanaccount(data) {
-					if(data.clearingmoney!=null&&data.clearingmoney!=0){
-						this.clearingMoney=data.clearingmoney
-					}else{
-						this.clearingMoney=0
+					if(data.clearingmoney != null && data.clearingmoney != 0) {
+						this.clearingMoney = data.clearingmoney
+					} else {
+						this.clearingMoney = 0
 					}
-					
+
 					this.jiesuan = data
 				},
 				tiaojianCx() {
+					this.jiesuan = {}
 					this.showList()
 					if(this.value == "待结算") {
 						this.jiesuanBtn = true
@@ -196,7 +255,7 @@
 									message: '结算成功！',
 									type: 'success'
 								});
-								_this.dialogVisible=false;
+								_this.dialogVisible = false;
 							} else {
 								_this.$message({
 									message: '回滚成功！',
@@ -204,7 +263,7 @@
 								});
 							}
 							_this.showList()
-							_this.clearingMoney=0
+							_this.clearingMoney = 0
 						}
 					})
 				},
@@ -217,35 +276,38 @@
 				},
 				settleAccounts() {
 					if(JSON.stringify(this.jiesuan) != "{}") {
-							this.jsSubmitForm("待结算")
+						this.jsSubmitForm("待结算")
 					} else {
-							this.$message('请选择要回滚的单！');
+						this.$message('请选择要回滚的单！');
 					}
 
 				},
 				settleAccounts2() {
 					if(JSON.stringify(this.jiesuan) != "{}") {
-							this.dialogVisible = true
+						this.dialogVisible = true
 					} else {
-							this.$message('请选择要结算的单！');
+						this.$message('请选择要结算的单！');
 					}
 
-				}
-				,
+				},
 				deleteRow(index, rows) {
 					rows.splice(index, 1);
 				},
 				handleCurrentChange(ss) {
-					
+
 				},
 				showList() {
 					let _this = this
-					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/closeanaccount/selectAll/${this.value}`).then(function(resp) {
+					axios.post(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/closeanaccount/selectAll`, this.CloseanaccountVO).then(function(resp) {
 						_this.closeanaccount = resp.data
 					})
 				}
 			},
 			mounted() {
+				this.date1.push(this.getNowTime())
+				this.date1.push(this.getNowTime())
+				this.CloseanaccountVO.date1 = this.getNowTime()
+				this.CloseanaccountVO.date2 = this.getNowTime()
 				this.showList()
 			}
 		})
