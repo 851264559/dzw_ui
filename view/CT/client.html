@@ -567,8 +567,6 @@
 							</el-table-column>
 							<el-table-column prop="admissiondate" label="入会日期" width="200">
 							</el-table-column>
-							<el-table-column prop="expiredate" label="会员到期" width="200">
-							</el-table-column>
 							<el-table-column prop="remark" label="备注" width="200">
 							</el-table-column>
 							<el-table-column prop="nowdate" label="建档日期" width="200">
@@ -582,12 +580,9 @@
 									<el-button @click="updateClient(scope.row)" type="text" size="small">
 										修改
 									</el-button>
-									<el-popconfirm confirm-button-text='好的' cancel-button-text='不用了' icon="el-icon-info" icon-color="red" title="这是一段内容确定删除吗？">
-										<el-button slot="reference" @click="removeClient(scope.row.cid)" type="text" size="small">
-											移除
-										</el-button>
-									</el-popconfirm>
-
+									<el-button slot="reference" @click="removeClient(scope.row.cid)" type="text" size="small">
+										移除
+									</el-button>
 								</template>
 							</el-table-column>
 						</el-table>
@@ -694,139 +689,137 @@
 	<script>
 		const clientApp = new Vue({
 			el: '#clientApp',
-			data() {
-				return {
-					input3: '',
-					statisUpdate: 0,
-					activeName: 'first',
-					client_Client: [],
-					updateIndex: 0,
-					client_vehicles: [],
-					//新增车资料
-					client_vehicles3: {
-						clientid: '',
-						license: '',
-						vehiclebrand: '',
-						model: '',
-						driver: '',
-						driverphone: '',
-						vehicleownership: '',
-						VIN: '',
-						engine: '',
-						enginebrand: '',
-						vehiclemodel: '',
-						mileage: '',
-						load: '',
-						carseries: '',
-						buydate: '',
-						registereddate: '',
-						citydue: '',
-						fueltype: '',
-						member: ''
-					},
-					//修改车辆对象
-					client_vehiclesUpdate: {},
-					//新增用户对象
-					ruleForm: {
-						cId: '',
-						cName: '',
-						detailedAddress: '',
-						linkman: '',
-						phone: '',
-						userType: '普通用户',
-						remark: '',
-						vehicles: []
-					},
-					options: [{
-						value: '普通用户',
-						label: '普通用户'
-					}, {
-						value: '员工',
-						label: '员工'
-					}, {
-						value: '会员',
-						label: '会员'
+			data: {
+				input3: '',
+				statisUpdate: 0,
+				activeName: 'first',
+				client_Client: [],
+				updateIndex: 0,
+				client_vehicles: [],
+				//新增车资料
+				client_vehicles3: {
+					clientid: '',
+					license: '',
+					vehiclebrand: '',
+					model: '',
+					driver: '',
+					driverphone: '',
+					vehicleownership: '',
+					VIN: '',
+					engine: '',
+					enginebrand: '',
+					vehiclemodel: '',
+					mileage: '',
+					load: '',
+					carseries: '',
+					buydate: '',
+					registereddate: '',
+					citydue: '',
+					fueltype: '',
+					member: ''
+				},
+				//修改车辆对象
+				client_vehiclesUpdate: {},
+				//新增用户对象
+				ruleForm: {
+					cId: '',
+					cName: '',
+					detailedAddress: '',
+					linkman: '',
+					phone: '',
+					userType: '普通用户',
+					remark: '',
+					vehicles: []
+				},
+				options: [{
+					value: '普通用户',
+					label: '普通用户'
+				}, {
+					value: '员工',
+					label: '员工'
+				}, {
+					value: '会员',
+					label: '会员'
+				}],
+				value: '',
+				dialogVisible: false,
+				dialogVisible2: false,
+				innerVisible: false,
+				innerVisible2: false,
+				rules: {
+					cId: [{
+						required: true,
+						message: '',
+						trigger: 'blur'
 					}],
-					value: '',
-					dialogVisible: false,
-					dialogVisible2: false,
-					innerVisible: false,
-					innerVisible2: false,
-					rules: {
-						cId: [{
-							required: true,
-							message: '',
-							trigger: 'blur'
-						}],
-						cName: [{
-							required: true,
-							message: '请输入客户名称',
-							trigger: 'blur'
-						}],
-						cname: [{
-							required: true,
-							message: '请输入客户名称',
-							trigger: 'blur'
-						}],
-						linkman: [{
-							required: true,
-							message: '请输入联系人',
-							trigger: 'blur'
-						}],
-						phone: [{
-							required: true,
-							message: '请输入电话',
-							trigger: 'blur'
-						}],
-						license: [{
-							required: true,
-							message: '请输入车牌',
-							trigger: 'blur'
-						}],
-						vehiclebrand: [{
-							required: true,
-							message: '请选择车辆品牌',
-							trigger: 'blur'
-						}],
-						model: [{
-							required: true,
-							message: '请选择车辆型号',
-							trigger: 'blur'
-						}],
-						clientid: [{
-							required: true,
-							message: '',
-							trigger: 'blur'
-						}],
-						vehicleownership: [{
-							required: true,
-							message: '请选择车辆归属',
-							trigger: 'blur'
-						}],
-						engine: [{
-							required: true,
-							message: '请选择发动机',
-							trigger: 'blur'
-						}],
-						enginebrand: [{
-							required: true,
-							message: '请选择发动机品牌',
-							trigger: 'blur'
-						}],
-						driver: [{
-							required: true,
-							message: '请输入驾驶员',
-							trigger: 'blur'
-						}],
-						driverphone: [{
-							required: true,
-							message: '请输入驾驶员电话',
-							trigger: 'blur'
-						}]
-					},
-					//修改用户，车资料
-					updateClientData: {}
-				}
+					cName: [{
+						required: true,
+						message: '请输入客户名称',
+						trigger: 'blur'
+					}],
+					cname: [{
+						required: true,
+						message: '请输入客户名称',
+						trigger: 'blur'
+					}],
+					linkman: [{
+						required: true,
+						message: '请输入联系人',
+						trigger: 'blur'
+					}],
+					phone: [{
+						required: true,
+						message: '请输入电话',
+						trigger: 'blur'
+					}],
+					license: [{
+						required: true,
+						message: '请输入车牌',
+						trigger: 'blur'
+					}],
+					vehiclebrand: [{
+						required: true,
+						message: '请选择车辆品牌',
+						trigger: 'blur'
+					}],
+					model: [{
+						required: true,
+						message: '请选择车辆型号',
+						trigger: 'blur'
+					}],
+					clientid: [{
+						required: true,
+						message: '',
+						trigger: 'blur'
+					}],
+					vehicleownership: [{
+						required: true,
+						message: '请选择车辆归属',
+						trigger: 'blur'
+					}],
+					engine: [{
+						required: true,
+						message: '请选择发动机',
+						trigger: 'blur'
+					}],
+					enginebrand: [{
+						required: true,
+						message: '请选择发动机品牌',
+						trigger: 'blur'
+					}],
+					driver: [{
+						required: true,
+						message: '请输入驾驶员',
+						trigger: 'blur'
+					}],
+					driverphone: [{
+						required: true,
+						message: '请输入驾驶员电话',
+						trigger: 'blur'
+					}]
+				},
+				//修改用户，车资料
+				updateClientData: {}
 			},
 			methods: {
 				//修改车资料
@@ -838,7 +831,7 @@
 							} else if(this.statisUpdate == 2) {
 								this.$set(this.updateClientData.vehicles, this.updateIndex, this.client_vehiclesUpdate)
 							} else {
-								let _this=this
+								let _this = this
 								this.$set(this.client_vehicles, this.updateIndex, this.client_vehiclesUpdate)
 								axios.put("http://localhost:8080/dzw_sys/api/vehicle/updateVehicle", this.client_vehiclesUpdate).then(function(resp) {
 									if(resp.data) {
@@ -869,7 +862,7 @@
 					this.innerVisible2 = true
 				},
 				//子表点击修改
-				updateCheliang2(index,data) {
+				updateCheliang2(index, data) {
 					this.updateIndex = index
 					this.client_vehiclesUpdate = JSON.parse(JSON.stringify(data))
 					this.statisUpdate = 3
