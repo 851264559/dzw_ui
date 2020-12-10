@@ -41,15 +41,15 @@
 					<div>
 						<span style="color: green;">业务类型：</span>
 						<el-select style="width: 120px;" v-model="value" size="small" placeholder="请选择">
-							<el-option value="维修接车">
+							<el-option value="站内维修">
 							</el-option>
-							<el-option value="救援开单">
+							<el-option value="站外维修">
 							</el-option>
 						</el-select>
 					</div>
 				</el-col>
 				<el-col :span="6">
-					<el-button type="danger" size="small">救援开单</el-button>
+					<el-button type="danger" size="small" @click="Billing(value)">维修开单</el-button>
 				</el-col>
 			</el-row>
 			<el-divider></el-divider>
@@ -59,92 +59,116 @@
 					<br />
 					<br />
 					<div id="userinfo">
-						<span>车主： </span> <span>地址：</span> <span>驾驶员： </span> <span>手机号：</span> <br />
-						<br /> <span>品牌：</span> <span>车型： </span> <span>发动机品牌：</span> <span>发动机号:</span>
+						<span>车牌号:{{Vehicle.license}} </span> <span>品牌：{{Vehicle.enginebrand}}</span> <span>驾驶员：{{Vehicle.driver}} </span> <span>手机号：{{Vehicle.driverphone}}</span> <br />
+						<br /> <span>发动机品牌:{{Vehicle.enginebrand}}</span> <span>车型：{{Vehicle.carseries}} </span> <span>发动机品牌：{{Vehicle.engine}}</span> <span>上牌时间:{{Vehicle.registereddate}}</span>
 					</div>
 				</el-col>
 			</el-row><br />
-			<el-row type="flex" justify="center" v-show="value=='维修接车'">
+			<el-row type="flex" justify="center" v-show="value=='站内维修'">
 				<el-col>
 					<el-tabs v-model="activeName" @tab-click="handleClick">
 						<el-tab-pane label="今日维修" name="first">
-							<el-table :data="tableData" style="width: 100%">
+							<el-table :data="MaintenanceItemsByDay" style="width: 100%">
 								<el-table-column type="expand">
 									<template slot-scope="props">
 										<el-form label-position="left" inline class="demo-table-expand">
-											<el-form-item label="商品名称">
-												<span>{{ props.row.name }}</span>
+											<el-form-item label="数量">
+												<span>{{ props.row.number }}</span>
 											</el-form-item>
-											<el-form-item label="所属店铺">
-												<span>{{ props.row.shop }}</span>
+											<el-form-item label="价类">
+												<span>{{ props.row.priceclass }}</span>
 											</el-form-item>
-											<el-form-item label="商品 ID">
-												<span>{{ props.row.id }}</span>
+											<el-form-item label="单价">
+												<span>{{ props.row.unitprice}}</span>
 											</el-form-item>
-											<el-form-item label="店铺 ID">
-												<span>{{ props.row.shopId }}</span>
+											<el-form-item label="技师结算价">
+												<span>{{ props.row.settlementprice }}</span>
 											</el-form-item>
-											<el-form-item label="商品分类">
-												<span>{{ props.row.category }}</span>
+											<el-form-item label="故障描述">
+												<span>{{ props.row.errordesc }}</span>
 											</el-form-item>
-											<el-form-item label="店铺地址">
-												<span>{{ props.row.address }}</span>
+											<el-form-item label="故障原因">
+												<span>{{ props.row.errorcause }}</span>
 											</el-form-item>
-											<el-form-item label="商品描述">
-												<span>{{ props.row.desc }}</span>
+											<el-form-item label="维修班组">
+												<span>{{ props.row.themaintenancecrew }}</span>
+											</el-form-item>
+											<el-form-item label="作业人员">
+												<span>{{ props.row.busyworkgroup }}</span>
+											</el-form-item>
+											<el-form-item label="服务顾问">
+												<span>{{ props.row.server }}</span>
+											</el-form-item>
+											<el-form-item label="工单号">
+												<span>{{ props.row.workordernumber }}</span>
+											</el-form-item>
+											<el-form-item label="免单原因">
+												<span>{{ props.row.freeofchargefor }}</span>
 											</el-form-item>
 										</el-form>
 									</template>
 								</el-table-column>
-								<el-table-column label="商品 ID" prop="id">
+								<el-table-column label="项目编号" prop="oid">
 								</el-table-column>
-								<el-table-column label="商品名称" prop="name">
+								<el-table-column label="项目名称" prop="oname">
 								</el-table-column>
-								<el-table-column label="描述" prop="desc">
+								<el-table-column label="金额" prop="money">
 								</el-table-column>
 							</el-table>
 						</el-tab-pane>
 						<el-tab-pane label="历史维修" name="second">
-							<el-table :data="tableData1" style="width: 100%">
+							<el-table :data="MaintenanceItems" style="width: 100%">
 								<el-table-column type="expand">
 									<template slot-scope="props">
 										<el-form label-position="left" inline class="demo-table-expand">
-											<el-form-item label="商品名称">
-												<span>{{ props.row.name }}</span>
+											<el-form-item label="数量">
+												<span>{{ props.row.number }}</span>
 											</el-form-item>
-											<el-form-item label="所属店铺">
-												<span>{{ props.row.shop }}</span>
+											<el-form-item label="价类">
+												<span>{{ props.row.priceclass }}</span>
 											</el-form-item>
-											<el-form-item label="商品 ID">
-												<span>{{ props.row.id }}</span>
+											<el-form-item label="单价">
+												<span>{{ props.row.unitprice}}</span>
 											</el-form-item>
-											<el-form-item label="店铺 ID">
-												<span>{{ props.row.shopId }}</span>
+											<el-form-item label="技师结算价">
+												<span>{{ props.row.settlementprice }}</span>
 											</el-form-item>
-											<el-form-item label="商品分类">
-												<span>{{ props.row.category }}</span>
+											<el-form-item label="故障描述">
+												<span>{{ props.row.errordesc }}</span>
 											</el-form-item>
-											<el-form-item label="店铺地址">
-												<span>{{ props.row.address }}</span>
+											<el-form-item label="故障原因">
+												<span>{{ props.row.errorcause }}</span>
 											</el-form-item>
-											<el-form-item label="商品描述">
-												<span>{{ props.row.desc }}</span>
+											<el-form-item label="维修班组">
+												<span>{{ props.row.themaintenancecrew }}</span>
+											</el-form-item>
+											<el-form-item label="作业人员">
+												<span>{{ props.row.busyworkgroup }}</span>
+											</el-form-item>
+											<el-form-item label="服务顾问">
+												<span>{{ props.row.server }}</span>
+											</el-form-item>
+											<el-form-item label="工单号">
+												<span>{{ props.row.workordernumber }}</span>
+											</el-form-item>
+											<el-form-item label="免单原因">
+												<span>{{ props.row.freeofchargefor }}</span>
 											</el-form-item>
 										</el-form>
 									</template>
 								</el-table-column>
-								<el-table-column label="商品 ID" prop="id">
+								<el-table-column label="项目编号" prop="oid">
 								</el-table-column>
-								<el-table-column label="商品名称" prop="name">
+								<el-table-column label="项目名称" prop="oname">
 								</el-table-column>
-								<el-table-column label="描述" prop="desc">
+								<el-table-column label="金额" prop="money">
 								</el-table-column>
 							</el-table>
 						</el-tab-pane>
 					</el-tabs>
 				</el-col>
 			</el-row>
-			<el-row type="flex" justify="center" v-show="value=='救援开单'">
+			<el-row type="flex" justify="center" v-show="value=='站外维修'">
 				<el-col :span="8">
 					<span style="color: cornflowerblue; font-size: 12px;">请选择派车的车辆</span>
 					<el-autocomplete clearable size="small " class="inline-input" v-model="state2" :fetch-suggestions="querySearch1" placeholder="请输入内容" @select="handleSelect1"></el-autocomplete>
@@ -157,89 +181,31 @@
 			el: "#billing",
 			data: {
 				//业务类型选项
+<<<<<<< HEAD
 				value: '维修接车',
+				Vehicle: {},
+				MaintenanceItems: [],
+				MaintenanceItemsByDay: [],
+				time:"",
+=======
+				value: '站内维修',
 
+>>>>>>> f56b490caf4f39890433bbcae78ec1d3e22a1749
 				//车牌输入框
 				restaurants: [],
 				state1: '',
 				//派车
 				restaurants1: [],
 				state2: '',
-				
-				//标签页
-				 activeName: 'first',
 
-				//今日维修列表
-				tableData: [{
-					id: '12987122',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}, {
-					id: '12987123',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}, {
-					id: '12987125',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}, {
-					id: '12987126',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}],
-				
-				//历史维修列表
-				tableData1: [{
-					id: '12987122',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}, {
-					id: '12987123',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}, {
-					id: '12987125',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}, {
-					id: '12987126',
-					name: '好滋好味鸡蛋仔',
-					category: '江浙小吃、小吃零食',
-					desc: '荷兰优质淡奶，奶香浓而不腻',
-					address: '上海市普陀区真北路',
-					shop: '王小虎夫妻店',
-					shopId: '10333'
-				}],
+				//标签页
+				activeName: 'first'
+								
 			},
 			methods: {
+				handleClick(tab, event) {
+					console.log(tab, event);
+				},
 				//车牌输入框方法
 				querySearch(queryString, cb) {
 					var restaurants = this.restaurants;
@@ -252,67 +218,28 @@
 						return(restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
 					};
 				},
-				loadAll() {
-					return [{
-							"value": "三全鲜食（北新泾店）",
-							"address": "长宁区新渔路144号"
-						},
-						{
-							"value": "Hot honey 首尔炸鸡（仙霞路）",
-							"address": "上海市长宁区淞虹路661号"
-						},
-						{
-							"value": "新旺角茶餐厅",
-							"address": "上海市普陀区真北路988号创邑金沙谷6号楼113"
-						},
-						{
-							"value": "泷千家(天山西路店)",
-							"address": "天山西路438号"
-						},
-						{
-							"value": "胖仙女纸杯蛋糕（上海凌空店）",
-							"address": "上海市长宁区金钟路968号1幢18号楼一层商铺18-101"
-						},
-						{
-							"value": "贡茶",
-							"address": "上海市长宁区金钟路633号"
-						},
-						{
-							"value": "豪大大香鸡排超级奶爸",
-							"address": "上海市嘉定区曹安公路曹安路1685号"
-						},
-						{
-							"value": "茶芝兰（奶茶，手抓饼）",
-							"address": "上海市普陀区同普路1435号"
-						},
-						{
-							"value": "十二泷町",
-							"address": "上海市北翟路1444弄81号B幢-107"
-						},
-						{
-							"value": "星移浓缩咖啡",
-							"address": "上海市嘉定区新郁路817号"
-						},
-						{
-							"value": "阿姨奶茶/豪大大",
-							"address": "嘉定区曹安路1611号"
-						},
-						{
-							"value": "新麦甜四季甜品炸鸡",
-							"address": "嘉定区曹安公路2383弄55号"
-						},
-						{
-							"value": "Monica摩托主题咖啡店",
-							"address": "嘉定区江桥镇曹安公路2409号1F，2383弄62号1F"
-						},
-						{
-							"value": "浮生若茶（凌空soho店）",
-							"address": "上海长宁区金钟路968号9号楼地下一层"
-						},
-					];
-				},
 				handleSelect(item) {
-					console.log(item);
+					//console.log(item.value);
+					//alert(JSON.stringify(item.value));
+					let _This = this;
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/license/${item.value}`).then(function(success) {
+						_This.Vehicle = success.data;					
+						console.log(JSON.stringify(_This.Vehicle));
+					}).catch(function(error) {
+						console.log(error);
+					});
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/carNum/${item.value}`).then(function(success) {
+						_This.MaintenanceItems = success.data;					
+						console.log(JSON.stringify(_This.MaintenanceItems));
+					}).catch(function(error) {
+						console.log(error);
+					});
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/dayAndLicense/${this.time}/${item.value}`).then(function(success) {
+						_This.MaintenanceItemsByDay = success.data;					
+						console.log(JSON.stringify(_This.MaintenanceItemsByDay));
+					}).catch(function(error) {
+						console.log(error);
+					});
 				},
 
 				//派车输入框
@@ -329,11 +256,35 @@
 				},
 				handleSelect1(item) {
 					console.log(item);
+				},
+				
+				//开单按钮点击
+				Billing(val){
+					if(val=="站内维修"){
+						index.addTab(index.editableTabsValue, val, 'wx001');
+					}else{
+						index.addTab(index.editableTabsValue, val, 'jy001');
+					}
 				}
 			},
 			mounted() {
-				this.restaurants = this.loadAll();
+				axios.get(`http://127.0.0.1:8080/dzw_sys/api/vehicle/queryAll`).then(resp => {
+					resp.data.forEach(temp=>{
+						this.restaurants.push({"value":temp.license})
+					})
+				})
+<<<<<<< HEAD
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/fieldOfVehicle/queryAll`).then(resp1 => {
+					resp1.data.forEach(temp1=>{
+						this.restaurants1.push({"value":temp1.carnumber})
+					})
+					})
+				var newDate = new Date();
+				this.time = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate();
+				
+=======
 				this.restaurants1 = this.loadAll();
+>>>>>>> f56b490caf4f39890433bbcae78ec1d3e22a1749
 			}
 		})
 	</script>

@@ -124,8 +124,9 @@
 			},methods:{
 				modifyTestOnCompletion(){
 					if(this.selecttypeofdocument=="1"){
-						this.testOnCompletion.typeofdocument = "完工";
+						this.testOnCompletion.thedocumentsstate = "完工";
 					}else{
+						this.testOnCompletion.thedocumentsstate = "待结算";
 						this.testOnCompletion.numberofrework+=1;
 					}
 					//alert(JSON.stringify(this.testOnCompletion));
@@ -137,7 +138,9 @@
 							if(_This.selecttypeofdocument=="1"){
 								_This.addCloseAnAccount();
 							}else if(_This.selecttypeofdocument=="2"){
-								offSiteRescueSheet.isShowTwo = false;
+								//offSiteRescueSheet.isShowTwo = false;
+								//alert("s");
+								_This.addCloseAnAccount();
 							}
 							//_This.$alert("success");
 							/*if(sessionStorage.getItem("typeOfDocument")=="救援"){

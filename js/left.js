@@ -235,7 +235,7 @@
 				},
 				{
 					itemTitle: "班组技工",
-					url: "../CWL/ShiftTheMechanic.html"
+					url: "../TY/bzjg.html"
 				},
 				{
 					itemTitle: "外勤车辆",
