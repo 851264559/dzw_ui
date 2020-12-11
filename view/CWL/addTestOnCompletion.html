@@ -43,7 +43,7 @@
 					<!--<el-input v-model="TestOnCompletion.licenseplatenumber" placeholder="车牌号"></el-input>-->
 					<el-button type="primary" @click="dialogVisible = true" plain>请选择</el-button>
 					<span>{{TestOnCompletion.licenseplatenumber}}</span>
-					<el-dialog title="提示" :visible.sync="dialogVisible" width="70%">
+					<el-dialog title="提示" :visible.sync="dialogVisible" append-to-body width="70%">
 						<el-table :data="Vehicles" highlight-current-row @current-change="addCars" :border="true" height="310px" style="width: 100%" max-height="310">
 							<el-table-column type="index" label="序号" width="150">
 							</el-table-column>
@@ -333,7 +333,7 @@
 					this.Vehicle = row;
 					//this.$alert(JSON.stringify(row));
 					this.TestOnCompletion.licenseplatenumber = row.license;
-					this.TestOnCompletion.vin = row.member;
+					this.TestOnCompletion.vin = row.vin;
 					this.TestOnCompletion.ownername = row.driver;
 					this.dialogVisible = false;
 				},

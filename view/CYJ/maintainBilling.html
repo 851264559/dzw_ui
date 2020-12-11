@@ -187,10 +187,6 @@
 				MaintenanceItemsByDay: [],
 				time:"",
 				value: '站内维修',
-<<<<<<< HEAD
-=======
-				
->>>>>>> 8695050fdaaab9ae10bbd8808751fff67cf9d6b3
 				//车牌输入框
 				restaurants: [],
 				state1: '',
@@ -222,18 +218,21 @@
 					//console.log(item.value);
 					//alert(JSON.stringify(item.value));
 					let _This = this;
+					
 					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/license/${item.value}`).then(function(success) {
 						_This.Vehicle = success.data;					
 						console.log(JSON.stringify(_This.Vehicle));
 					}).catch(function(error) {
 						console.log(error);
 					});
+					//历史维修记录
 					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/carNum/${item.value}`).then(function(success) {
 						_This.MaintenanceItems = success.data;					
 						console.log(JSON.stringify(_This.MaintenanceItems));
 					}).catch(function(error) {
 						console.log(error);
 					});
+					//今日
 					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/maintenanceItem/dayAndLicense/${this.time}/${item.value}`).then(function(success) {
 						_This.MaintenanceItemsByDay = success.data;					
 						console.log(JSON.stringify(_This.MaintenanceItemsByDay));
@@ -280,11 +279,6 @@
 					})
 				var newDate = new Date();
 				this.time = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate();
-<<<<<<< HEAD
-				
-				this.restaurants1 = this.loadAll();
-=======
->>>>>>> 8695050fdaaab9ae10bbd8808751fff67cf9d6b3
 			}
 		})
 	</script>

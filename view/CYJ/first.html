@@ -50,14 +50,14 @@
 				<el-col :span="6" >
 					<el-card  shadow="hover">
 						<p>
-							今日结算台次 <span>0</span>
+							今日结算台次 <span>{{jsCount}}</span>
 						</p>
 					</el-card>
 				</el-col>
 				<el-col :span="6" >
 					<el-card  shadow="hover">
 						<p>
-							今日现金收入 <span>0</span>
+							今日现金收入 <span>{{jrMoney}}</span>
 						</p>
 					</el-card>
 				</el-col>
@@ -73,7 +73,23 @@
 	</body>
 	<script>
 		var first = new Vue({
-			el: "#first"
+			el: "#first",
+			data:{
+				jrMoney:0,
+				jsCount:0
+			},
+			methods:{
+				showCount(){
+					let _this=this
+					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/closeanaccount/selectCount`).then(function(resp) {
+						_this.jrMoney=resp.data.count1
+						_this.jsCount=resp.data.count2
+					})
+				}
+			},
+			mounted(){
+				this.showCount()
+			}
 		})
 	</script>
 
