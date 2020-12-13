@@ -101,6 +101,23 @@
 					</el-col>
 				</el-row>
 				<el-row>
+					<el-col :span="4">
+						&nbsp;
+					</el-col>
+					<el-col :span="4">
+						<span style="line-height: 40px;">
+							充值方式：
+						</span>
+					</el-col>
+					<el-col :span="10">
+						<el-radio v-model="radios" label="1" size="medium" border>支付宝支付</el-radio>
+						<el-radio v-model="radios" label="2" size="medium" border>现金支付</el-radio>
+					</el-col>
+					<el-col :span="6">
+						&nbsp;
+					</el-col>
+				</el-row>
+				<el-row>
 					<el-col :span="8">&nbsp;</el-col>
 					<el-col :span="16">
 						<el-button type="primary" @click="rechargeAdd">立即充值</el-button>
@@ -110,15 +127,13 @@
 			</el-dialog>
 			<br />
 			<el-row>
-				<el-col :span="20" :offset="3">
-					<el-table :border="true" :data="member" max-height="600" style="width: 952px">
+				<el-col :span="20" :offset="5">
+					<el-table :border="true" :data="member" max-height="600" style="width: 801px">
 						<el-table-column type="index" label="序号" width="100">
 						</el-table-column>
 						<el-table-column property="cardno" label="会员卡号" width="171">
 						</el-table-column>
 						<el-table-column property="admissiondate" label="入会日期" width="178">
-						</el-table-column>
-						<el-table-column property="integral" label="积分" width="151">
 						</el-table-column>
 						<el-table-column property="earnest" label="账户余额" width="171">
 						</el-table-column>
@@ -145,6 +160,7 @@
 		const summaryApp = new Vue({
 			el: '#memberApp',
 			data: {
+				radios: '1',
 				ClientVo: {
 					bianhao: '',
 					userType: ''
@@ -156,6 +172,7 @@
 				state1: '',
 				restaurants: [],
 				dialogVisibleMember: false,
+				dialogVisible:false,
 				memberAdd: {
 					cid: '',
 					cname: '',
@@ -218,21 +235,40 @@
 						});
 						return false;
 					}
-					axios.put("http://localhost:8080/dzw_sys/api/client/updateClient", this.memberRecharge).then(function(resp) {
-						if(resp.data) {
-							_this.showMember("会员");
-							_this.dialogVisibleMember = false;
-							_this.$message({
-								message: '充值成功！',
-								type: 'success'
-							});
-						} else {
-							_this.$message({
-								message: '充值失败！',
-								type: 'error'
-							});
-						}
-					})
+					if(this.radios == '2') {
+						axios.put("http://localhost:8080/dzw_sys/api/client/updateClient2", this.memberRecharge).then(function(resp) {
+							if(resp.data) {
+								_this.showMember("会员");
+								_this.dialogVisibleMember = false;
+								_this.$message({
+									message: '充值成功！',
+									type: 'success'
+								});
+							} else {
+								_this.$message({
+									message: '充值失败！',
+									type: 'error'
+								});
+							}
+						})
+					} else {
+						this.dialogVisibleMember = false;
+						window.sessionStorage.setItem("memberRecharge", JSON.stringify(this.memberRecharge))
+						window.sessionStorage.setItem("panduan", true)
+						window.open("http://localhost:8080/dzw_sys/api/pay/"+this.weiYiId()+"/"+this.memberMoney+"/be recharged successfully/huiyuanchongzhi","_blank");
+					}
+				},
+				weiYiId() {
+					var s = [];
+					var hexDigits = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM";
+					for(var i = 0; i < 10; i++) {
+						s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+					}
+					s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+					s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+					s[8] = s[13] = s[18] = s[23];
+					var uuid = s.join("");
+					return uuid;
 				},
 				removeMember(data) {
 					let memberRemove = {
@@ -273,11 +309,20 @@
 				},
 				recharge(data) {
 					this.dialogVisibleMember = true;
-					this.memberRecharge = data
+					this.memberRecharge = JSON.parse(JSON.stringify(data))
 				},
 				addMemberYm() {
-					this.dialogVisible = true
-					this.showMember2()
+					let _this = this
+					axios.get("http://localhost:8080/dzw_sys/api/client/selectMemberVo").then(function(resp) {
+						if(JSON.stringify(resp.data) == "[]") {
+							_this.$message('请先添加一个用户！');
+							return false;
+						} else {
+							_this.consumer = resp.data
+							_this.dialogVisible = true
+						}
+					})
+
 				},
 				addFormMember(formName) {
 					let _this = this
@@ -288,7 +333,7 @@
 							});
 							return false;
 						}
-						axios.put("http://localhost:8080/dzw_sys/api/client/updateClient", _this.memberAdd).then(function(resp) {
+						axios.put("http://localhost:8080/dzw_sys/api/client/updateClient2", _this.memberAdd).then(function(resp) {
 							if(resp.data) {
 								_this.showMember("会员");
 								_this.dialogVisible = false
@@ -305,12 +350,6 @@
 						})
 					})
 
-				},
-				showMember2() {
-					let _this = this
-					axios.get("http://localhost:8080/dzw_sys/api/client/selectMemberVo").then(function(resp) {
-						_this.consumer = resp.data
-					})
 				},
 				querySearch(queryString, cb) {
 					var restaurants = this.consumer;
