@@ -59,7 +59,7 @@
 				</el-form-item>
 				<el-form-item label="发动机品牌">
 					<template>
-						<el-select v-model="RepairBill.enginebrand" placeholder="请选择">
+						<el-select v-model="RepairBill.enginebrand" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in engineBrands" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -91,7 +91,7 @@
 				</el-form-item>
 				<el-form-item label="业务类别">
 					<template>
-						<el-select v-model="RepairBill.classofbusiness" placeholder="请选择">
+						<el-select v-model="RepairBill.classofbusiness" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in classOfBusinesses" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -99,7 +99,7 @@
 				</el-form-item>
 				<el-form-item label="施工班次">
 					<template>
-						<el-select v-model="RepairBill.constructiondivisions" placeholder="请选择">
+						<el-select v-model="RepairBill.constructiondivisions" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in constructionDivisionsList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -187,7 +187,7 @@
 						</el-table-column>
 					</el-table>
 				</el-tab-pane>
-				<el-tab-pane label="结算信息" name="third">
+				<!--<el-tab-pane label="结算信息" name="third">
 					<el-table ref="multipleTable" :data="BillingInfo" tooltip-effect="dark" style="width: 100%">
 						<el-table-column type="selection" width="55">
 						</el-table-column>
@@ -234,7 +234,7 @@
 						<el-table-column prop="wipeTheMantissa" label="抹尾数" show-overflow-tooltip>
 						</el-table-column>
 					</el-table>
-				</el-tab-pane>
+				</el-tab-pane>-->
 			</el-tabs>
 			</template>
 			</el-form>

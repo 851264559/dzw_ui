@@ -40,12 +40,12 @@
 					</el-dialog>
 			</h1>
 
-			<el-form :inline="true" :model="OffSiteRescueSheet" :disabled="false" class="demo-form-inline">
+			<el-form :inline="true" :model="OffSiteRescueSheet" class="demo-form-inline">
 				<el-form-item label="单号">
 					<el-input :disabled="true" v-model="OffSiteRescueSheet.oddnumber" placeholder="单号"></el-input>
 				</el-form-item>
 				<el-form-item label="车牌号">
-					<el-input :disabled="true" v-model="OffSiteRescueSheet.carnumbers" placeholder="车牌号"></el-input>
+					<el-input :disabled="isDisabled" v-model="OffSiteRescueSheet.carnumbers" placeholder="车牌号"></el-input>
 				</el-form-item>
 				<el-form-item label="车型">
 					<el-input v-model="OffSiteRescueSheet.cartype" placeholder="车型"></el-input>
@@ -56,7 +56,7 @@
 				<el-form-item label="发动机品牌">
 					<!--<el-input v-model="RepairBill.engineBrand" placeholder="发动机品牌"></el-input>-->
 					<template>
-						<el-select v-model="OffSiteRescueSheet.enginebrand" placeholder="请选择">
+						<el-select v-model="OffSiteRescueSheet.enginebrand" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in engineBrands" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -95,7 +95,7 @@
 				<el-form-item label="业务类别">
 					<!--<el-input v-model="RepairBill.classOfBusiness" placeholder="业务类别"></el-input>-->
 					<template>
-						<el-select v-model="OffSiteRescueSheet.classofbusiness" placeholder="请选择">
+						<el-select v-model="OffSiteRescueSheet.classofbusiness" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in classOfBusinesses" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -104,7 +104,7 @@
 				<el-form-item label="施工班次">
 					<!--<el-input v-model="RepairBill.constructionDivisions" placeholder="施工班次"></el-input>-->
 					<template>
-						<el-select v-model="OffSiteRescueSheet.constructiondivisions" placeholder="请选择">
+						<el-select v-model="OffSiteRescueSheet.constructiondivisions" :popper-append-to-body="false" placeholder="请选择">
 							<el-option v-for="item in constructionDivisionsList" :key="item.values" :label="item.name" :value="item.values">
 							</el-option>
 						</el-select>
@@ -205,7 +205,7 @@
 								</el-table-column>
 							</el-table>
 						</el-tab-pane>
-						<el-tab-pane label="结算信息" name="third">
+						<!--<el-tab-pane label="结算信息" name="third">
 							<el-table ref="multipleTable" :data="BillingInfo" tooltip-effect="dark">
 								<el-table-column type="selection" width="55">
 								</el-table-column>
@@ -252,7 +252,7 @@
 								<el-table-column prop="wipeTheMantissa" label="抹尾数" show-overflow-tooltip>
 								</el-table-column>
 							</el-table>
-						</el-tab-pane>
+						</el-tab-pane>-->
 					</el-tabs>
 				</template>
 			</el-form>
@@ -338,14 +338,19 @@
 					BillingInfo: [],
 					isShow:false,
 					removeOID:"",
-					isShowTwo:false
+					isShowTwo:false,
+					isDisabled:true
 				}
 			},
 			methods: {
 				getOffSiteRescueSheetInfosByOddNum() {
 					let _This = this;
 					axios.get(`http://127.0.0.1:8080/dzw_sys/api/dzw_Sys/cwl/offSiteRescueSheet/${this.OffSiteRescueSheet.oddnumber}`).then(function(success) {
-						_This.OffSiteRescueSheet = success.data;
+						if(success.data!=""){
+							_This.OffSiteRescueSheet = success.data;
+						}else{
+							_This.isDisabled = false;
+						}
 						console.log(JSON.stringify(_This.OffSiteRescueSheet));
 					}).catch(function(error) {
 						console.log(error);

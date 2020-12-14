@@ -2,9 +2,9 @@
 var menuMapping = {
 	"sy001": "first.html",
 	"j003": "../CWL/StarEmployees.html",
-	"b001": "../CWL/ShiftTheMechanic.html",
+	"b001": "../TY/bzjg.html",
 	"w002": "../CWL/FieldOfVehicle.html",
-	"w001": "../CWL/PickUpCarRegistration.html",
+	"w001": "../CYJ/maintainBilling.html",
 	"j002": "../CWL/TestOnCompletion.html",
 	"f002": "../WZY/engineBrand.html",
 	"c002": "../WZY/vehicleFile.html",
@@ -20,5 +20,7 @@ var menuMapping = {
 	"r001":"../CWL/RepairBill.html",
 	"o001":"../CWL/OffSiteRescueSheet.html",
 	"j005":"../CYJ/position.html",
-	"q002":"../CYJ/power.html"
+	"q002":"../CYJ/power.html",
+	"wx001":"../CWL/RepairBill.html",//站内
+	"jy001":"../CWL/OffSiteRescueSheet.html"//站外
 }
