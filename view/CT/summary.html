@@ -468,6 +468,7 @@
 					} else {
 						this.dialogVisibleMember = false;
 						window.sessionStorage.setItem("memberRecharge", JSON.stringify(this.memberRecharge))
+						window.sessionStorage.setItem("panduan", true)
 						window.open("http://localhost:8080/dzw_sys/api/pay/" + this.weiYiId() + "/" + this.memberMoney + "/be recharged successfully/huiyuanchongzhi", "_blank");
 					}
 				},
