@@ -17,7 +17,6 @@ var menuMapping = {
 	"g001": "../TY/gwdy.html",
 	"l001": "../TY/lzdj.html",
 	"t001": "../TY/txml.html",
-	"w003": "../WZY/maintenanceItems.html",
 	"r001":"../CWL/RepairBill.html",
 	"o001":"../CWL/OffSiteRescueSheet.html",
 	"j005":"../CYJ/position.html",
